@@ -59,5 +59,9 @@ desired effect
     @include('adminlte::layouts.partials.scripts')
 @show
 
+{{-- TODO::JUAMPA debo hacer que cargue solamente cuando estoy en la sección de precios --}}
+{!! Html::script('js/app/autoprice.js'); !!}
+
+
 </body>
 </html>
