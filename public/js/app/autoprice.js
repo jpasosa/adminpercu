@@ -67,6 +67,10 @@ function set_values_by_cont_real()
     var precio      = $('#precio').val();
     var precio_real = $('#cont_real').val();
 
+    console.log( 'estoy obteniendo los valores que tengo el sugerido y el real');
+    console.log( 'precio sugerido: ' + precio );
+    console.log( 'precio real: ' + precio_real );
+
 
     if($("#gope").is(':checked'))
         var gope = 1;
@@ -90,26 +94,26 @@ function calcular_ind_aumento ( precio )
 {
 
     if (precio > 0 && precio < 301)
-        var indice_aumento = 1.5;
+        var indice_aumento = 1.7;
 
      else if ( precio > 300 && precio < 601 )
-        var indice_aumento = 1.45;
+        var indice_aumento = 1.6;
 
 
      else if ( precio > 600 && precio < 901 )
-        var indice_aumento = 1.40;
+        var indice_aumento = 1.4;
 
 
      else if ( precio > 900 && precio < 1501 )
-        var indice_aumento = 1.37;
+        var indice_aumento = 1.39;
 
 
      else if ( precio > 1500 && precio < 2001 )
-        var indice_aumento = 1.36;
+        var indice_aumento = 1.38;
 
 
      else if ( precio > 2000 && precio < 2501 )
-        var indice_aumento = 1.35;
+        var indice_aumento = 1.36;
 
 
      else if ( precio > 2500 && precio < 3001 )
@@ -117,7 +121,7 @@ function calcular_ind_aumento ( precio )
 
 
      else if ( precio > 3000 && precio < 20000 )
-        var indice_aumento = 1.33;
+        var indice_aumento = 1.32;
      else
         var indice_aumento = 0;
 
@@ -125,6 +129,7 @@ function calcular_ind_aumento ( precio )
 
 
 }
+
 
 function calcular_contado( precio_lista, es_gope )
 {
