@@ -15,9 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/precios', function () {
-    return view('precios');
-});
+// Route::get('/precios', function () {
+//     return view('precios');
+// });
+
+Route::get('precios', 'PreciosController@get_prices');
+Route::post('calcular_precios', 'PreciosController@calcular_precios');
+Route::post('recalcular_precios', 'PreciosController@recalcular_precios');
+
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
