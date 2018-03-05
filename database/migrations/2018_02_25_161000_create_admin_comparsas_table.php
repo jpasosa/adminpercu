@@ -18,10 +18,10 @@ class CreateAdminComparsasTable extends Migration
             $table->string('name');
             $table->unsignedInteger('admin_state_id')->nullable();
             $table->foreign('admin_state_id')->references('id')->on('admin_states');
-            $table->string('facebook_page');
-            $table->integer('members_cant');
+            $table->string('facebook_page')->nullable();
+            $table->integer('members_cant')->nullable();
             $table->boolean('can_publish');
-            $table->string('observations');
+            $table->string('observations')->nullable();
             $table->timestamps();
         });
     }

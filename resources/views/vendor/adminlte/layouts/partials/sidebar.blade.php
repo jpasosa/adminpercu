@@ -35,11 +35,20 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
+            <li><a href="{{ url('precios') }}"><i class='fa fa-link'></i> <span>Calcular Precios</span></a></li>
+            <li><a href="{{ url('clientes') }}"><i class='fa fa-link'></i> <span>Clientes</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Comparsas</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('comparsas') }}">Lista de Comparsas</a></li>
+                    <li><a href="{{ url('comparsas/nueva') }}">Nueva Comparsa</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->
