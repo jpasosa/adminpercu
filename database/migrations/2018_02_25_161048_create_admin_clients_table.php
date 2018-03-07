@@ -21,6 +21,8 @@ class CreateAdminClientsTable extends Migration
             $table->string('email');
             $table->string('dni');
             $table->string('phone');
+            $table->string('face');
+            $table->boolean('friends');
             $table->unsignedInteger('admin_state_residence_id')->nullable();
             $table->foreign('admin_state_residence_id')->references('id')->on('admin_states');
             $table->unsignedInteger('admin_state_shipping_id')->nullable();

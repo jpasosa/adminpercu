@@ -27,9 +27,15 @@ Route::get('precios', 'PreciosController@get_prices');
 Route::post('calcular_precios', 'PreciosController@calcular_precios');
 Route::post('recalcular_precios', 'PreciosController@recalcular_precios');
 
+
 Route::get('comparsas', 'ComparsasController@index');       # Lista de las comparsas
 Route::get('comparsas/nueva', 'ComparsasController@add'); # Agregar una nueva comparsa
 Route::post('comparsas/nueva', 'ComparsasController@add_save_changes'); # Agregar una nueva comparsa, ya vienen los datos que ingresamos.
+
+Route::get('clientes', 'ClientesController@index');       # Lista de las comparsas
+Route::get('clientes/nuevo', 'ClientesController@add'); # Agregar una nueva comparsa
+Route::post('clientes/nuevo', 'ClientesController@add_save_changes'); # Agregar una nueva comparsa, ya vienen los datos que ingresamos.
+
 
 
 Route::group(['middleware' => 'auth'], function () {
