@@ -18,7 +18,7 @@ class AdminComparsas extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'admin_state_id', 'facebook_page', 'members_cant', 'can_publish', 'observations'
+        'name_comparsa', 'name_bateria', 'admin_state_id', 'facebook_page', 'members_cant', 'can_publish', 'observations'
     ];
 
 
@@ -31,7 +31,8 @@ class AdminComparsas extends Model
         $states     = AdminStates::all()->where('admin_province_id',1)->sortBy('name');
 
         return [
-            'name'          => '',
+            'name_comparsa'  => '',
+            'name_bateria'  => '',
             'admin_state_id' => $states,
             'admin_province_id' => $provinces,
             'facebook_page' => '',

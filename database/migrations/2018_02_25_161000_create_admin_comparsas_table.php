@@ -15,7 +15,8 @@ class CreateAdminComparsasTable extends Migration
     {
         Schema::create('admin_comparsas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name_comparsa')->nullable();
+            $table->string('name_bateria')->nullable();
             $table->unsignedInteger('admin_state_id')->nullable();
             $table->foreign('admin_state_id')->references('id')->on('admin_states');
             $table->string('facebook_page')->nullable();

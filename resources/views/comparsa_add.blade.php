@@ -18,8 +18,16 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1">Nombre de la Comparsa/Bateria</label>
-                                        <input type="text" class="form-control" id="" name="name" placeholder="Indique el nombre" value="{{ $name }}" required="required" >
+                                        <label for="exampleFormControlInput1">Nombre de la Comparsa</label>
+                                        <input type="text" class="form-control" id="" name="name_comparsa" placeholder="Indique el nombre de la comparsa" value="{{ $name_comparsa }}"  >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Nombre de la Bateria</label>
+                                        <input type="text" class="form-control" id="" name="name_bateria" placeholder="Indique el nombre de la bateria" value="{{ $name_bateria }}"  >
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +65,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Cantidad de Miembros</label>
-                                        <input type="text" class="form-control" id="" name="members_cant" placeholder="4000" value="{{ $members_cant }}" >
+                                        <input type="number" class="form-control" id="" name="members_cant" placeholder="4000" value="{{ $members_cant }}" >
                                     </div>
                                 </div>
                                 <div class="col-sm-4">

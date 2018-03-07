@@ -13,6 +13,8 @@ class ComparsasSeeder extends Seeder
     public function run()
     {
         DB::table('admin_comparsas')->insert([
+            'name_comparsa' => 'Comparsa Buenos Aires',
+            'name_bateria'  => 'bateria buenos aires',
             'admin_state_id'=> 4107,
             'facebook_page' => 'https://www.facebook.com/profile.php?id=100010586884175',
             'members_cant'  => 4999,
@@ -22,6 +24,8 @@ class ComparsasSeeder extends Seeder
             'updated_at'    => date('Y-m-d H:i:s')
         ]);
         DB::table('admin_comparsas')->insert([
+            'name_comparsa' => 'Comparsa Moreno',
+            'name_bateria'  => 'bateria moreno',
             'admin_state_id'=> 16529,
             'facebook_page' => 'https://www.facebook.com/batucada.p.samba',
             'members_cant'  => 2.466,
