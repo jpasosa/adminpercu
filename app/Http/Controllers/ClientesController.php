@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 // use App\Models\AdminComparsas;
 use App\Models\AdminClients;
 use Session;
+use Illuminate\Support\Facades\DB;
+
+
 
 class ClientesController extends Controller
 {
@@ -14,8 +17,21 @@ class ClientesController extends Controller
     public function index()
     {
 
+        $data['clients'] = AdminClients::all();
+
+        return view('cliente_lista', $data);
+
     }
 
+    public function show ( $id )
+    {
+        $data['client'] = AdminClients::find( $id );
+
+        // dd($data['client']);
+
+        return view('cliente_ver', $data);
+
+    }
 
 
     public function add()
@@ -33,6 +49,12 @@ class ClientesController extends Controller
 
         if($data['friends'] == '1')  $data['friends'] = true;
         if($data['friends'] == '0')  $data['friends'] = false;
+
+        if ($data['admin_comparsas_id'] == 'null')
+        {
+            $data['admin_comparsas_id'] = null;
+        }
+
 
         if ( $data['dni'] == '' && $data['name'] == '')
         {

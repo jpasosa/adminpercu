@@ -19,7 +19,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Nombre</label>
-                                        <input type="text" class="form-control" id="" name="name" placeholder="Indique el nombre de la comparsa" value="{{ $name }}"  >
+                                        <input type="text" class="form-control" id="" name="name" placeholder="Indique el nombre de la comparsa" value="{{ $name }}" required="required"  >
                                     </div>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Apellido</label>
-                                        <input type="text" class="form-control" id="" name="last_name" placeholder="Indique el nombre de la bateria" value="{{ $last_name }}"  >
+                                        <input type="text" class="form-control" id="" name="last_name" placeholder="Indique el nombre de la bateria" value="{{ $last_name }}" required="required"  >
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Email</label>
-                                        <input type="text" class="form-control" id="" name="email" placeholder="Indique el nombre de la bateria" value="{{ $email }}"  >
+                                        <input type="email" class="form-control" id="" name="email" placeholder="Indique el nombre de la bateria" value="{{ $email }}"  >
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">DNI</label>
-                                        <input type="text" class="form-control" id="" name="dni" placeholder="Indique el nombre de la bateria" value="{{ $dni }}"  >
+                                        <input type="number" class="form-control" id="" name="dni" placeholder="Indique el nombre de la bateria" value="{{ $dni }}" required="required" >
                                     </div>
                                 </div>
                             </div>
@@ -59,10 +59,23 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Teléfono</label>
-                                        <input type="text" class="form-control" id="" name="phone" placeholder="Indique el nombre de la bateria" value="{{ $phone }}"  >
+                                        <input type="number" class="form-control" id="" name="phone" placeholder="Indique el nombre de la bateria" value="{{ $phone }}" required="required" >
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Por donde Nos Conociste ?</label>
+                                        <select class="form-control" id="marketing" name="marketing">
+                                                @foreach ($marketing as $id=>$market)
+                                                    <option value="{{ $id }}">{{ $market }}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -135,6 +148,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Comparsa a la que pertenece</label>
                                         <select class="form-control" id="admin_comparsas_id" name="admin_comparsas_id">
+                                                <option value="null">No Pertenesco a Ninguna . . . .</option>
                                                 @foreach ($admin_comparsas_id AS $comp)
                                                     <option value="{{ $comp['id'] }}">{{ $comp['name_comparsa'] }} | {{  $comp['name_bateria']  }}</option>
                                                 @endforeach
