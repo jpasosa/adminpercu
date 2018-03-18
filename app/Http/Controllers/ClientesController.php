@@ -27,6 +27,8 @@ class ClientesController extends Controller
     {
         $data['client'] = AdminClients::find( $id );
 
+        // dd($data);
+
         // dd($data['client']);
 
         return view('cliente_ver', $data);
@@ -45,7 +47,26 @@ class ClientesController extends Controller
 
     public function add_save_changes()
     {
-        $data = request()->post();
+
+        $data = request()->validate([
+                'name'          => 'required',
+                'last_name'     => '',
+                'user_ml'       => '',
+                'email'         => '',
+                'dni'           => 'required',
+                'phone'         => 'required',
+                'marketing'     => '',
+                'face'          => '',
+                'friends'       => '',
+                'admin_province_residence_id' => '',
+                'admin_state_residence_id' => '',
+                'admin_province_shipping_id' => '',
+                'admin_state_shipping_id' => '',
+                'admin_comparsas_id' => '',
+                'observations' => '',
+
+            ]);
+
 
         if($data['friends'] == '1')  $data['friends'] = true;
         if($data['friends'] == '0')  $data['friends'] = false;
@@ -56,26 +77,16 @@ class ClientesController extends Controller
         }
 
 
-        if ( $data['dni'] == '' && $data['name'] == '')
-        {
-            Session::flash('error_message', 'Debe ingresar su nombre y su DNI.');
-            $save_client = false;
-        } else {
-            $save_client = AdminClients::create($data);
-        }
-
-
-
+        $save_client = AdminClients::create($data);
 
         if ( $save_client ) {
             Session::flash('success_message', 'Grabamos correctamente el nuevo cliente');
         } else {
-            if ( !Session::has('error_message')) {
-                Session::flash('error_message', 'No se pudo grabar el cliente. Intente más tarde, gracias!');
-            }
+            Session::flash('error_message', 'No se pudo grabar el cliente. Intente más tarde, gracias!');
         }
 
-        return redirect('home');
+
+        return redirect('clientes');
 
     }
 

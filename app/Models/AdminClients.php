@@ -32,27 +32,12 @@ class AdminClients extends Model
         $marketings = self::get_marketings();
 
         return [
-            'name'  => '',
-            'last_name'  => '',
-            'user_ml'  => '',
-            'email'  => '',
-            'dni'  => '',
-            'phone'  => '',
-            'face'  => '',
-            'friends'  => false,
             'marketing'  => $marketings,
-            'last_name'  => '',
-            'last_name'  => '',
-            'last_name'  => '',
-            'last_name'  => '',
-            'last_name'  => '',
-            'last_name'  => '',
             'admin_state_residence_id' => $states,
             'admin_province_residence_id' => $provinces,
             'admin_state_shipping_id' => $states,
             'admin_province_shipping_id' => $provinces,
             'admin_comparsas_id' => $comparsas,
-            'observations' => '',
         ];
     }
 

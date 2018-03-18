@@ -31,10 +31,13 @@
                                             Whatsapp
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                            DNI
+                                            User MercadoLibre
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
                                             Email
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                            Ubicación Envío
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">
                                             Acciones
@@ -46,8 +49,9 @@
                                         <tr role="row" class="odd">
                                             <td class="sorting_1">{{ $client->name }}</td>
                                             <td>{{ $client->user_whatsapp }}</td>
-                                            <td>{{ $client->dni }}</td>
+                                            <td>{{ $client->user_ml }}</td>
                                             <td>{{ $client->email }}</td>
+                                            <td>{{ $client->state_shipping->name . ' - ' . $client->state_shipping->province->name . ' - ' . $client->state_shipping->cp }}</td>
                                             <td><a href="{{ url( "cliente/$client->id" ) }}">Ver</a></td>
                                         </tr>
                                     @empty

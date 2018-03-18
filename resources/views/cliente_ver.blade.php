@@ -13,7 +13,10 @@
                     <div class="box-body">
                             {{ csrf_field() }}
                             {{-- AL CONTADO --}}
-                            <span class="label label-success">DETALLES DEL CLIENTE</span>
+                                <span class="label label-success">DETALLES DEL CLIENTE</span><br>
+                            <div class="row">
+                            <br>
+                            </div>
 
                             <div class="row">
                                 <div class="col-sm-8">
@@ -101,7 +104,14 @@
 
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <h4>Comparsa: <b>{{ $client->comparsa->name_comparsa }}</b></h4>
+                                    <h4>
+                                        Comparsa:
+                                        <b>
+                                        @if( !is_null($client->comparsa) )
+                                            {{ $client->comparsa->name_comparsa }}
+                                        @endif
+                                        </b>
+                                    </h4>
                                 </div>
                             </div>
 
@@ -110,11 +120,11 @@
                                     <h4>Observaciones: <b>{{ $client->observations }}</b></h4>
                                 </div>
                             </div>
-
                     </div>
-
-                    <p><a href="{{ url('clientes') }}">Volver a la Lista de Clientes</a></p>
                 </div>
+
+                    <p><a href="{{ url('clientes') }}"><span class="label label-info">VOLVER LISTA DE CLIENTES</span></a></p>
+
             </div>
         </div>
     </div>
