@@ -16,13 +16,13 @@ class CreateAdminClientsTable extends Migration
         Schema::create('admin_clients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('last_name');
-            $table->string('user_ml')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('user_ml')->nullable()->default(null);
             $table->string('user_whatsapp')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email')->nullable()->unique();
             $table->string('dni')->unique();
-            $table->string('phone');
-            $table->string('face')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('face')->nullable()->default(null);
             $table->boolean('friends');
             $table->enum('marketing', ['Por Facebook Juan Pablo Sosa', 'Por facebook.com/comparsas.percu', 'Por la Web www.percu.com.ar',
                                         'Por Busqueda Google', 'Por un Amigo', 'Ya nos conociamos', 'Por una promo que hicimos', 'Por volantes', 'Otros'])

@@ -84,24 +84,24 @@
                                     </li>
                                     <li class="paginate_button ">
                                         <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a>
-                                    </li><
-                                    li class="paginate_button ">
-                                    <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a>
-                                </li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a>
-                                </li>
-                                <li class="paginate_button next" id="example2_next">
-                                    <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a>
-                                </li>
-                            </ul>
+                                    </li>
+                                    <li class="paginate_button ">
+                                        <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a>
+                                    </li>
+                                    <li class="paginate_button ">
+                                        <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a>
+                                    </li>
+                                    <li class="paginate_button next" id="example2_next">
+                                        <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 

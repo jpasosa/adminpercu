@@ -27,7 +27,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Nombre</label>
-                                        <input type="text" class="form-control" id="" name="name" placeholder="Indique el nombre de la comparsa" value="{{ old('name') }}"   >
+                                        <input type="text" class="form-control" id="" name="name" placeholder="Nombre" value="{{ old('name') }}"   required="required">
                                     </div>
                                     @if( $errors->has('name') )
                                         <p><code>{{ $errors->first('name') }}</code></p>
@@ -38,7 +38,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Apellido</label>
-                                        <input type="text" class="form-control" id="" name="last_name" placeholder="Indique el nombre de la bateria" value="{{ old('last_name') }}"   >
+                                        <input type="text" class="form-control" id="" name="last_name" placeholder="Apellido" value="{{ old('last_name') }}"   >
                                     </div>
                                 </div>
                             </div>
@@ -46,23 +46,29 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Usuario de MercadoLibre</label>
-                                        <input type="text" class="form-control" id="" name="user_ml" placeholder="Indique el nombre de la bateria" value="{{ old('user_ml') }}"  >
+                                        <input type="text" class="form-control" id="" name="user_ml" placeholder="User mercadolibre" value="{{ old('user_ml') }}"  >
                                     </div>
+                                    @if( $errors->has('user_ml') )
+                                        <p><code>{{ $errors->first('user_ml') }}</code></p>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Email</label>
-                                        <input type="email" class="form-control" id="" name="email" placeholder="Indique el nombre de la bateria" value="{{ old('email') }}"  >
+                                        <input type="email" class="form-control" id="" name="email" placeholder="email" value="{{ old('email') }}"  >
                                     </div>
+                                    @if( $errors->has('email') )
+                                        <p><code>{{ $errors->first('email') }}</code></p>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">DNI</label>
-                                        <input type="number" class="form-control" id="" name="dni" placeholder="Indique el nombre de la bateria" value="{{ old('dni') }}"  >
+                                        <input type="number" class="form-control" id="" name="dni" placeholder="Indique su DNI" value="{{ old('dni') }}"  required="required">
                                     </div>
                                     @if( $errors->has('dni') )
                                         <p><code>{{ $errors->first('dni') }}</code></p>
@@ -73,7 +79,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Teléfono</label>
-                                        <input type="number" class="form-control" id="" name="phone" placeholder="Indique el nombre de la bateria" value="{{ old('phone') }}"  >
+                                        <input type="number" class="form-control" id="" name="phone" placeholder="+54 9 11 5655 5566" value="{{ old('phone') }}"  >
                                     </div>
                                     @if( $errors->has('phone') )
                                         <p><code>{{ $errors->first('phone') }}</code></p>
@@ -103,6 +109,9 @@
                                         <label for="exampleFormControlInput1">Facebook</label>
                                         <input type="text" class="form-control" id="" name="face" placeholder="4000" value="{{ old('face') }}" >
                                     </div>
+                                    @if( $errors->has('face') )
+                                        <p><code>{{ $errors->first('face') }}</code></p>
+                                    @endif
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
