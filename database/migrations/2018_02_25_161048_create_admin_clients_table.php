@@ -19,12 +19,12 @@ class CreateAdminClientsTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('user_ml')->nullable()->default(null);
             $table->string('user_whatsapp')->nullable();
-            $table->string('email')->nullable()->unique();
+            $table->string('email');
             $table->string('dni')->unique();
             $table->string('phone')->nullable();
             $table->string('face')->nullable()->default(null);
             $table->boolean('friends');
-            $table->enum('marketing', ['Por Facebook Juan Pablo Sosa', 'Por facebook.com/comparsas.percu', 'Por la Web www.percu.com.ar',
+            $table->enum('marketing', ['No responde', 'Por Facebook Juan Pablo Sosa', 'Por facebook.com/comparsas.percu', 'Por la Web www.percu.com.ar',
                                         'Por Busqueda Google', 'Por un Amigo', 'Ya nos conociamos', 'Por una promo que hicimos', 'Por volantes', 'Otros'])
                                         ->default('Otros');
             $table->boolean('ya_nos_compro')->default(false); // el cliente ya nos hizo una compra ?

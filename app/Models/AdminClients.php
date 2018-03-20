@@ -26,10 +26,14 @@ class AdminClients extends Model
     {
 
 
-        $provinces  = AdminProvinces::all()->pluck('name', 'id');
+        $provinces  = AdminProvinces::all()->sortBy('name');
         $states     = AdminStates::all()->where('admin_province_id',1)->sortBy('name');
+
         $comparsas  = AdminComparsas::all()->toArray();
         $marketings = self::get_marketings();
+
+
+
 
         return [
             'marketing'  => $marketings,

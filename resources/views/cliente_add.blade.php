@@ -13,7 +13,13 @@
                     <div class="box-body">
                         @if( $errors->any() )
                                 <div class="alert alert-danger">
-                                    <h5><strong>Error!</strong> Por favor corregir los errores marcados debajo. . .</h5>
+                                    <h5>
+                                        <strong>Error!</strong>
+                                        Por favor corregir los errores marcados debajo. . .
+                                    </h5>
+                                    <h5>
+                                        Y controlar nuevamente Provincia y Localidades. . .
+                                    </h5>
                                 </div>
                             @endif
                         <form method="POST" action="{{ url("clientes/nuevo") }}">
@@ -138,31 +144,32 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Provincia de Residencia</label>
                                         <select class="form-control" id="admin_province_residence_id" name="admin_province_residence_id">
-                                                 @foreach ($admin_province_residence_id as $id=>$name)
-                                                    @if (old('admin_province_residence_id') == $id)
-                                                          <option value="{{ $id }}" selected>{{ $name }}</option>
+                                                 @foreach ($admin_province_residence_id AS $prov)
+                                                    @if (old('admin_province_residence_id') == $prov->id)
+                                                          <option value="{{ $prov->id }}" selected="selected">{{ $prov->name }}</option>
                                                     @else
-                                                          <option value="{{ $id }}">{{ $name }}</option>
+                                                          <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                                                     @endif
                                                 @endforeach
                                         </select>
                                     </div>
-                                    @if( $errors->any() )
-                                        <p><code><strong>Error!</strong>Debe Seleccionar nuevamente la provincia.</code></p>
-                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1">Localidad de Residencia</label>
+                                        <label for="exampleFormControlInput1">Localidad de Residencia{{ old('admin_state_residence_id') }} </label>
                                         <select class="form-control" id="admin_state_residence_id" name="admin_state_residence_id">
-                                            <option value="">Selecciones antes la provincia, luego la localidad . . .</option>
+                                            <@foreach ($admin_state_residence_id AS $state)
+                                                @if (old('admin_state_residence_id') == $state->id)
+                                                      <option value="{{ $state->id }}" selected="selected">{{ $state->name }}</option>
+                                                @else
+                                                      <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
-                                    @if( $errors->any() )
-                                        <p><code><strong>Error!</strong>Debe Seleccionar nuevamente la localidad.</code></p>
-                                    @endif
+                                    <input id="old_admin_state_residence_id" type="hidden" value="{{ old('admin_state_residence_id') }}" />
                                 </div>
                             </div>
 
@@ -171,14 +178,15 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Provincia de Envío</label>
                                         <select class="form-control" id="admin_province_shipping_id" name="admin_province_shipping_id">
-                                                @foreach ($admin_province_shipping_id as $id=>$name)
-                                                    <option value="{{ $id }}">{{ $name }}</option>
-                                                @endforeach
+                                            @foreach ($admin_province_shipping_id AS $prov)
+                                                @if (old('admin_province_shipping_id') == $prov->id)
+                                                      <option value="{{ $prov->id }}" selected="selected">{{ $prov->name }}</option>
+                                                @else
+                                                      <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
-                                    @if( $errors->any() )
-                                        <p><code><strong>Error!</strong>Debe Seleccionar nuevamente la provincia.</code></p>
-                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -186,12 +194,16 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Localidad de Envío</label>
                                         <select class="form-control" id="admin_state_shipping_id" name="admin_state_shipping_id">
-                                            <option value="">Selecciones antes la provincia, luego la localidad . . .</option>
+                                            @foreach ($admin_state_shipping_id AS $state)
+                                                @if (old('admin_state_shipping_id') == $state->id)
+                                                      <option value="{{ $state->id }}" selected="selected">{{ $state->name }}</option>
+                                                @else
+                                                      <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
-                                    @if( $errors->any() )
-                                        <p><code><strong>Error!</strong>Debe Seleccionar nuevamente la localidad.</code></p>
-                                    @endif
+
                                 </div>
                             </div>
                             <div class="row">

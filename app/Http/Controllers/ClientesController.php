@@ -40,6 +40,7 @@ class ClientesController extends Controller
     {
         $clients_blank = AdminClients::get_blank_fields();
 
+
         return view('cliente_add', $clients_blank);
     }
 
@@ -52,7 +53,7 @@ class ClientesController extends Controller
                 'name'          => 'required',
                 'last_name'     => '',
                 'user_ml'       => '',
-                'email'         => 'unique:admin_clients',
+                'email'         => '',
                 'dni'           => 'required|unique:admin_clients',
                 'phone'         => '',
                 'marketing'     => '',
@@ -71,7 +72,9 @@ class ClientesController extends Controller
         if($data['friends'] == '1')     $data['friends'] = true;
         if($data['friends'] == '0')     $data['friends'] = false;
         if($data['user_ml'] == '')      $data['user_ml'] = null;
-        if($data['face'] == '')      $data['face'] = null;
+        if($data['face'] == '')         $data['face'] = null;
+        if ($data['email'] == null)       $data['email'] = '';
+
         if($data['admin_comparsas_id'] == 'null')   $data['admin_comparsas_id'] = null;
 
 
