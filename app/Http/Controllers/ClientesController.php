@@ -14,6 +14,8 @@ class ClientesController extends Controller
 {
 
 
+
+
     public function index()
     {
 
@@ -22,6 +24,8 @@ class ClientesController extends Controller
         return view('cliente_lista', $data);
 
     }
+
+
 
     public function show ( $id )
     {
@@ -36,6 +40,8 @@ class ClientesController extends Controller
     }
 
 
+
+
     public function add()
     {
         $clients_blank = AdminClients::get_blank_fields();
@@ -46,8 +52,10 @@ class ClientesController extends Controller
 
 
 
+
     public function add_save_changes()
     {
+
 
         $data = request()->validate([
                 'name'          => 'required',
@@ -59,22 +67,21 @@ class ClientesController extends Controller
                 'marketing'     => '',
                 'face'          => '',
                 'friends'       => '',
-                'admin_province_residence_id' => '',
-                'admin_state_residence_id' => '',
-                'admin_province_shipping_id' => '',
-                'admin_state_shipping_id' => '',
-                'admin_comparsas_id' => '',
-                'observations' => '',
+                'admin_province_residence_id'=> '',
+                'admin_state_residence_id'  => '',
+                'admin_province_shipping_id'=> '',
+                'admin_state_shipping_id'=> '',
+                'admin_comparsas_id'    => '',
+                'observations'          => '',
 
             ]);
 
 
-        if($data['friends'] == '1')     $data['friends'] = true;
-        if($data['friends'] == '0')     $data['friends'] = false;
-        if($data['user_ml'] == '')      $data['user_ml'] = null;
-        if($data['face'] == '')         $data['face'] = null;
-        if ($data['email'] == null)       $data['email'] = '';
-
+        if($data['friends'] == '1')     $data['friends']= true;
+        if($data['friends'] == '0')     $data['friends']= false;
+        if($data['user_ml'] == '')      $data['user_ml']= null;
+        if($data['face'] == '')         $data['face']   = null;
+        if($data['email'] == null)      $data['email']  = '';
         if($data['admin_comparsas_id'] == 'null')   $data['admin_comparsas_id'] = null;
 
 

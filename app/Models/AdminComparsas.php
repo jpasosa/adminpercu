@@ -27,19 +27,18 @@ class AdminComparsas extends Model
     {
 
 
-        $provinces  = AdminProvinces::all()->pluck('name', 'id');
+        $provinces  = AdminProvinces::all()->sortBy('name');
         $states     = AdminStates::all()->where('admin_province_id',1)->sortBy('name');
 
         return [
-            'name_comparsa'  => '',
-            'name_bateria'  => '',
             'admin_state_id' => $states,
             'admin_province_id' => $provinces,
-            'facebook_page' => '',
-            'members_cant'  => '',
-            'can_publish'   => 'true',
-            'observations'  => '',
         ];
+    }
+
+    public function state()
+    {
+        return  $this->belongsTo(AdminStates::class, 'admin_state_id');
     }
 
 }

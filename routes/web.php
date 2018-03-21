@@ -28,8 +28,9 @@ Route::post('calcular_precios', 'PreciosController@calcular_precios');
 Route::post('recalcular_precios', 'PreciosController@recalcular_precios');
 
 
-Route::get('comparsas', 'ComparsasController@index');       # Lista de las comparsas
-Route::get('comparsas/nueva', 'ComparsasController@add'); # Agregar una nueva comparsa
+
+Route::get('comparsas', 'ComparsasController@index');        # Lista de las comparsas
+Route::get('comparsas/nueva', 'ComparsasController@add');   # Agregar una nueva comparsa
 Route::post('comparsas/nueva', 'ComparsasController@add_save_changes'); # Agregar una nueva comparsa, ya vienen los datos que ingresamos.
 
 

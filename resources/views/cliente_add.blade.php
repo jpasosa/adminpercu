@@ -160,7 +160,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Localidad de Residencia{{ old('admin_state_residence_id') }} </label>
                                         <select class="form-control" id="admin_state_residence_id" name="admin_state_residence_id">
-                                            <@foreach ($admin_state_residence_id AS $state)
+                                            @foreach ($admin_state_residence_id AS $state)
                                                 @if (old('admin_state_residence_id') == $state->id)
                                                       <option value="{{ $state->id }}" selected="selected">{{ $state->name }}</option>
                                                 @else

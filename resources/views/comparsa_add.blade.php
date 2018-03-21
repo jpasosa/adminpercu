@@ -19,15 +19,18 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Nombre de la Comparsa</label>
-                                        <input type="text" class="form-control" id="" name="name_comparsa" placeholder="Indique el nombre de la comparsa" value="{{ $name_comparsa }}"  >
+                                        <input type="text" class="form-control" id="" name="name_comparsa" placeholder="Indique el nombre de la comparsa" value="{{ old('name_comparsa') }}"  >
                                     </div>
+                                    @if( $errors->has('name_comparsa') )
+                                        <p><code>{{ $errors->first('name_comparsa') }}</code></p>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Nombre de la Bateria</label>
-                                        <input type="text" class="form-control" id="" name="name_bateria" placeholder="Indique el nombre de la bateria" value="{{ $name_bateria }}"  >
+                                        <input type="text" class="form-control" id="" name="name_bateria" placeholder="Indique el nombre de la bateria" value="{{ old('name_bateria') }}"  >
                                     </div>
                                 </div>
                             </div>
@@ -36,8 +39,12 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Provincia</label>
                                         <select class="form-control" id="province" name="admin_province_id">
-                                                @foreach ($admin_province_id as $id=>$name)
-                                                    <option value="{{ $id }}">{{ $name }}</option>
+                                                @foreach ($admin_province_id AS $prov)
+                                                    @if (old('admin_province_id') == $prov->id)
+                                                          <option value="{{ $prov->id }}" selected="selected">{{ $prov->name }}</option>
+                                                    @else
+                                                          <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                                                    @endif
                                                 @endforeach
                                         </select>
                                     </div>
@@ -51,13 +58,16 @@
                                             <option value="">Selecciones antes la provincia, luego la localidad . . .</option>
                                         </select>
                                     </div>
+                                    @if( $errors->has('admin_state_id') )
+                                        <p><code>{{ $errors->first('admin_state_id') }}</code></p>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Pagina Facebook</label>
-                                        <input type="text" class="form-control" id="" name="facebook_page" placeholder="facebook.com/comparsa-" value="{{ $facebook_page }}" >
+                                        <input type="text" class="form-control" id="" name="facebook_page" placeholder="facebook.com/comparsa-" value="{{ old('facebook_page') }}" >
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +75,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Cantidad de Miembros</label>
-                                        <input type="number" class="form-control" id="" name="members_cant" placeholder="4000" value="{{ $members_cant }}" >
+                                        <input type="number" class="form-control" id="" name="members_cant" placeholder="4000" value="{{ old('members_cant') }}" >
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -73,8 +83,13 @@
                                         <label for="exampleFormControlInput1">Se puede publicar ? </label>
                                         <div class="form-group">
                                             <select class="form-control" id="sel1" name="can_publish">
-                                                <option value="1">SI</option>
-                                                <option value="0">NO</option>
+                                                @if (old('can_publish') == '1')
+                                                      <option value="1" selected>SI</option>
+                                                      <option value="0" >NO</option>
+                                                @else
+                                                      <option value="1">SI</option>
+                                                      <option value="0" selected>NO</option>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -84,7 +99,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Observaciones</label>
-                                        <textarea type="text" class="form-control" rows="5" name="observations">{{ $observations }}</textarea>
+                                        <textarea type="text" class="form-control" rows="5" name="observations">{{ old('observations') }}</textarea>
                                     </div>
                                 </div>
                             </div>
