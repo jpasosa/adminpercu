@@ -19,9 +19,11 @@ class ClientesController extends Controller
     public function index()
     {
 
-        $data['clients'] = AdminClients::all();
+        $data['clients'] = AdminClients::orderBy('id', 'desc')->paginate();
 
         return view('cliente_lista', $data);
+
+
 
     }
 
@@ -53,12 +55,8 @@ class ClientesController extends Controller
 
 
 
-    public function add_save_changes( $id )
+    public function add_save_changes()
     {
-
-        dd($id);
-
-
 
         $validations = [
                 'name'          => 'required',
