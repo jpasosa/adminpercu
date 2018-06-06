@@ -29,15 +29,23 @@ Route::post('recalcular_precios', 'PreciosController@recalcular_precios');
 
 
 
-Route::get('comparsas', 'ComparsasController@index');        # Lista de las comparsas
+// COMPARSAS
+Route::get('comparsas', 'ComparsasController@index');       # Lista de las comparsas
 Route::get('comparsas/nueva', 'ComparsasController@add');   # Agregar una nueva comparsa
 Route::post('comparsas/nueva', 'ComparsasController@add_save_changes'); # Agregar una nueva comparsa, ya vienen los datos que ingresamos.
+Route::get('comparsa/{id}', 'ComparsasController@show')     # Vista detallada de un cliente
+            ->where('id', '[0-9]+');
+Route::get('comparsa/editar/{id}', 'ComparsasController@edit')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+Route::post('comparsa/editar/{id}', 'ComparsasController@edit_save_changes')     # EDITAR, Graba la edición
+            ->where('id', '[0-9]+');
+
 
 
 // CLIENTES
 Route::get('clientes', 'ClientesController@index');             # Lista de los clientes
-Route::get('cliente/{id}', 'ClientesController@show')
-            ->where('id', '[0-9]+');          # Vista detallada de un cliente
+Route::get('cliente/{id}', 'ClientesController@show')           # Vista detallada de un cliente
+            ->where('id', '[0-9]+');
 Route::get('clientes/nuevo', 'ClientesController@add');         # Agregar un nuevo cliente
 Route::post('clientes/nuevo', 'ClientesController@add_save_changes'); # Agregar un nuevo cliente
 

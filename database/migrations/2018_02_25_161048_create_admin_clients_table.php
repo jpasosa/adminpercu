@@ -20,7 +20,7 @@ class CreateAdminClientsTable extends Migration
             $table->string('user_ml')->nullable()->default(null);
             $table->string('user_whatsapp')->nullable();
             $table->string('email');
-            $table->string('dni')->unique();
+            $table->string('dni')->unique()->nullable();
             $table->string('phone')->nullable();
             $table->string('face')->nullable()->default(null);
             $table->boolean('friends');

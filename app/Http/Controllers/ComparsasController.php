@@ -15,7 +15,7 @@ class ComparsasController extends Controller
 
     public function index()
     {
-        $data['comparsas'] = AdminComparsas::all();
+        $data['comparsas'] = AdminComparsas::orderBy('name_comparsa')->paginate();
 
         return view('comparsa_list', $data);
     }
@@ -50,10 +50,6 @@ class ComparsasController extends Controller
                 'admin_state_id.required' => 'Debe seleccionar una localidad.',
             ]);
 
-
-
-
-
         unset($data['admin_province_id']);
         if($data['can_publish'] == '1')  $data['can_publish'] = true;
         if($data['can_publish'] == '0')  $data['can_publish'] = false;
@@ -71,9 +67,22 @@ class ComparsasController extends Controller
         }
 
         return redirect('home');
-
     }
 
+    public function edit( $id )
+    {
+
+        $data['comparsa'] = AdminComparsas::find( $id );
+        // $data[]
+
+
+        return view('comparsa_edit', $data);
+    }
+
+    public function edit_save_changes( $id )
+    {
+
+    }
 
 
     public function show ( $id )
@@ -81,7 +90,7 @@ class ComparsasController extends Controller
 
         $data['comparsa'] = AdminComparsas::find( $id );
 
-        return view('cliente_ver', $data);
+        return view('comparsa_show', $data);
 
     }
 

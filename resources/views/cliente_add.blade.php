@@ -74,7 +74,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">DNI</label>
-                                        <input type="number" class="form-control" id="" name="dni" placeholder="Indique su DNI" value="{{ old('dni') }}"  required="required">
+                                        <input type="number" class="form-control" id="" name="dni" placeholder="Indique su DNI" value="{{ old('dni') }}">
                                     </div>
                                     @if( $errors->has('dni') )
                                         <p><code>{{ $errors->first('dni') }}</code></p>
