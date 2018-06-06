@@ -40,9 +40,8 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Provincia</label>
                                         <select class="form-control" id="province" name="admin_province_id">
-                                        $comparsa->state->province->id
-                                                @foreach ($comparsa->state->province->nadmin_province_id AS $prov)
-                                                    @if (old('admin_province_id', $comparsa->admin_province_id) == $prov->id)
+                                                @foreach ($comparsa->state->province->all() AS $prov)
+                                                    @if (old('admin_province_id', $comparsa->state->province->id) == $prov->id)
                                                           <option value="{{ $prov->id }}" selected="selected">{{ $prov->name }}</option>
                                                     @else
                                                           <option value="{{ $prov->id }}">{{ $prov->name }}</option>
@@ -57,7 +56,13 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Localidad</label>
                                         <select class="form-control" id="state" name="admin_state_id">
-                                            <option value="">Selecciones antes la provincia, luego la localidad . . .</option>
+                                            @foreach ($states AS $st)
+                                                @if (old('admin_state_id', $comparsa->state->id) == $st->id)
+                                                      <option value="{{ $st->id }}" selected="selected">{{ $st->name }}</option>
+                                                @else
+                                                      <option value="{{ $st->id }}">{{ $st->name }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
                                     @if( $errors->has('admin_state_id') )

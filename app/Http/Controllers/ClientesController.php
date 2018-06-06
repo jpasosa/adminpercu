@@ -53,8 +53,12 @@ class ClientesController extends Controller
 
 
 
-    public function add_save_changes()
+    public function add_save_changes( $id )
     {
+
+        dd($id);
+
+
 
         $validations = [
                 'name'          => 'required',

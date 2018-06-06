@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminComparsas;
+use App\Models\AdminStates;
 use Illuminate\Http\Request;
 
 use Session;
@@ -73,7 +74,17 @@ class ComparsasController extends Controller
     {
 
         $data['comparsa'] = AdminComparsas::find( $id );
-        // $data[]
+
+        $comparsa = $data['comparsa'];
+
+
+
+
+        $id_province = $comparsa->state->province->id;
+        $id_state   = $comparsa->state->id;
+
+        $data['states']     = AdminStates::where('admin_province_id',$id_province)->get();
+
 
 
         return view('comparsa_edit', $data);
@@ -81,6 +92,34 @@ class ComparsasController extends Controller
 
     public function edit_save_changes( $id )
     {
+
+        $data = request()->validate([
+                'name_comparsa' => 'required',
+                'name_bateria'  => '',
+                'facebook_page' => '',
+                'members_cant'  => '',
+                'can_publish'   => '',
+                'observations'  => '',
+                'admin_province_id'=> '',
+                'admin_state_id'=> 'required',
+            ],[
+                'name_comparsa.required' => 'Debe incluir el nombre de la comparsa.',
+                'admin_state_id.required' => 'Debe seleccionar una localidad.',
+            ]);
+        unset($data['admin_province_id']);
+
+        $save = AdminComparsas::where('id', $id)
+                    ->update($data);
+
+        if ( $save ) {
+            Session::flash('success_message', 'Editamos correctamente la Comparsa');
+        } else {
+            if ( !Session::has('error_message')) {
+                Session::flash('error_message', 'No se pudo actualizar la comparsa. Intente más tarde, gracias!');
+            }
+        }
+
+        return redirect('home');
 
     }
 

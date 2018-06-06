@@ -37,6 +37,8 @@ $(document).ready(function()
 
         });
     });
+
+
     // En Clientes
     $('#admin_province_residence_id').on('click', function(e)
     {
@@ -50,6 +52,7 @@ $(document).ready(function()
 
         });
     });
+
     // En Clientes
     $('#admin_province_shipping_id').on('click', function(e)
     {
