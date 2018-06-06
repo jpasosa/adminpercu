@@ -56,13 +56,11 @@ class ClientesController extends Controller
     public function add_save_changes()
     {
 
-
-        $data = request()->validate([
+        $validations = [
                 'name'          => 'required',
                 'last_name'     => '',
                 'user_ml'       => '',
                 'email'         => '',
-                'dni'           => 'required|unique:admin_clients',
                 'phone'         => '',
                 'marketing'     => '',
                 'face'          => '',
@@ -74,7 +72,13 @@ class ClientesController extends Controller
                 'admin_comparsas_id'    => '',
                 'observations'          => '',
 
-            ]);
+            ];
+
+        if (!is_null(request('dni'))) {
+            $validations['dni'] = 'unique:admin_clients';
+        }
+
+        $data = request()->validate($validations);
 
 
         if($data['friends'] == '1')     $data['friends']= true;
