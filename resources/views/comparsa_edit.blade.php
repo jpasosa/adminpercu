@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('htmlheader_title')
-    Nueva Comparsa
+    Edición de la comparsa.
 @endsection
 
 

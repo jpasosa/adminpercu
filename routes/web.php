@@ -48,6 +48,10 @@ Route::get('cliente/{id}', 'ClientesController@show')           # Vista detallad
             ->where('id', '[0-9]+');
 Route::get('clientes/nuevo', 'ClientesController@add');         # Agregar un nuevo cliente
 Route::post('clientes/nuevo', 'ClientesController@add_save_changes'); # Agregar un nuevo cliente
+Route::get('cliente/editar/{id}', 'ClientesController@edit')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+Route::post('cliente/editar/{id}', 'ClientesController@edit_save_changes')     # EDITAR, Graba la edición
+            ->where('id', '[0-9]+');
 
 
 

@@ -53,6 +53,8 @@
                                             <td>{{ $client->email }}</td>
                                             <td>{{ $client->state_shipping->name . ' - ' . $client->state_shipping->province->name . ' - ' . $client->state_shipping->cp }}</td>
                                             <td><a href="{{ url( "cliente/$client->id" ) }}">Ver</a></td>
+                                            <td><a href="{{ url( "cliente/editar/$client->id" ) }}">Editar</a></td>
+
                                         </tr>
                                     @empty
                                         <tr role="row" class="odd">
