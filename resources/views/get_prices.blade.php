@@ -22,7 +22,7 @@
 
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Descuento</label>
-                                    <input type="number" class="form-control" name="discount" id="descuento" placeholder="120" value="10">
+                                    <input type="number" class="form-control" name="discount" id="descuento" placeholder="120" value="20">
                                 </div>
                                 <input type="submit" class="btn btn-info" value="Calcular Precios">
                             </div>
