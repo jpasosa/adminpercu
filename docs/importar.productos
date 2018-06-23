@@ -1,0 +1,14 @@
+
+importación de los pructos desde el excel -> tabla admin_products
+
+creo tablas temporales para cada mara: tmp_ivsom, tmp_gope, tmp_king, tmp_timbra, tmp_rozini, tmp_contemporanea
+desde ahí tengo que hacer un script para meterlos en la tabla.
+
+
+IVSOM
+guardar como .csv y ubicarlo en resource/external_files
+luego en mysql:
+LOAD DATA LOCAL INFILE '/var/www/html/adminpercu/resources/external_files/ivsom.csv' INTO TABLE tmp_ivsom CHARACTER SET UTF8 FIELDS TERMINATED BY ',' ENCLOSED BY '"';
+nos va a guardar en la tabla temporal tmp_ivsom
+
+Teniendo eso hay que hacer un controlador para ir exportando a la tabla original de productos, haciendo que ya calcule los precios que no tiene seteado.
