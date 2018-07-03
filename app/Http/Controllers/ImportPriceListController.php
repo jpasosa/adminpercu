@@ -126,4 +126,70 @@ class ImportPriceListController extends Controller
 
 
 
+
+    static function importKing()
+    {
+
+
+        $kings = DB::table('tmp_king')->get();
+
+        session(['category' => '']);
+
+
+        foreach ($kings as $k=>$king)
+        {
+
+            $cat = $king->precio_cash;
+
+            if ( $cat == 'categoria' )
+            { // es una categoria o una subcategoria
+
+                session(['category' => $king->codigo]);
+
+
+            } else {
+                // es un instrumento
+
+            $producto_king[$k]['code']  = trim($king->codigo);
+            $producto_king[$k]['name'] = session('category') . ' ' . $king->nombre . ' ' . $king->pulgadas;
+
+            $producto_king[$k]['manufacturer_id'] = 14; // es el id de KING
+
+            $producto_king[$k]['weight']       = '';
+            $producto_king[$k]['dimension']    = $king->medidas;
+
+
+            $price = str_replace("$", "", $king->precio_lista);
+            $price = str_replace(".", "", $price);
+
+
+
+
+            $producto_king[$k]['list_price']   = $price;
+            $producto_king[$k]['cash_price']   = trim($king->precio_cash);
+            $producto_king[$k]['mp_price']     = trim($king->precio_mp);
+            $producto_king[$k]['ml_price']     = trim($king->precio_ml);
+            $producto_king[$k]['created_at']   = date('Y-m-d H:i:s');
+            $producto_king[$k]['updated_at']   = date('Y-m-d H:i:s');
+
+            }
+        }
+
+        foreach ($producto_king AS $prod)
+        {
+            $insert_product = DB::table('admin_products')->insert($prod);
+        }
+
+        if ($insert_product) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+
+
+
 }
