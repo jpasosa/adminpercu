@@ -18,5 +18,6 @@ class StatesSeeder extends Seeder
         DB::unprepared(file_get_contents($path));
         $this->command->info('States table seeded!');
 
+
     }
 }
