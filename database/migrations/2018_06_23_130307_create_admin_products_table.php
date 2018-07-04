@@ -20,10 +20,10 @@ class CreateAdminProductsTable extends Migration
             $table->integer('manufacturer_id'); // MARCAS, se relaciona con la tabla oc_manufacturer del OC
             $table->string('weight')->nullable();
             $table->string('dimension')->nullable();
-            $table->float('list_price', 6, 2);
-            $table->float('cash_price', 6, 2);
-            $table->float('mp_price', 6, 2);
-            $table->float('ml_price', 6, 2);
+            $table->integer('list_price');
+            $table->integer('cash_price');
+            $table->integer('mp_price');
+            $table->integer('ml_price');
             $table->integer('oc_product_id')->nullable()->default(0); // relaciona al id del producto en el OC
             $table->text('ml_description')->nullable();
             $table->text('oc_description')->nullable();

@@ -40,3 +40,66 @@ if ( ! function_exists('ddd'))
     }
 }
 
+
+if ( ! function_exists('calc_cash'))
+{
+    function calc_cash( $price_list )
+    {
+        $real_price = (float)$price_list * 0.8;
+        if ($real_price > 0 && $real_price < 301)
+            $indice_aumento = 1.6;
+        else if ( $real_price > 300 && $real_price < 601 )
+            $indice_aumento = 1.5;
+        else if ( $real_price > 600 && $real_price < 901 )
+            $indice_aumento = 1.35;
+        else if ( $real_price > 900 && $real_price < 1501 )
+            $indice_aumento = 1.30;
+        else if ( $real_price > 1500 && $real_price < 2001 )
+            $indice_aumento = 1.28;
+        else if ( $real_price > 2000 && $real_price < 2501 )
+            $indice_aumento = 1.27;
+        else if ( $real_price > 2500 && $real_price < 3001 )
+            $indice_aumento = 1.25;
+        else if ( $real_price > 3000 && $real_price < 20000 )
+            $indice_aumento = 1.23;
+        else
+            $indice_aumento = 0;
+
+
+        $precio_venta_cash  = $real_price * $indice_aumento;
+        $precio_venta_cash  = (int)$precio_venta_cash;
+        $new_pv_cash        = substr_replace($precio_venta_cash , "",-1);
+        $new_pv_cash        = $new_pv_cash . '0';
+        $new_pv_cash        = (int)$new_pv_cash;
+
+        return $new_pv_cash;
+    }
+}
+
+if ( ! function_exists('calc_mp'))
+{
+    function calc_mp( $price_cash )
+    {
+        $mp = (float)$price_cash * 1.08;
+        $mp = (int)$mp;
+        $new_mp = substr_replace($mp ,"",-1);
+        $new_mp = $new_mp . '0';
+        $new_mp = (int)$new_mp;
+
+        return $new_mp;
+    }
+}
+
+if ( ! function_exists('calc_ml'))
+{
+    function calc_ml( $price_cash )
+    {
+        $ml = (float)$price_cash * 1.12;
+        $ml = (int)$ml;
+        $new_ml = substr_replace($ml ,"",-1);
+        $new_ml = $new_ml . '0';
+        $new_ml = (int)$new_ml;
+        return $new_ml;
+    }
+}
+

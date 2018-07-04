@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TmpIvsomSeeder::class);
         $this->call(GopeProductsSeeder::class);
         $this->call(KingProductsSeeder::class);
+        $this->call(TimbraProductsSeeder::class);
     }
 }

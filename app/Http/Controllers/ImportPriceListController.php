@@ -29,11 +29,12 @@ class ImportPriceListController extends Controller
             $producto_ivsom[$k]['weight']       = trim($ivsom->peso);
             $producto_ivsom[$k]['dimension']    = trim($ivsom->medida);
             $price = str_replace("$", "", $ivsom->precio_lista);
-            $price = str_replace(".", "", $price);
+            $price = (int)str_replace(".", "", $price);
             $producto_ivsom[$k]['list_price']   = $price;
-            $producto_ivsom[$k]['cash_price']   = trim($ivsom->precio_cash);
-            $producto_ivsom[$k]['mp_price']     = trim($ivsom->precio_mp);
-            $producto_ivsom[$k]['ml_price']     = trim($ivsom->precio_ml);
+            $cash_price = calc_cash($price);
+            $producto_ivsom[$k]['cash_price']   = $cash_price;
+            $producto_ivsom[$k]['mp_price']     = calc_mp($cash_price);
+            $producto_ivsom[$k]['ml_price']     = calc_ml($cash_price);
             $producto_ivsom[$k]['created_at']   = date('Y-m-d H:i:s');
             $producto_ivsom[$k]['updated_at']   = date('Y-m-d H:i:s');
         }
@@ -99,10 +100,12 @@ class ImportPriceListController extends Controller
             $producto_gope[$k]['weight']       = '';
             $producto_gope[$k]['dimension']    = '';
 
-            $producto_gope[$k]['list_price']   = $gope->precio_lista;
-            $producto_gope[$k]['cash_price']   = trim($gope->precio_cash);
-            $producto_gope[$k]['mp_price']     = trim($gope->precio_mp);
-            $producto_gope[$k]['ml_price']     = trim($gope->precio_ml);
+            $list_price = (int)$gope->precio_lista;
+            $producto_gope[$k]['list_price']   = $list_price;
+            $cash_price = calc_cash($list_price);
+            $producto_gope[$k]['cash_price']   = $cash_price;
+            $producto_gope[$k]['mp_price']     = calc_mp($cash_price);
+            $producto_gope[$k]['ml_price']     = calc_ml($cash_price);
             $producto_gope[$k]['created_at']   = date('Y-m-d H:i:s');
             $producto_gope[$k]['updated_at']   = date('Y-m-d H:i:s');
 
@@ -161,14 +164,16 @@ class ImportPriceListController extends Controller
 
             $price = str_replace("$", "", $king->precio_lista);
             $price = str_replace(".", "", $price);
+            (int)$price;
 
 
 
 
             $producto_king[$k]['list_price']   = $price;
-            $producto_king[$k]['cash_price']   = trim($king->precio_cash);
-            $producto_king[$k]['mp_price']     = trim($king->precio_mp);
-            $producto_king[$k]['ml_price']     = trim($king->precio_ml);
+            $cash_price = calc_cash($price);
+            $producto_king[$k]['cash_price']   = $cash_price;
+            $producto_king[$k]['mp_price']     = calc_mp($cash_price);
+            $producto_king[$k]['ml_price']     = calc_ml($cash_price);
             $producto_king[$k]['created_at']   = date('Y-m-d H:i:s');
             $producto_king[$k]['updated_at']   = date('Y-m-d H:i:s');
 
@@ -187,6 +192,75 @@ class ImportPriceListController extends Controller
         }
 
     }
+
+
+
+
+
+     static function importTimbra()
+    {
+
+
+        $timbras = DB::table('tmp_timbra')->get();
+
+        session(['category' => '']);
+
+
+        foreach ($timbras as $k=>$timbra)
+        {
+
+            $cat = $timbra->cat;
+
+            if ( $cat == 'categoria' )
+            { // es una categoria o una subcategoria
+
+                session(['category' => trim($timbra->codigo_nombre)]);
+
+
+            } else {
+                // es un instrumento
+
+            $codigo_nombre = trim($timbra->codigo_nombre);
+            $expl_code_name = explode( " ", $codigo_nombre);
+            $codigo = $expl_code_name[0];
+            $producto_timbra[$k]['code']  = trim($codigo);
+            $name_product = str_replace($codigo, "", $codigo_nombre);
+            $producto_timbra[$k]['name'] = session('category') . ' ' . $name_product;
+
+
+            $producto_timbra[$k]['manufacturer_id'] = 18; // falta agregar la marca timbra en la tienda
+
+            $producto_timbra[$k]['weight']       = '';
+            $producto_timbra[$k]['dimension']    = '';
+
+
+            $price = str_replace("$", "", $timbra->precio);
+            $price = str_replace(".", "", $price);
+            $producto_timbra[$k]['list_price']   = $price;
+            $cash_price = calc_cash($price);
+            $producto_timbra[$k]['cash_price']   = $cash_price;
+            $producto_timbra[$k]['mp_price']     = calc_mp($cash_price);
+            $producto_timbra[$k]['ml_price']     = calc_ml($cash_price);
+            $producto_timbra[$k]['created_at']   = date('Y-m-d H:i:s');
+            $producto_timbra[$k]['updated_at']   = date('Y-m-d H:i:s');
+
+            }
+        }
+
+        foreach ($producto_timbra AS $prod)
+        {
+            $insert_product = DB::table('admin_products')->insert($prod);
+        }
+
+        if ($insert_product) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
 
 
 

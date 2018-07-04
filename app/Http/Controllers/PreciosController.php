@@ -27,11 +27,11 @@ class PreciosController extends Controller
 
 
         if ($real_price > 0 && $real_price < 301)
-            $indice_aumento = 1.7;
-        else if ( $real_price > 300 && $real_price < 601 )
             $indice_aumento = 1.6;
+        else if ( $real_price > 300 && $real_price < 601 )
+            $indice_aumento = 1.5;
         else if ( $real_price > 600 && $real_price < 901 )
-            $indice_aumento = 1.37;
+            $indice_aumento = 1.35;
         else if ( $real_price > 900 && $real_price < 1501 )
             $indice_aumento = 1.30;
         else if ( $real_price > 1500 && $real_price < 2001 )
