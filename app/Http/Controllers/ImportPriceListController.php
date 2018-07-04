@@ -260,6 +260,46 @@ class ImportPriceListController extends Controller
 
     }
 
+    static function importContemporanea()
+    {
+
+        $contemporaneas = DB::table('tmp_contemporanea')->get();
+
+
+        foreach ($contemporaneas as $k=>$cont)
+        {
+            $producto_contemporanea[$k]['code']         = 'contempo';
+            $producto_contemporanea[$k]['name']         = trim($cont->nombre);
+            $producto_contemporanea[$k]['manufacturer_id'] = 17; // es el id de contemporanea
+            $producto_contemporanea[$k]['weight']       = '';
+            $producto_contemporanea[$k]['dimension']    = '';
+            $price = str_replace("$", "", $cont->precio);
+            $price = (int)str_replace(".", "", $price);
+            $producto_contemporanea[$k]['list_price']   = $price;
+            $cash_price = calc_cash($price);
+            $producto_contemporanea[$k]['cash_price']   = $cash_price;
+            $producto_contemporanea[$k]['mp_price']     = calc_mp($cash_price);
+            $producto_contemporanea[$k]['ml_price']     = calc_ml($cash_price);
+            $producto_contemporanea[$k]['created_at']   = date('Y-m-d H:i:s');
+            $producto_contemporanea[$k]['updated_at']   = date('Y-m-d H:i:s');
+        }
+
+
+        foreach ($producto_contemporanea AS $prod)
+        {
+            $insert_product = DB::table('admin_products')->insert($prod);
+        }
+
+        if ($insert_product) {
+            return true;
+        } else {
+            return false;
+        }
+
+
+
+    }
+
 
 
 
