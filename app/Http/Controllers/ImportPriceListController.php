@@ -17,26 +17,24 @@ class ImportPriceListController extends Controller
     static function importIvsom()
     {
 
-
         $ivsoms = DB::table('tmp_ivsom')->get();
-
 
         foreach ($ivsoms as $k=>$ivsom)
         {
-            $producto_ivsom[$k]['code']         = trim($ivsom->codigo);
-            $producto_ivsom[$k]['name']         = trim($ivsom->descripcion);
+            $price                          = str_replace("$", "", $ivsom->precio_lista);
+            $price                          = (int)str_replace(".", "", $price);
+            $cash_price                     = calc_cash($price);
+            $producto_ivsom[$k]['code']     = trim($ivsom->codigo);
+            $producto_ivsom[$k]['name']     = trim($ivsom->descripcion);
             $producto_ivsom[$k]['manufacturer_id'] = 11; // es el id de ivsom
-            $producto_ivsom[$k]['weight']       = trim($ivsom->peso);
-            $producto_ivsom[$k]['dimension']    = trim($ivsom->medida);
-            $price = str_replace("$", "", $ivsom->precio_lista);
-            $price = (int)str_replace(".", "", $price);
-            $producto_ivsom[$k]['list_price']   = $price;
-            $cash_price = calc_cash($price);
-            $producto_ivsom[$k]['cash_price']   = $cash_price;
-            $producto_ivsom[$k]['mp_price']     = calc_mp($cash_price);
-            $producto_ivsom[$k]['ml_price']     = calc_ml($cash_price);
-            $producto_ivsom[$k]['created_at']   = date('Y-m-d H:i:s');
-            $producto_ivsom[$k]['updated_at']   = date('Y-m-d H:i:s');
+            $producto_ivsom[$k]['weight']   = trim($ivsom->peso);
+            $producto_ivsom[$k]['dimension']= trim($ivsom->medida);
+            $producto_ivsom[$k]['list_price']= $price;
+            $producto_ivsom[$k]['cash_price']= $cash_price;
+            $producto_ivsom[$k]['mp_price'] = calc_mp($cash_price);
+            $producto_ivsom[$k]['ml_price'] = calc_ml($cash_price);
+            $producto_ivsom[$k]['created_at']= date('Y-m-d H:i:s');
+            $producto_ivsom[$k]['updated_at']= date('Y-m-d H:i:s');
         }
 
 
@@ -58,12 +56,10 @@ class ImportPriceListController extends Controller
     static function importGope()
     {
 
-
         $gopes = DB::table('tmp_gope')->get();
 
         session(['category' => '']);
         session(['subcategory' => '']);
-
 
         foreach ($gopes as $k=>$gope)
         {
@@ -84,31 +80,23 @@ class ImportPriceListController extends Controller
 
             } else {
                 // es un instrumento
-
-            $codigo_nombre = trim($gope->codigo_nombre);
-            $expl_cod_name = explode("-",$codigo_nombre);
-
-            $producto_gope[$k]['code']  = trim($expl_cod_name[0]);
-            $name = trim(str_replace( $producto_gope[$k]['code'], '', $codigo_nombre ));
-
-            $name = trim(substr( $name , 1));
-
-            $producto_gope[$k]['name'] = session('category') . ' ' . session('subcategory') . ' ' . $name;
-
-            $producto_gope[$k]['manufacturer_id'] = 12; // es el id de GOPE
-
-            $producto_gope[$k]['weight']       = '';
-            $producto_gope[$k]['dimension']    = '';
-
-            $list_price = (int)$gope->precio_lista;
-            $producto_gope[$k]['list_price']   = $list_price;
-            $cash_price = calc_cash($list_price);
-            $producto_gope[$k]['cash_price']   = $cash_price;
-            $producto_gope[$k]['mp_price']     = calc_mp($cash_price);
-            $producto_gope[$k]['ml_price']     = calc_ml($cash_price);
-            $producto_gope[$k]['created_at']   = date('Y-m-d H:i:s');
-            $producto_gope[$k]['updated_at']   = date('Y-m-d H:i:s');
-
+                $codigo_nombre  = trim($gope->codigo_nombre);
+                $expl_cod_name  = explode("-",$codigo_nombre);
+                $name           = trim(str_replace( $producto_gope[$k]['code'], '', $codigo_nombre ));
+                $name           = trim(substr( $name , 1));
+                $list_price     = (int)$gope->precio_lista;
+                $cash_price     = calc_cash($list_price);
+                $producto_gope[$k]['code']          = trim($expl_cod_name[0]);
+                $producto_gope[$k]['name']          = session('category') . ' ' . session('subcategory') . ' ' . $name;
+                $producto_gope[$k]['manufacturer_id']= 12; // es el id de GOPE
+                $producto_gope[$k]['weight']       = '';
+                $producto_gope[$k]['dimension']    = '';
+                $producto_gope[$k]['list_price']   = $list_price;
+                $producto_gope[$k]['cash_price']   = $cash_price;
+                $producto_gope[$k]['mp_price']     = calc_mp($cash_price);
+                $producto_gope[$k]['ml_price']     = calc_ml($cash_price);
+                $producto_gope[$k]['created_at']   = date('Y-m-d H:i:s');
+                $producto_gope[$k]['updated_at']   = date('Y-m-d H:i:s');
             }
         }
 
@@ -133,11 +121,9 @@ class ImportPriceListController extends Controller
     static function importKing()
     {
 
-
         $kings = DB::table('tmp_king')->get();
 
         session(['category' => '']);
-
 
         foreach ($kings as $k=>$king)
         {
@@ -146,36 +132,24 @@ class ImportPriceListController extends Controller
 
             if ( $cat == 'categoria' )
             { // es una categoria o una subcategoria
-
                 session(['category' => $king->codigo]);
-
-
             } else {
                 // es un instrumento
-
-            $producto_king[$k]['code']  = trim($king->codigo);
-            $producto_king[$k]['name'] = session('category') . ' ' . $king->nombre . ' ' . $king->pulgadas;
-
-            $producto_king[$k]['manufacturer_id'] = 14; // es el id de KING
-
-            $producto_king[$k]['weight']       = '';
-            $producto_king[$k]['dimension']    = $king->medidas;
-
-
-            $price = str_replace("$", "", $king->precio_lista);
-            $price = str_replace(".", "", $price);
-            (int)$price;
-
-
-
-
-            $producto_king[$k]['list_price']   = $price;
-            $cash_price = calc_cash($price);
-            $producto_king[$k]['cash_price']   = $cash_price;
-            $producto_king[$k]['mp_price']     = calc_mp($cash_price);
-            $producto_king[$k]['ml_price']     = calc_ml($cash_price);
-            $producto_king[$k]['created_at']   = date('Y-m-d H:i:s');
-            $producto_king[$k]['updated_at']   = date('Y-m-d H:i:s');
+                $price                              = str_replace("$", "", $king->precio_lista);
+                $price                              = str_replace(".", "", $price);
+                $price                              = (int)$price;
+                $cash_price                         = calc_cash($price);
+                $producto_king[$k]['code']          = trim($king->codigo);
+                $producto_king[$k]['name']          = session('category') . ' ' . $king->nombre . ' ' . $king->pulgadas;
+                $producto_king[$k]['manufacturer_id'] = 14; // es el id de KING
+                $producto_king[$k]['weight']        = '';
+                $producto_king[$k]['dimension']     = $king->medidas;
+                $producto_king[$k]['list_price']    = $price;
+                $producto_king[$k]['cash_price']    = $cash_price;
+                $producto_king[$k]['mp_price']      = calc_mp($cash_price);
+                $producto_king[$k]['ml_price']      = calc_ml($cash_price);
+                $producto_king[$k]['created_at']    = date('Y-m-d H:i:s');
+                $producto_king[$k]['updated_at']    = date('Y-m-d H:i:s');
 
             }
         }
@@ -200,11 +174,9 @@ class ImportPriceListController extends Controller
      static function importTimbra()
     {
 
-
         $timbras = DB::table('tmp_timbra')->get();
 
         session(['category' => '']);
-
 
         foreach ($timbras as $k=>$timbra)
         {
@@ -212,37 +184,28 @@ class ImportPriceListController extends Controller
             $cat = $timbra->cat;
 
             if ( $cat == 'categoria' )
-            { // es una categoria o una subcategoria
-
+            {   // es una categoria o una subcategoria
                 session(['category' => trim($timbra->codigo_nombre)]);
-
-
             } else {
                 // es un instrumento
-
-            $codigo_nombre = trim($timbra->codigo_nombre);
-            $expl_code_name = explode( " ", $codigo_nombre);
-            $codigo = $expl_code_name[0];
-            $producto_timbra[$k]['code']  = trim($codigo);
-            $name_product = str_replace($codigo, "", $codigo_nombre);
-            $producto_timbra[$k]['name'] = session('category') . ' ' . $name_product;
-
-
-            $producto_timbra[$k]['manufacturer_id'] = 18; // falta agregar la marca timbra en la tienda
-
-            $producto_timbra[$k]['weight']       = '';
-            $producto_timbra[$k]['dimension']    = '';
-
-
-            $price = str_replace("$", "", $timbra->precio);
-            $price = str_replace(".", "", $price);
-            $producto_timbra[$k]['list_price']   = $price;
-            $cash_price = calc_cash($price);
-            $producto_timbra[$k]['cash_price']   = $cash_price;
-            $producto_timbra[$k]['mp_price']     = calc_mp($cash_price);
-            $producto_timbra[$k]['ml_price']     = calc_ml($cash_price);
-            $producto_timbra[$k]['created_at']   = date('Y-m-d H:i:s');
-            $producto_timbra[$k]['updated_at']   = date('Y-m-d H:i:s');
+                $codigo_nombre  = trim($timbra->codigo_nombre);
+                $expl_code_name = explode( " ", $codigo_nombre);
+                $codigo         = $expl_code_name[0];
+                $name_product   = str_replace($codigo, "", $codigo_nombre);
+                $price          = str_replace("$", "", $timbra->precio);
+                $price          = str_replace(".", "", $price);
+                $cash_price     = calc_cash($price);
+                $producto_timbra[$k]['code']        = trim($codigo);
+                $producto_timbra[$k]['name']        = session('category') . ' ' . $name_product;
+                $producto_timbra[$k]['manufacturer_id'] = 18;
+                $producto_timbra[$k]['weight']       = '';
+                $producto_timbra[$k]['dimension']    = '';
+                $producto_timbra[$k]['list_price']   = $price;
+                $producto_timbra[$k]['cash_price']   = $cash_price;
+                $producto_timbra[$k]['mp_price']     = calc_mp($cash_price);
+                $producto_timbra[$k]['ml_price']     = calc_ml($cash_price);
+                $producto_timbra[$k]['created_at']   = date('Y-m-d H:i:s');
+                $producto_timbra[$k]['updated_at']   = date('Y-m-d H:i:s');
 
             }
         }
@@ -265,18 +228,17 @@ class ImportPriceListController extends Controller
 
         $contemporaneas = DB::table('tmp_contemporanea')->get();
 
-
         foreach ($contemporaneas as $k=>$cont)
         {
+            $price      = str_replace("$", "", $cont->precio);
+            $price      = (int)str_replace(".", "", $price);
+            $cash_price = calc_cash($price);
             $producto_contemporanea[$k]['code']         = 'contempo';
             $producto_contemporanea[$k]['name']         = trim($cont->nombre);
             $producto_contemporanea[$k]['manufacturer_id'] = 17; // es el id de contemporanea
             $producto_contemporanea[$k]['weight']       = '';
             $producto_contemporanea[$k]['dimension']    = '';
-            $price = str_replace("$", "", $cont->precio);
-            $price = (int)str_replace(".", "", $price);
             $producto_contemporanea[$k]['list_price']   = $price;
-            $cash_price = calc_cash($price);
             $producto_contemporanea[$k]['cash_price']   = $cash_price;
             $producto_contemporanea[$k]['mp_price']     = calc_mp($cash_price);
             $producto_contemporanea[$k]['ml_price']     = calc_ml($cash_price);
@@ -305,11 +267,8 @@ class ImportPriceListController extends Controller
     static function importRozini()
     {
 
-
         $rozinis = DB::table('tmp_rozini')->get();
-
         session(['category' => '']);
-
 
         foreach ($rozinis as $k=>$rozini)
         {
@@ -317,34 +276,24 @@ class ImportPriceListController extends Controller
             $cat = $rozini->cat;
 
             if ( $cat == 'categoria' )
-            { // es una categoria o una subcategoria
-
+            {   // es una categoria o una subcategoria
                 session(['category' => trim($rozini->nombre)]);
-
-
             } else {
                 // es un instrumento
-
-            $producto_rozini[$k]['code']  = trim($rozini->codigo);;
-            $producto_rozini[$k]['name'] = session('category') . ' ' . trim($rozini->nombre);
-
-
-            $producto_rozini[$k]['manufacturer_id'] = 19;
-
-            $producto_rozini[$k]['weight']       = '';
-            $producto_rozini[$k]['dimension']    = '';
-
-
-            $price = str_replace("$", "", $rozini->precio);
-            $price = str_replace(".", "", $price);
-            $producto_rozini[$k]['list_price']   = $price;
-            $cash_price = calc_cash($price);
-            $producto_rozini[$k]['cash_price']   = $cash_price;
-            $producto_rozini[$k]['mp_price']     = calc_mp($cash_price);
-            $producto_rozini[$k]['ml_price']     = calc_ml($cash_price);
-            $producto_rozini[$k]['created_at']   = date('Y-m-d H:i:s');
-            $producto_rozini[$k]['updated_at']   = date('Y-m-d H:i:s');
-
+                $price      = str_replace("$", "", $rozini->precio);
+                $price      = str_replace(".", "", $price);
+                $cash_price = calc_cash($price);
+                $producto_rozini[$k]['code']        = trim($rozini->codigo);;
+                $producto_rozini[$k]['name']        = session('category') . ' ' . trim($rozini->nombre);
+                $producto_rozini[$k]['manufacturer_id'] = 19;
+                $producto_rozini[$k]['weight']       = '';
+                $producto_rozini[$k]['dimension']    = '';
+                $producto_rozini[$k]['list_price']   = $price;
+                $producto_rozini[$k]['cash_price']   = $cash_price;
+                $producto_rozini[$k]['mp_price']     = calc_mp($cash_price);
+                $producto_rozini[$k]['ml_price']     = calc_ml($cash_price);
+                $producto_rozini[$k]['created_at']   = date('Y-m-d H:i:s');
+                $producto_rozini[$k]['updated_at']   = date('Y-m-d H:i:s');
             }
         }
 
