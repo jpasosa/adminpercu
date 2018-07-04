@@ -302,6 +302,67 @@ class ImportPriceListController extends Controller
 
 
 
+    static function importRozini()
+    {
+
+
+        $rozinis = DB::table('tmp_rozini')->get();
+
+        session(['category' => '']);
+
+
+        foreach ($rozinis as $k=>$rozini)
+        {
+
+            $cat = $rozini->cat;
+
+            if ( $cat == 'categoria' )
+            { // es una categoria o una subcategoria
+
+                session(['category' => trim($rozini->nombre)]);
+
+
+            } else {
+                // es un instrumento
+
+            $producto_rozini[$k]['code']  = trim($rozini->codigo);;
+            $producto_rozini[$k]['name'] = session('category') . ' ' . trim($rozini->nombre);
+
+
+            $producto_rozini[$k]['manufacturer_id'] = 19;
+
+            $producto_rozini[$k]['weight']       = '';
+            $producto_rozini[$k]['dimension']    = '';
+
+
+            $price = str_replace("$", "", $rozini->precio);
+            $price = str_replace(".", "", $price);
+            $producto_rozini[$k]['list_price']   = $price;
+            $cash_price = calc_cash($price);
+            $producto_rozini[$k]['cash_price']   = $cash_price;
+            $producto_rozini[$k]['mp_price']     = calc_mp($cash_price);
+            $producto_rozini[$k]['ml_price']     = calc_ml($cash_price);
+            $producto_rozini[$k]['created_at']   = date('Y-m-d H:i:s');
+            $producto_rozini[$k]['updated_at']   = date('Y-m-d H:i:s');
+
+            }
+        }
+
+        foreach ($producto_rozini AS $prod)
+        {
+            $insert_product = DB::table('admin_products')->insert($prod);
+        }
+
+        if ($insert_product) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+
 
 
 
