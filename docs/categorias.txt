@@ -1,0 +1,23 @@
+
+
+vamos a sacar las categorias principales del opencart
+
+surdos          89
+repiques        66
+tam tam         103
+rebolo          104
+timbal          91
+tamborin        62
+pandeiro        70
+chocaios        88
+baquetas        63
+reco reco       102
+agogo           86
+caixas          87
+cuicas          90
+Llave afinacion 64
+parches         65
+correas         67
+masas           68
+frijadeira      69
+
