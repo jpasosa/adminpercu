@@ -38,7 +38,8 @@ class TmpIvsomSeeder extends Seeder
 
         $ins_products_ivsom = ImportPriceListController::importIvsom();
 
-        if ($ins_products_ivsom) {
+        if ($ins_products_ivsom)
+        {
             $this->command->info('Se insertaron los productos IVSOM en tabla definitiva. [OK] ');
         } else {
             $this->command->error('No se pudieron insertar los productos IVSOM en la tabla definitiva');

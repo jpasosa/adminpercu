@@ -12,6 +12,9 @@ class ContemporaneaProductsSeeder extends Seeder
      */
     public function run()
     {
+
+
+
         $doble_com = '"';
 
 

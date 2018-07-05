@@ -11,6 +11,58 @@ use Illuminate\Support\Facades\DB;
 class ImportPriceListController extends Controller
 {
 
+    private static function get_categoryOC($name)
+    {
+
+        $encontrada = false;
+        $categorias = config('categorias');
+        $category_id = null;
+        $descartar_categoria = false;
+        foreach ($categorias AS $cat)
+        {
+
+            foreach ($cat['coincide_con'] AS $palabra_coincidente)
+            {
+                $search = stripos ( $name , $palabra_coincidente);
+                if ($search === false) {
+                    // no encontro.
+                } else {
+                    //encontro, define la categoria
+                    ddd('encontro la palabra ' . $palabra_coincidente . ' en nombre instrumento ' . $name);
+
+                    foreach ($cat['excluyo_palabras'] AS $palabras_excluidas)
+                    {
+                        $search = stripos( $name, $palabras_excluidas);
+                        if ($search === false)
+                        {
+                            // no está la palabra excluida
+                        } else {
+                            // está la palabra excluida
+                            $descartar_categoria = true;
+                        }
+                    }
+
+                    if ($descartar_categoria == false)
+                    {
+                        $category_id = $cat['id'];
+                        $encontrada = true;
+                        break;
+                    }
+
+                }
+
+            }
+
+            if ($encontrada) { break; }
+
+        }
+
+
+        return $category_id;
+
+
+    }
+
 
     // ya tenemos la table tml_ivsom y va a importar a la tabla definitiva
     // a la tabla de productos
@@ -24,9 +76,11 @@ class ImportPriceListController extends Controller
             $price                          = str_replace("$", "", $ivsom->precio_lista);
             $price                          = (int)str_replace(".", "", $price);
             $cash_price                     = calc_cash($price);
+            $name                           = trim($ivsom->descripcion);
             $producto_ivsom[$k]['code']     = trim($ivsom->codigo);
-            $producto_ivsom[$k]['name']     = trim($ivsom->descripcion);
-            $producto_ivsom[$k]['manufacturer_id'] = 11; // es el id de ivsom
+            $producto_ivsom[$k]['name']     = $name;
+            $producto_ivsom[$k]['oc_manufacturer_id'] = 11; // es el id de ivsom
+            $producto_ivsom[$k]['oc_category_id'] = self::get_categoryOC($name);
             $producto_ivsom[$k]['weight']   = trim($ivsom->peso);
             $producto_ivsom[$k]['dimension']= trim($ivsom->medida);
             $producto_ivsom[$k]['list_price']= $price;
@@ -82,13 +136,16 @@ class ImportPriceListController extends Controller
                 // es un instrumento
                 $codigo_nombre  = trim($gope->codigo_nombre);
                 $expl_cod_name  = explode("-",$codigo_nombre);
-                $name           = trim(str_replace( $producto_gope[$k]['code'], '', $codigo_nombre ));
+                $code           = trim($expl_cod_name[0]);
+                $name           = trim(str_replace( $code, '', $codigo_nombre ));
                 $name           = trim(substr( $name , 1));
+                $name           = session('category') . ' ' . session('subcategory') . ' ' . $name;
                 $list_price     = (int)$gope->precio_lista;
                 $cash_price     = calc_cash($list_price);
-                $producto_gope[$k]['code']          = trim($expl_cod_name[0]);
-                $producto_gope[$k]['name']          = session('category') . ' ' . session('subcategory') . ' ' . $name;
-                $producto_gope[$k]['manufacturer_id']= 12; // es el id de GOPE
+                $producto_gope[$k]['code']          = $code;
+                $producto_gope[$k]['name']          = $name;
+                $producto_gope[$k]['oc_manufacturer_id']= 12; // es el id de GOPE
+                $producto_gope[$k]['oc_category_id'] = self::get_categoryOC($name);
                 $producto_gope[$k]['weight']       = '';
                 $producto_gope[$k]['dimension']    = '';
                 $producto_gope[$k]['list_price']   = $list_price;
@@ -141,7 +198,7 @@ class ImportPriceListController extends Controller
                 $cash_price                         = calc_cash($price);
                 $producto_king[$k]['code']          = trim($king->codigo);
                 $producto_king[$k]['name']          = session('category') . ' ' . $king->nombre . ' ' . $king->pulgadas;
-                $producto_king[$k]['manufacturer_id'] = 14; // es el id de KING
+                $producto_king[$k]['oc_manufacturer_id'] = 14; // es el id de KING
                 $producto_king[$k]['weight']        = '';
                 $producto_king[$k]['dimension']     = $king->medidas;
                 $producto_king[$k]['list_price']    = $price;
@@ -197,7 +254,7 @@ class ImportPriceListController extends Controller
                 $cash_price     = calc_cash($price);
                 $producto_timbra[$k]['code']        = trim($codigo);
                 $producto_timbra[$k]['name']        = session('category') . ' ' . $name_product;
-                $producto_timbra[$k]['manufacturer_id'] = 18;
+                $producto_timbra[$k]['oc_manufacturer_id'] = 18;
                 $producto_timbra[$k]['weight']       = '';
                 $producto_timbra[$k]['dimension']    = '';
                 $producto_timbra[$k]['list_price']   = $price;
@@ -235,7 +292,7 @@ class ImportPriceListController extends Controller
             $cash_price = calc_cash($price);
             $producto_contemporanea[$k]['code']         = 'contempo';
             $producto_contemporanea[$k]['name']         = trim($cont->nombre);
-            $producto_contemporanea[$k]['manufacturer_id'] = 17; // es el id de contemporanea
+            $producto_contemporanea[$k]['oc_manufacturer_id'] = 17; // es el id de contemporanea
             $producto_contemporanea[$k]['weight']       = '';
             $producto_contemporanea[$k]['dimension']    = '';
             $producto_contemporanea[$k]['list_price']   = $price;
@@ -285,7 +342,7 @@ class ImportPriceListController extends Controller
                 $cash_price = calc_cash($price);
                 $producto_rozini[$k]['code']        = trim($rozini->codigo);;
                 $producto_rozini[$k]['name']        = session('category') . ' ' . trim($rozini->nombre);
-                $producto_rozini[$k]['manufacturer_id'] = 19;
+                $producto_rozini[$k]['oc_manufacturer_id'] = 19;
                 $producto_rozini[$k]['weight']       = '';
                 $producto_rozini[$k]['dimension']    = '';
                 $producto_rozini[$k]['list_price']   = $price;

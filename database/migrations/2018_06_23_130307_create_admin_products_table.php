@@ -17,7 +17,8 @@ class CreateAdminProductsTable extends Migration
             $table->increments('id');
             $table->string('code')->nullable();
             $table->string('name')->nullable();
-            $table->integer('manufacturer_id'); // MARCAS, se relaciona con la tabla oc_manufacturer del OC
+            $table->integer('oc_manufacturer_id'); // MARCAS, se relaciona con la tabla oc_manufacturer del OC
+            $table->integer('oc_category_id')->nullable(); // MARCAS, se relaciona con la tabla oc_manufacturer del OC
             $table->string('weight')->nullable();
             $table->string('dimension')->nullable();
             $table->integer('list_price');
