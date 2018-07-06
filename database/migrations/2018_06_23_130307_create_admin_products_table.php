@@ -26,6 +26,7 @@ class CreateAdminProductsTable extends Migration
             $table->integer('mp_price');
             $table->integer('ml_price');
             $table->integer('oc_product_id')->nullable()->default(0); // relaciona al id del producto en el OC
+            $table->boolean('popular')->nullable()->default(false); // relaciona al id del producto en el OC
             $table->text('ml_description')->nullable();
             $table->text('oc_description')->nullable();
             $table->timestamps();
