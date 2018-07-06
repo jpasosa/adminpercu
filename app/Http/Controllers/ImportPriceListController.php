@@ -28,7 +28,9 @@ class ImportPriceListController extends Controller
                     // no encontro.
                 } else {
                     //encontro, define la categoria
-                    ddd('encontro la palabra ' . $palabra_coincidente . ' en nombre instrumento ' . $name);
+                    // ddd('encontro la palabra ' . $palabra_coincidente . ' en nombre instrumento ' . $name);
+                    // ddd('Categoria asignación automática . . [OK]');
+                    // Command::info('Categoria asignación automática . . [OK] ');
 
                     foreach ($cat['excluyo_palabras'] AS $palabras_excluidas)
                     {
@@ -196,9 +198,11 @@ class ImportPriceListController extends Controller
                 $price                              = str_replace(".", "", $price);
                 $price                              = (int)$price;
                 $cash_price                         = calc_cash($price);
+                $name                               = session('category') . ' ' . $king->nombre . ' ' . $king->pulgadas;
                 $producto_king[$k]['code']          = trim($king->codigo);
-                $producto_king[$k]['name']          = session('category') . ' ' . $king->nombre . ' ' . $king->pulgadas;
+                $producto_king[$k]['name']          = $name;
                 $producto_king[$k]['oc_manufacturer_id'] = 14; // es el id de KING
+                $producto_king[$k]['oc_category_id'] = self::get_categoryOC($name);
                 $producto_king[$k]['weight']        = '';
                 $producto_king[$k]['dimension']     = $king->medidas;
                 $producto_king[$k]['list_price']    = $price;
@@ -249,12 +253,14 @@ class ImportPriceListController extends Controller
                 $expl_code_name = explode( " ", $codigo_nombre);
                 $codigo         = $expl_code_name[0];
                 $name_product   = str_replace($codigo, "", $codigo_nombre);
+                $name           = session('category') . ' ' . $name_product;
                 $price          = str_replace("$", "", $timbra->precio);
                 $price          = str_replace(".", "", $price);
                 $cash_price     = calc_cash($price);
                 $producto_timbra[$k]['code']        = trim($codigo);
-                $producto_timbra[$k]['name']        = session('category') . ' ' . $name_product;
+                $producto_timbra[$k]['name']        = $name;
                 $producto_timbra[$k]['oc_manufacturer_id'] = 18;
+                $producto_timbra[$k]['oc_category_id'] = self::get_categoryOC($name);
                 $producto_timbra[$k]['weight']       = '';
                 $producto_timbra[$k]['dimension']    = '';
                 $producto_timbra[$k]['list_price']   = $price;
@@ -290,9 +296,11 @@ class ImportPriceListController extends Controller
             $price      = str_replace("$", "", $cont->precio);
             $price      = (int)str_replace(".", "", $price);
             $cash_price = calc_cash($price);
+            $name       = trim($cont->nombre);
             $producto_contemporanea[$k]['code']         = 'contempo';
-            $producto_contemporanea[$k]['name']         = trim($cont->nombre);
+            $producto_contemporanea[$k]['name']         = $name;
             $producto_contemporanea[$k]['oc_manufacturer_id'] = 17; // es el id de contemporanea
+            $producto_contemporanea[$k]['oc_category_id'] = self::get_categoryOC($name);
             $producto_contemporanea[$k]['weight']       = '';
             $producto_contemporanea[$k]['dimension']    = '';
             $producto_contemporanea[$k]['list_price']   = $price;
@@ -340,9 +348,11 @@ class ImportPriceListController extends Controller
                 $price      = str_replace("$", "", $rozini->precio);
                 $price      = str_replace(".", "", $price);
                 $cash_price = calc_cash($price);
+                $name       = session('category') . ' ' . trim($rozini->nombre);
                 $producto_rozini[$k]['code']        = trim($rozini->codigo);;
-                $producto_rozini[$k]['name']        = session('category') . ' ' . trim($rozini->nombre);
+                $producto_rozini[$k]['name']        = $name;
                 $producto_rozini[$k]['oc_manufacturer_id'] = 19;
+                $producto_rozini[$k]['oc_category_id'] = self::get_categoryOC($name);
                 $producto_rozini[$k]['weight']       = '';
                 $producto_rozini[$k]['dimension']    = '';
                 $producto_rozini[$k]['list_price']   = $price;
