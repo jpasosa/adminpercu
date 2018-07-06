@@ -2,7 +2,7 @@
 
 return [
     [
-        'nombre' => 'surdos',
+        'nombre' => 'Surdos',
         'link_tienda' => 'surdos',
         'id'    => 89,
         'coincide_con' => [
@@ -23,7 +23,7 @@ return [
     ],
 
     [
-    'nombre' => 'agogo',
+    'nombre' => 'Agogos',
     'link_tienda' => 'ivsom-agogo',
         'id'    => 86,
         'coincide_con' => [
@@ -39,7 +39,7 @@ return [
     ],
 
     [
-    'nombre' => 'repique',
+    'nombre' => 'Repiques',
     'link_tienda' => 'index.php?route=product/category&path=66',
         'id'    => 66,
         'coincide_con' => [
@@ -53,7 +53,7 @@ return [
         ],
     ],
     [
-    'nombre' => 'tan tan',
+    'nombre' => 'Tan Tan',
     'link_tienda' => '',
         'id'    => 103,
         'coincide_con' => [
@@ -69,7 +69,7 @@ return [
     ],
 
     [
-    'nombre' => 'rebolo',
+    'nombre' => 'Rebolo',
     'link_tienda' => '',
         'id'    => 104,
         'coincide_con' => [
@@ -84,7 +84,7 @@ return [
     ],
 
     [
-    'nombre' => 'timbal',
+    'nombre' => 'Timbal',
     'link_tienda' => '',
         'id'    => 91,
         'coincide_con' => [
@@ -99,7 +99,7 @@ return [
     ],
 
     [ # TAMBORIN
-    'nombre' => 'tamborin',
+    'nombre' => 'Tamborins',
     'link_tienda' => '',
         'id'    => 62,
         'coincide_con' => [
@@ -118,7 +118,7 @@ return [
     ],
 
     [ # PANDEIRO
-    'nombre' => 'pandeiro',
+    'nombre' => 'Pandeiros',
     'link_tienda' => '',
         'id'    => 70,
         'coincide_con' => [
@@ -137,7 +137,7 @@ return [
     ],
 
     [ # CHOCAIO
-    'nombre' => 'chocaiho',
+    'nombre' => 'Chocalho',
     'link_tienda' => '',
         'id'    => 88,
         'coincide_con' => [
@@ -156,11 +156,12 @@ return [
     ],
 
     [ # BAQUETAS
-    'nombre' => 'baquetas',
+    'nombre' => 'Baquetas / Masas',
     'link_tienda' => '',
         'id'    => 63,
         'coincide_con' => [
             'baqueta',
+            'maceta',
         ],
         'excluyo_palabras' => [
             'capa',
@@ -172,7 +173,7 @@ return [
     ],
 
     [ # RECO RECO
-    'nombre' => 'reco reco',
+    'nombre' => 'Reco Reco',
     'link_tienda' => '102',
         'id'    => 102,
         'coincide_con' => [
@@ -328,7 +329,7 @@ return [
     ],
 
     [ # Cuerdas
-    'nombre' => 'ESTEIRA',
+    'nombre' => 'Esteira',
     'link_tienda' => '',
         'id'    => 0,
         'coincide_con' => [
@@ -344,7 +345,7 @@ return [
     ],
 
     [ # Berimbau
-    'nombre' => 'BERIMBAU',
+    'nombre' => 'Berimbau',
     'link_tienda' => '',
         'id'    => 0,
         'coincide_con' => [
