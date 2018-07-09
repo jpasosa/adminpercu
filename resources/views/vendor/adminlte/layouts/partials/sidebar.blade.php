@@ -50,6 +50,7 @@
                     <li><a href="{{ url('comparsas/nueva') }}">Nueva Comparsa</a></li>
                 </ul>
             </li>
+
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
@@ -57,6 +58,16 @@
                     <li><a href="{{ url('clientes/nuevo') }}">Nuevo Cliente</a></li>
                 </ul>
             </li>
+
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Cotizaciones</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('clientes') }}">Lista de Cotizaciones</a></li>
+                    <li><a href="{{ url('clientes/nuevo') }}">Nueva Cotizacion</a></li>
+                </ul>
+            </li>
+
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
