@@ -55,10 +55,10 @@ Route::post('cliente/editar/{id}', 'ClientesController@edit_save_changes')     #
             ->where('id', '[0-9]+');
 
 
-// COMPARSAS
-// Route::get('cotizaciones', 'CotizacionesController@index');       # Lista de las cotizaciones
+// COTIZACIONES
+Route::get('cotizaciones', 'CotizacionesController@index');       # Lista de las cotizaciones
 Route::get('cotizaciones/nueva', 'CotizacionesController@add');   # Agregar una nueva cotizacion
-// Route::post('cotizaciones/nueva', 'CotizacionesController@add_save_changes'); # Agregar una nueva cotizacion, ya vienen los datos que ingresamos.
+Route::post('cotizaciones/nueva', 'CotizacionesController@add_save_changes'); # Agregar una nueva cotizacion, ya vienen los datos que ingresamos.
 // Route::get('cotizacion/{id}', 'CotizacionesController@show')     # Vista detallada de cotizacion
 //             ->where('id', '[0-9]+');
 // Route::get('cotizacion/editar/{id}', 'CotizacionesController@edit')     # EDITAR, muestra por GET
