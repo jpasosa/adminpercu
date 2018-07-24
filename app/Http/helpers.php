@@ -45,23 +45,23 @@ if ( ! function_exists('calc_cash'))
 {
     function calc_cash( $price_list )
     {
-        $real_price = (float)$price_list * 0.8;
+        $real_price = (float)$price_list * (1 - ( config('indices.desc_lista') * 0.01 ));
         if ($real_price > 0 && $real_price < 301)
-            $indice_aumento = 1.4;
+            $indice_aumento = 1.44;
         else if ( $real_price > 300 && $real_price < 601 )
-            $indice_aumento = 1.37;
+            $indice_aumento = 1.38;
         else if ( $real_price > 600 && $real_price < 901 )
-            $indice_aumento = 1.35;
+            $indice_aumento = 1.37;
         else if ( $real_price > 900 && $real_price < 1501 )
             $indice_aumento = 1.30;
         else if ( $real_price > 1500 && $real_price < 2001 )
-            $indice_aumento = 1.28;
+            $indice_aumento = 1.29;
         else if ( $real_price > 2000 && $real_price < 2501 )
-            $indice_aumento = 1.27;
+            $indice_aumento = 1.28;
         else if ( $real_price > 2500 && $real_price < 3001 )
-            $indice_aumento = 1.25;
+            $indice_aumento = 1.27;
         else if ( $real_price > 3000 && $real_price < 20000 )
-            $indice_aumento = 1.23;
+            $indice_aumento = 1.26;
         else
             $indice_aumento = 0;
 
@@ -94,12 +94,51 @@ if ( ! function_exists('calc_ml'))
 {
     function calc_ml( $price_cash )
     {
-        $ml = (float)$price_cash * 1.12;
+        $ml = (float)$price_cash * 1.13;
         $ml = (int)$ml;
         $new_ml = substr_replace($ml ,"",-1);
         $new_ml = $new_ml . '0';
         $new_ml = (int)$new_ml;
         return $new_ml;
+    }
+}
+
+
+if ( ! function_exists('calc_gain_cash'))
+{
+    function calc_gain_cash( $list_price )
+    {
+        $price_cash     = calc_cash($list_price);
+        $price_descount = (float)$list_price * (1 - ( config('indices.desc_lista') * 0.01 ));
+        $gain           = $price_cash - $price_descount;
+        $gain           = (int)$gain;
+        return $gain;
+    }
+}
+
+if ( ! function_exists('calc_gain_mp'))
+{
+    function calc_gain_mp( $list_price )
+    {
+        $price_cash     = calc_cash($list_price);
+        $price_descount = (float)$list_price * (1 - ( config('indices.desc_lista') * 0.01 ));
+        $price_mp       = calc_mp($price_cash);
+        $desc_mp        = $price_mp * (1 - ( config('indices.gan_por_MP') * 0.01 ) );
+        $gain           = $desc_mp - $price_descount;
+        return $gain;
+    }
+}
+
+if ( ! function_exists('calc_gain_ml'))
+{
+    function calc_gain_ml( $list_price )
+    {
+        $price_cash     = calc_cash($list_price);
+        $price_descount = (float)$list_price * (1 - ( config('indices.desc_lista') * 0.01 ));
+        $price_ml       = calc_ml($price_cash);
+        $desc_ml        = $price_ml * (1 - ( config('indices.gan_por_ML') * 0.01 ) );
+        $gain           = $desc_ml - $price_descount;
+        return $gain;
     }
 }
 

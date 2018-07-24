@@ -89,6 +89,9 @@ class ImportPriceListController extends Controller
             $producto_ivsom[$k]['cash_price']= $cash_price;
             $producto_ivsom[$k]['mp_price'] = calc_mp($cash_price);
             $producto_ivsom[$k]['ml_price'] = calc_ml($cash_price);
+            $producto_ivsom[$k]['cash_gain'] = calc_gain_cash($price);
+            $producto_ivsom[$k]['mp_gain']  = calc_gain_mp($price);
+            $producto_ivsom[$k]['ml_gain']  = calc_gain_ml($price);
             $producto_ivsom[$k]['created_at']= date('Y-m-d H:i:s');
             $producto_ivsom[$k]['updated_at']= date('Y-m-d H:i:s');
         }
@@ -154,6 +157,9 @@ class ImportPriceListController extends Controller
                 $producto_gope[$k]['cash_price']   = $cash_price;
                 $producto_gope[$k]['mp_price']     = calc_mp($cash_price);
                 $producto_gope[$k]['ml_price']     = calc_ml($cash_price);
+                $producto_gope[$k]['cash_gain']     = calc_gain_cash($list_price);
+                $producto_gope[$k]['mp_gain']      = calc_gain_mp($list_price);
+                $producto_gope[$k]['ml_gain']      = calc_gain_ml($list_price);
                 $producto_gope[$k]['created_at']   = date('Y-m-d H:i:s');
                 $producto_gope[$k]['updated_at']   = date('Y-m-d H:i:s');
             }
@@ -209,6 +215,9 @@ class ImportPriceListController extends Controller
                 $producto_king[$k]['cash_price']    = $cash_price;
                 $producto_king[$k]['mp_price']      = calc_mp($cash_price);
                 $producto_king[$k]['ml_price']      = calc_ml($cash_price);
+                $producto_king[$k]['cash_gain']     = calc_gain_cash($price);
+                $producto_king[$k]['mp_gain']       = calc_gain_mp($price);
+                $producto_king[$k]['ml_gain']       = calc_gain_ml($price);
                 $producto_king[$k]['created_at']    = date('Y-m-d H:i:s');
                 $producto_king[$k]['updated_at']    = date('Y-m-d H:i:s');
 
@@ -267,6 +276,9 @@ class ImportPriceListController extends Controller
                 $producto_timbra[$k]['cash_price']   = $cash_price;
                 $producto_timbra[$k]['mp_price']     = calc_mp($cash_price);
                 $producto_timbra[$k]['ml_price']     = calc_ml($cash_price);
+                $producto_timbra[$k]['cash_gain']   = calc_gain_cash($price);
+                $producto_timbra[$k]['mp_gain']     = calc_gain_mp($price);
+                $producto_timbra[$k]['ml_gain']     = calc_gain_ml($price);
                 $producto_timbra[$k]['created_at']   = date('Y-m-d H:i:s');
                 $producto_timbra[$k]['updated_at']   = date('Y-m-d H:i:s');
 
@@ -307,6 +319,9 @@ class ImportPriceListController extends Controller
             $producto_contemporanea[$k]['cash_price']   = $cash_price;
             $producto_contemporanea[$k]['mp_price']     = calc_mp($cash_price);
             $producto_contemporanea[$k]['ml_price']     = calc_ml($cash_price);
+            $producto_contemporanea[$k]['cash_gain']    = calc_gain_cash($price);
+            $producto_contemporanea[$k]['mp_gain']      = calc_gain_mp($price);
+            $producto_contemporanea[$k]['ml_gain']      = calc_gain_ml($price);
             $producto_contemporanea[$k]['created_at']   = date('Y-m-d H:i:s');
             $producto_contemporanea[$k]['updated_at']   = date('Y-m-d H:i:s');
         }
@@ -359,6 +374,9 @@ class ImportPriceListController extends Controller
                 $producto_rozini[$k]['cash_price']   = $cash_price;
                 $producto_rozini[$k]['mp_price']     = calc_mp($cash_price);
                 $producto_rozini[$k]['ml_price']     = calc_ml($cash_price);
+                $producto_rozini[$k]['cash_gain']    = calc_gain_cash($price);
+                $producto_rozini[$k]['mp_gain']      = calc_gain_mp($price);
+                $producto_rozini[$k]['ml_gain']      = calc_gain_ml($price);
                 $producto_rozini[$k]['created_at']   = date('Y-m-d H:i:s');
                 $producto_rozini[$k]['updated_at']   = date('Y-m-d H:i:s');
             }
