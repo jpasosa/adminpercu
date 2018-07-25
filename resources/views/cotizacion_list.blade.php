@@ -57,8 +57,8 @@
                                             <td>{{ $quot->cantItems }}</td>
                                             <td>{{ $quot->price_cash }}</td>
                                             <td>
-                                                <a href="{{ url( "comparsa/$quot->id" ) }}">Ver</a>
-                                                <a href="{{ url( "comparsa/editar/$quot->id" ) }}">Editar</a>
+                                                <a href="{{ url( "cotizacion/$quot->id" ) }}">Ver</a>
+                                                <a href="{{ url( "cotizacion/editar/$quot->id" ) }}">Editar</a>
                                             </td>
                                         </tr>
                                     @empty

@@ -13,6 +13,7 @@
 
 use  App\Models\AdminStates;
 use  App\Models\AdminProvinces;
+use  App\Models\AdminProducts;
 
 
 Route::get('/', function () {
@@ -61,10 +62,9 @@ Route::get('cotizaciones/nueva', 'CotizacionesController@add');   # Agregar una 
 Route::post('cotizaciones/nueva', 'CotizacionesController@add_save_changes'); # Agregar una nueva cotizacion, ya vienen los datos que ingresamos.
 // Route::get('cotizacion/{id}', 'CotizacionesController@show')     # Vista detallada de cotizacion
 //             ->where('id', '[0-9]+');
-// Route::get('cotizacion/editar/{id}', 'CotizacionesController@edit')     # EDITAR, muestra por GET
-//             ->where('id', '[0-9]+');
-// Route::post('cotizacion/editar/{id}', 'CotizacionesController@edit_save_changes')     # EDITAR, Graba la edición
-//             ->where('id', '[0-9]+');
+Route::get('cotizacion/editar/{id}', 'CotizacionesController@edit')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+Route::post('cotizacion/editar/agregar_producto', 'CotizacionesController@edit_add_product');    # EDITAR, Graba la edición
 
 
 
@@ -86,6 +86,16 @@ Route::get('ajax-get_state', function() {
                     ->first();
     $states     = $province->states->toArray();
     $response   = Response::json($states);
+
+    return $response;
+
+});
+
+
+Route::get('ajax-get_product', function() {
+    $id_manufacturer= Request::get('id_manufacturer');
+    $products   = AdminProducts::where('oc_manufacturer_id', $id_manufacturer)->get();
+    $response   = Response::json($products);
 
     return $response;
 

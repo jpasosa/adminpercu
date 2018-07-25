@@ -62,6 +62,7 @@ desired effect
 {{-- TODO::JUAMPA debo hacer que cargue solamente cuando estoy en la sección de precios --}}
 {{-- {!! Html::script('js/app/autoprice.js'); !!} --}}
 {!! Html::script('js/app/states.js'); !!}
+{!! Html::script('js/app/products.js'); !!}
 
 
 </body>

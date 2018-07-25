@@ -15,6 +15,14 @@ class QuotationsSeeder extends Seeder
                 'admin_client_id'  => 1,
                 'number'=> 6765,
         ]);
+        DB::table('admin_quotations')->insert([
+                'admin_client_id'  => 2,
+                'number'=> 6766,
+        ]);
+        DB::table('admin_quotations')->insert([
+                'admin_client_id'  => 2,
+                'number'=> 6767,
+        ]);
     }
 }
 

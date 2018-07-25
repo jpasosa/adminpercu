@@ -21,7 +21,7 @@ class AdminQuotations extends Model
      * @var array
      */
     protected $fillable = [
-            'description', 'admin_client_id', 'number', 'price_mp_fixed', 'price_cash_fixed'
+            'description', 'admin_client_id', 'number', 'price_mp_fixed', 'price_cash_fixed','updated_at', 'created_at'
     ];
 
     protected $appends = [

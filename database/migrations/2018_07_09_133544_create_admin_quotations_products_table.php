@@ -20,7 +20,7 @@ class CreateAdminQuotationsProductsTable extends Migration
             $table->foreign('admin_quotation_id')->references('id')->on('admin_quotations')->nullable();
             $table->unsignedInteger('admin_product_id')->nullable();
             $table->foreign('admin_product_id')->references('id')->on('admin_products')->nullable();
-            $table->text('clarifications');
+            $table->text('clarifications')->nullable();
             $table->timestamps();
         });
     }

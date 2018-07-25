@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdminQuotations;
+use App\Models\AdminQuotationsProducts;
+use App\Models\AdminProducts;
 
 // use App\Models\AdminComparsas;
 // use App\Models\AdminClients;
@@ -115,21 +117,69 @@ class CotizacionesController extends Controller
     public function edit( $id )
     {
 
-        $data['cliente']    = AdminClients::find( $id );
-        $cliente            = $data['cliente'];
+        $data['quotation']= AdminQuotations::find( $id );
 
-        $id_province_residence= $cliente->state_residence->province->id;
-        $id_state_residence = $cliente->state_residence->id;
-        $id_province_shipping= $cliente->state_shipping->province->id;
-        $id_state_shipping  = $cliente->state_shipping->id;
+        $data['quotation_products'] = AdminQuotationsProducts::where('admin_quotation_id', $id)->get();
 
+        $data['manufacturers']  = [ 17 => 'CONTEMPORANEA',
+                                    12 => 'GOPE',
+                                    11 => 'IVSOM',
+                                    14 => 'KING',
+                                    19 => 'ROZINI',
+                                    18 => 'TIMBRA',
+                                ];
+        $data['products']       = AdminProducts::all();
 
-
-        $data['states_residence']   = AdminStates::where('admin_province_id',$id_province_residence)->get();
-        $data['states_shipping']    = AdminStates::where('admin_province_id',$id_province_shipping)->get();
-
-        return view('cliente_edit', $data);
+        return view('cotizacion_edit', $data);
     }
+
+    public function edit_add_product ()
+    {
+
+
+
+            $validations = [
+                'admin_quotation_id' => 'required',
+                'quantity'=> 'required',
+                'manufacturer_id'=> 'required',
+                'product_id'=> 'required',
+                'aclarations'=> '',
+            ];
+
+        $validations_texts = [  'admin_quotation_id' => 'Se produjo un error, volver a cargar la página por favor!',
+                                'quantity.required' => 'Debe incluir cantidad.',
+                                'manufacturer_id.required' => 'Debe especificar marca',
+                                'product_id.required' => 'Debe ingresar el producto',
+                            ];
+
+
+
+
+        $data = request()->validate($validations, $validations_texts);
+
+
+        $data_save['quantity']          = $data['quantity'];
+        $data_save['admin_quotation_id']= $data['admin_quotation_id'];
+        $data_save['admin_product_id']  = $data['product_id'];
+        $data_save['aclarations']       = $data['aclarations'];
+
+
+        $save_quotation_product = AdminQuotationsProducts::create($data_save);
+
+        if ( $save_quotation_product ) {
+            Session::flash('success_message', 'Agregamos correctamente el producto');
+        } else {
+            Session::flash('error_message', 'No se pudo grabar el producto. Intente más tarde, gracias!');
+        }
+
+
+        return redirect('cotizacion/editar/' . $data['admin_quotation_id']);
+
+
+
+    }
+
+
 
     public function edit_save_changes( $id )
     {

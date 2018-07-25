@@ -30,15 +30,39 @@ class AdminProducts extends Model
     protected $ml_gain = 0;
 
 
-    public getCashGain()
-    {
-        return  $this->cash_gain;
-    }
+    // public getCashGain()
+    // {
+    //     return  $this->cash_gain;
+    // }
 
-    public setCashGain( $value )
+    // public setCashGain( $value )
+    // {
+    //     $this->cash_gain = 1;
+    //     return $this->cash_gain;
+    // }
+
+    function getManufacturerAttribute()
     {
-        $this->cash_gain = 1;
-        return $this->cash_gain;
+        if ( $this->oc_manufacturer_id == 17 )
+        {
+            $response_manufact = 'CONTEMPORANEA';
+        } else if ( $this->oc_manufacturer_id == 12 ) {
+            $response_manufact = 'GOPE';
+        } else if ( $this->oc_manufacturer_id == 11 ) {
+            $response_manufact = 'IVSOM';
+        } else if ( $this->oc_manufacturer_id == 14 ) {
+            $response_manufact = 'KING';
+        } else if ( $this->oc_manufacturer_id == 19 ) {
+            $response_manufact = 'ROZINI';
+        } else if ( $this->oc_manufacturer_id == 18 ) {
+            $response_manufact = 'TIMBRA';
+        } else {
+            $response_manufact = 'Desconocida';
+        }
+
+        // dd($response_manufact);
+
+        return $response_manufact;
     }
 
 
