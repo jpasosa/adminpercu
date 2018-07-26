@@ -10,7 +10,23 @@
     <div class="row">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Lista de Productos de la Cotización</h3>
+                <h3 class="box-title">
+                    <strong>LISTA DE PRODUCTOS DE LA COTIZACION NRO: {{ $quotation->number }}</strong> |
+                    <a href="http://clientes.percu.com.ar/cotizacion/{{ $quotation->number }}" target="_blank">
+                        <button type="button" class="btn btn-info">LINK</button>
+                    </a>
+                    ||
+
+                    <a href="{{ url('cotizaciones') }}">
+                        <button type="button" class="btn btn-info">Volver al Listado</button>
+                    </a>
+
+                    || <input type="button" class="btn btn-warning" value="Realizar ORDEN">
+
+                </h3>
+            </div>
+            <div class="box-header">
+                <h3 class="box-title"></h3>
             </div>
 
             <!-- /.box-header -->
@@ -71,15 +87,17 @@
                                             $subtotal = $quot->product->cash_price * $quot->quantity;
                                         @endphp
 
-                                        <tr role="row" class="odd">
+                                        <tr role="row" class="odd" id="prod_quot_{{ $quot->id }}">
                                             <td>{{ $quot->quantity }}</td>
                                             <td>{{ $quot->product->manufacturer }}</td>
                                             <td>{{ $quot->product->name }}</td>
-                                            <td>{{ $quot->product->cash_price }}</td>
-                                            <td>{{ $quot->product->mp_price }}</td>
-                                            <td>{{ $subtotal }}</td>
+                                            <td>${{ $quot->product->cash_price }}</td>
+                                            <td>${{ $quot->product->mp_price }}</td>
+                                            <td>${{ $subtotal }}</td>
                                             <td>
-                                                <a href="{{ url( "comparsa/editar/$quot->product->id" ) }}">Eliminar</a>
+                                                <a href="#" class="erase_product" data-id_quotation="{{ $quot->id }}" >
+                                                    <i class="fa fa-fw fa-eraser"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @empty
@@ -116,7 +134,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Cantidad</label>
-                                        <input type="text" class="form-control" name="quantity" placeholder="1" value="{{ old('quantity') }}" >
+                                        <input type="text" class="form-control" name="quantity" placeholder="1" value="{{ old('quantity', 1) }}" >
                                     </div>
                                     @if( $errors->has('quantity') )
                                             <p><code>{{ $errors->first('quantity') }}</code></p>
@@ -160,20 +178,11 @@
                                 </div>
                             </div>
 
-                            <input type="submit" class="btn btn-info" value="Guardar">
-
-
-
+                            <input type="submit" class="btn btn-info" value="Guardar Producto">
                         {!! Form::close() !!}
             </div>
         </div>
     </div>
-
-
-
-
-
-
 
 
 </div>

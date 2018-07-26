@@ -54,18 +54,23 @@ class AdminQuotations extends Model
         return $products;
     }
 
-
-
-
-    public function getQuantityProducts()
+    public function getTotalAttribute()
     {
-        return $this->quantity_products;
+
+        $id         = $this->attributes['id'];
+        $products   = DB::table('admin_quotations_products')
+                            ->where('admin_quotations_products.admin_quotation_id', $id)
+                            ->join('admin_products', 'admin_quotations_products.admin_product_id', '=', 'admin_products.id')
+                            ->sum('admin_products.cash_price');
+
+        return $products;
+
     }
 
-    public function setQuantityProducts($value)
-    {
-        $this->quantity_products = $value;
-    }
+
+
+
+
 
 
     public function client()

@@ -63,6 +63,7 @@ desired effect
 {{-- {!! Html::script('js/app/autoprice.js'); !!} --}}
 {!! Html::script('js/app/states.js'); !!}
 {!! Html::script('js/app/products.js'); !!}
+{!! Html::script('js/app/quotations.js'); !!}
 
 
 </body>

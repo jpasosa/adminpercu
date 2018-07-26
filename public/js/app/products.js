@@ -10,7 +10,7 @@ $(document).ready(function()
         {
             $('#products').empty();
             $.each( data, function( index, objState){
-                $('#products').append('<option value="' + objState.id + '">' + objState.name + '</option>');
+                $('#products').append('<option value="' + objState.id + '">' + objState.name + ' ( $' + objState.cash_price + ' ) </option>');
             });
 
         });

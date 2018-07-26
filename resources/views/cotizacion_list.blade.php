@@ -55,10 +55,11 @@
                                             <td>{{ $quot->created_at }}</td>
                                             <td>{{ $quot->updated_at }}</td>
                                             <td>{{ $quot->cantItems }}</td>
-                                            <td>{{ $quot->price_cash }}</td>
+                                            <td>{{ $quot->total }}</td>
                                             <td>
-                                                <a href="{{ url( "cotizacion/$quot->id" ) }}">Ver</a>
-                                                <a href="{{ url( "cotizacion/editar/$quot->id" ) }}">Editar</a>
+                                                <a href="{{ url( "cotizacion/editar/$quot->id" ) }}">
+                                                    <i class="fa fa-fw fa-edit"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @empty

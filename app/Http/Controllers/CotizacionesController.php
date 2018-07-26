@@ -133,6 +133,9 @@ class CotizacionesController extends Controller
         return view('cotizacion_edit', $data);
     }
 
+
+
+
     public function edit_add_product ()
     {
 

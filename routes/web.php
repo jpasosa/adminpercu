@@ -14,7 +14,7 @@
 use  App\Models\AdminStates;
 use  App\Models\AdminProvinces;
 use  App\Models\AdminProducts;
-
+use  App\Models\AdminQuotationsProducts;
 
 Route::get('/', function () {
     return view('welcome');
@@ -99,4 +99,12 @@ Route::get('ajax-get_product', function() {
 
     return $response;
 
+});
+
+
+Route::get('ajax-erase_quotation_product', function() {
+    $id_quotation_product= Request::get('id_quotation_product');
+    $erase_quot_product = AdminQuotationsProducts::destroy($id_quotation_product);
+    $response           = Response::json($erase_quot_product);
+    return $response;
 });
