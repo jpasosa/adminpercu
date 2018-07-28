@@ -33,9 +33,6 @@ class CreateAdminOrdersTable extends Migration
             $table->unsignedInteger('admin_client_id');
             $table->foreign('admin_client_id')->references('id')->on('admin_clients')->nullable();
             $table->integer('number');
-            $table->integer('total_cash');
-            $table->integer('total_mp');
-            $table->integer('total_ml');
             $table->integer('total_cash_fixed')->nullable();
             $table->integer('total_mp_fixed')->nullable();
             $table->integer('total_ml_fixed')->nullable();

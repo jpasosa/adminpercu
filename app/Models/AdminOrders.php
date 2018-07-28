@@ -24,7 +24,14 @@ class AdminOrders extends Model
             'date_send', 'empresa_send', 'codetrack_send', 'cash_send', 'observations', 'status'
     ];
 
-    protected $totalCash;
+    protected $totalCash; // atributos que están en el modelo, pero no guarda en DB
+    protected $totalMp; // atributos que están en el modelo, pero no guarda en DB
+    protected $totalMl; // atributos que están en el modelo, pero no guarda en DB
+
+
+    // $table->integer('total_cash');
+    // $table->integer('total_mp');
+    // $table->integer('total_ml');
 
 
     public function getTotalCashAttribute()
@@ -39,11 +46,35 @@ class AdminOrders extends Model
 
     }
 
-    public function setTotalCashAttribute()
+    public function getTotalMpAttribute()
     {
+        $id         = $this->attributes['id'];
+        $products   = DB::table('admin_orders_products')
+                            ->where('admin_orders_products.admin_order_id', $id)
+                            ->join('admin_products', 'admin_orders_products.admin_product_id', '=', 'admin_products.id')
+                            ->sum('admin_products.mp_price');
 
-        $this->totalCash = $this->getTotalCashAttribute();
+        return $products;
+
     }
+
+    public function getTotalMlAttribute()
+    {
+        $id         = $this->attributes['id'];
+        $products   = DB::table('admin_orders_products')
+                            ->where('admin_orders_products.admin_order_id', $id)
+                            ->join('admin_products', 'admin_orders_products.admin_product_id', '=', 'admin_products.id')
+                            ->sum('admin_products.ml_price');
+
+        return $products;
+
+    }
+
+    // public function setTotalCashAttribute()
+    // {
+
+    //     $this->totalCash = $this->getTotalCashAttribute();
+    // }
 
      public function client()
     {
