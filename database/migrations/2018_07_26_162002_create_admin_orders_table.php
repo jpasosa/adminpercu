@@ -36,6 +36,9 @@ class CreateAdminOrdersTable extends Migration
             $table->integer('total_cash');
             $table->integer('total_mp');
             $table->integer('total_ml');
+            $table->integer('total_cash_fixed');
+            $table->integer('total_mp_fixed');
+            $table->integer('total_ml_fixed');
             $table->integer('abonado_cash');
             $table->integer('abonado_mp');
             $table->integer('abonado_ml');
