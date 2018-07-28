@@ -67,6 +67,17 @@ Route::get('cotizacion/editar/{id}', 'CotizacionesController@edit')     # EDITAR
 Route::post('cotizacion/editar/agregar_producto', 'CotizacionesController@edit_add_product');    # EDITAR, Graba la edición
 
 
+// ORDENES
+Route::get('ordenes/{status?}', 'OrdenesController@index');       # Lista de las cotizaciones
+// Route::get('cotizaciones/nueva', 'CotizacionesController@add');   # Agregar una nueva cotizacion
+// Route::post('cotizaciones/nueva', 'CotizacionesController@add_save_changes'); # Agregar una nueva cotizacion, ya vienen los datos que ingresamos.
+// Route::get('cotizacion/{id}', 'CotizacionesController@show')     # Vista detallada de cotizacion
+//             ->where('id', '[0-9]+');
+Route::get('orden/editar/{id}', 'OrdenesController@edit')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+Route::post('orden/editar/agregar_producto', 'OrdenesController@edit_add_product');    # EDITAR, Graba la edición
+
+
 
 
 

@@ -21,7 +21,7 @@ class AdminProducts extends Model
     ];
 
 
-
+    protected $manufacturer;
 
     protected $cash_gain;
 
@@ -64,6 +64,33 @@ class AdminProducts extends Model
 
         return $response_manufact;
     }
+
+    function get_manufacturer_text( $id_oc_manufacturer )
+    {
+
+        if ( $id_oc_manufacturer == 17 )
+        {
+            $response_manufact = 'CONTEMPORANEA';
+        } else if ( $id_oc_manufacturer == 12 ) {
+            $response_manufact = 'GOPE';
+        } else if ( $id_oc_manufacturer == 11 ) {
+            $response_manufact = 'IVSOM';
+        } else if ( $id_oc_manufacturer == 14 ) {
+            $response_manufact = 'KING';
+        } else if ( $id_oc_manufacturer == 19 ) {
+            $response_manufact = 'ROZINI';
+        } else if ( $id_oc_manufacturer == 18 ) {
+            $response_manufact = 'TIMBRA';
+        } else {
+            $response_manufact = 'Desconocida';
+        }
+
+        // dd($response_manufact);
+
+        return $response_manufact;
+    }
+
+
 
 
 
