@@ -33,6 +33,7 @@
         @endphp
     </script>
 
+    @yield('add_in_head')
 
 
 

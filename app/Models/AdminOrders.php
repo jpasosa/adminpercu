@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\DB;
 
-
 class AdminOrders extends Model
 {
 
@@ -33,6 +32,21 @@ class AdminOrders extends Model
     // $table->integer('total_mp');
     // $table->integer('total_ml');
 
+
+    static function getStatus()
+    {
+        return [    1=>'abierta-no-abonada',
+                    2=>'abierta-abonada-esperando-instrumentos',
+                    3=>'abierta-abonada-instrumentos-stock',
+                    4=>'abierta-abonada-en-viaje',
+                    5=>'abierta-abonada-viaje-problemas',
+                    6=>'cerrada',
+                    7=>'ML-esperando-intrumentos',
+                    8=>'ML-en-viaje',
+                    9=>'ML-con-reclamos',
+                    10=>'ML-cerrada'
+                ];
+    }
 
     public function getTotalCashAttribute()
     {
@@ -76,7 +90,7 @@ class AdminOrders extends Model
     //     $this->totalCash = $this->getTotalCashAttribute();
     // }
 
-     public function client()
+    public function client()
     {
         return  $this->belongsTo(AdminClients::class, 'admin_client_id');
     }

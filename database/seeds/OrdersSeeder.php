@@ -66,7 +66,7 @@ class OrdersSeeder extends Seeder
         ]);
         DB::table('admin_orders')->insert([
                 'admin_client_id'  => 1,
-                'number'=> 6767,
+                'number'=> 6768,
                 'total_cash_fixed'=> 2600,
                 'total_mp_fixed'=> 2700,
                 'total_ml_fixed'=> 2900,

@@ -76,6 +76,9 @@ Route::get('ordenes/{status?}', 'OrdenesController@index');       # Lista de las
 Route::get('orden/editar/{id}', 'OrdenesController@edit')     # EDITAR, muestra por GET
             ->where('id', '[0-9]+');
 Route::post('orden/editar/agregar_producto', 'OrdenesController@edit_add_product');    # EDITAR, Graba la edición
+Route::post('orden/editar/agregar_datos', 'OrdenesController@edit_add_data_pay');    # EDITAR, Graba la edición de los datos de pago
+Route::post('orden/editar/cambiar_estado', 'OrdenesController@edit_change_status');    # EDITAR, Cambia el estado de la ORDEN
+Route::post('orden/editar/agregar_nota', 'OrdenesController@edit_add_note');    # EDITAR, Cambia el estado de la ORDEN
 
 
 

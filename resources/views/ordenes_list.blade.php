@@ -104,7 +104,7 @@
                                             <td>{{ $order->total_cash }}</td>
                                             <td>{{ $order->status }}</td>
                                             <td>
-                                                <a href="{{ url( "cotizacion/editar/$order->id" ) }}">
+                                                <a href="{{ url( "orden/editar/$order->id" ) }}">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
                                             </td>

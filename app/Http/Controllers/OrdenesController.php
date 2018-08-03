@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Models\AdminOrders;
+Use App\Models\AdminOrdersProducts;
+Use App\Models\AdminProducts;
+Use App\Models\AdminOrdersNotes;
+use Session;
 
 
 class OrdenesController extends Controller
@@ -138,9 +142,14 @@ class OrdenesController extends Controller
     public function edit( $id )
     {
 
-        $data['quotation']= AdminQuotations::find( $id );
+        $data['order']= AdminOrders::find( $id );
 
-        $data['quotation_products'] = AdminQuotationsProducts::where('admin_quotation_id', $id)->get();
+
+        // dd($data['order']->totalCash);
+
+        $data['orders_products'] = AdminOrdersProducts::where('admin_order_id', $id)->get();
+
+        $data['orders_notes']   = AdminOrdersNotes::where('admin_order_id', $id)->orderBy('id', 'desc')->get();
 
         $data['manufacturers']  = [ 17 => 'CONTEMPORANEA',
                                     12 => 'GOPE',
@@ -151,7 +160,9 @@ class OrdenesController extends Controller
                                 ];
         $data['products']       = AdminProducts::all();
 
-        return view('cotizacion_edit', $data);
+        $data['status']         = AdminOrders::getStatus();
+
+        return view('orden_edit', $data);
     }
 
 
@@ -160,20 +171,18 @@ class OrdenesController extends Controller
     public function edit_add_product ()
     {
 
-
-
-            $validations = [
-                'admin_quotation_id' => 'required',
-                'quantity'=> 'required',
-                'manufacturer_id'=> 'required',
-                'product_id'=> 'required',
-                'aclarations'=> '',
+        $validations = [
+                'admin_order_id' => 'required',
+                'quantity'          => 'required',
+                'manufacturer_id'   => 'required',
+                'product_id'        => 'required',
+                'clarifications'     => '',
             ];
 
-        $validations_texts = [  'admin_quotation_id' => 'Se produjo un error, volver a cargar la página por favor!',
-                                'quantity.required' => 'Debe incluir cantidad.',
-                                'manufacturer_id.required' => 'Debe especificar marca',
-                                'product_id.required' => 'Debe ingresar el producto',
+        $validations_texts = [  'admin_order_id'        => 'Se produjo un error, volver a cargar la página por favor!',
+                                'quantity.required'         => 'Debe incluir cantidad.',
+                                'manufacturer_id.required'  => 'Debe especificar marca',
+                                'product_id.required'       => 'Debe ingresar el producto',
                             ];
 
 
@@ -183,12 +192,12 @@ class OrdenesController extends Controller
 
 
         $data_save['quantity']          = $data['quantity'];
-        $data_save['admin_quotation_id']= $data['admin_quotation_id'];
+        $data_save['admin_order_id']    = $data['admin_order_id'];
         $data_save['admin_product_id']  = $data['product_id'];
-        $data_save['aclarations']       = $data['aclarations'];
+        $data_save['clarifications']    = $data['clarifications'];
 
 
-        $save_quotation_product = AdminQuotationsProducts::create($data_save);
+        $save_quotation_product = AdminOrdersProducts::create($data_save);
 
         if ( $save_quotation_product ) {
             Session::flash('success_message', 'Agregamos correctamente el producto');
@@ -197,11 +206,128 @@ class OrdenesController extends Controller
         }
 
 
-        return redirect('cotizacion/editar/' . $data['admin_quotation_id']);
+        return redirect('orden/editar/' . $data['admin_order_id']);
 
+    }
+
+    public function edit_add_data_pay()
+    {
+        $validations = [
+                'admin_order_id'    => 'required',
+                'total_cash_fixed'  => 'numeric',
+                'total_mp_fixed'    => 'numeric',
+                'total_ml_fixed'    => 'numeric',
+                'abonado_cash'      => 'numeric',
+                'abonado_mp'        => 'numeric',
+                'abonado_ml'        => 'numeric',
+                'cash_send'         => 'nullable|numeric',
+                'date_cash'         => 'nullable|date|date_format:m/d/Y',
+                'date_mp'           => 'nullable|date|date_format:m/d/Y',
+                'date_ml'           => 'nullable|date|date_format:m/d/Y',
+                'empresa_send'      => '',
+                'codetrack_send'    => '',
+                'idcobro_mp'        => '',
+                'idcobro_ml'        => '',
+            ];
+
+        $validations_texts = [  'admin_order_id'        => 'Se produjo un error, volver a cargar la página por favor!',
+                                'total_cash_fixed.numeric'=> 'Debe ser númerico.',
+                                'total_mp_fixed.numeric'=> 'Debe ser númerico.',
+                                'total_ml_fixed.numeric'=> 'Debe ser númerico.',
+                                'abonado_cash.numeric'  => 'Debe ser númerico.',
+                                'abonado_mp.numeric'    => 'Debe ser númerico.',
+                                'abonado_ml.numeric'    => 'Debe ser númerico.',
+                                'cash_send.numeric'     => 'Debe ser númerico.',
+                                'date_cash.date'        => 'Debe ingresar una Fecha.',
+                                'date_cash.date_format' => 'Está mal el formato de la fecha.',
+                                'date_mp.date'          => 'Debe ingresar una Fecha.',
+                                'date_mp.date_format'   => 'Está mal el formato de la fecha.',
+                                'date_ml.date'          => 'Debe ingresar una Fecha.',
+                                'date_ml.date_format'   => 'Está mal el formato de la fecha.',
+                            ];
+
+
+
+
+        $data = request()->validate($validations, $validations_texts);
+
+
+        $id     = $data['admin_order_id'];
+
+        unset($data['admin_order_id'], $data['_token']);
+
+        $update = AdminOrders::where('id', $id)
+                                ->update( $data );
+
+
+
+
+        if ( $update ) {
+            Session::flash('success_message', 'Agregamos los datos de pago correctamente');
+        } else {
+            Session::flash('error_message', 'No se pudo agregar los datos de pago. Intente más tarde, gracias!');
+        }
+
+        return redirect('orden/editar/' . $id);
+
+        // dd($update);
+
+    }
+
+    public function edit_change_status()
+    {
+        $data = request()->all();
+
+        try {
+            $update = AdminOrders::where('id', $data['admin_order_id'])
+                                    ->update( ['status'=> $data['status']] );
+            if ($update) {
+                Session::flash('success_message', 'Se cambió el estado!');
+            } else {
+                Session::flash('error_message', 'No se pudo cambiar el estado.');
+            }
+        } catch (\PDOException $e) {
+            Session::flash('error_message', 'No se pudo cambiar el estado.');
+        }
+
+        return redirect('orden/editar/' . $data['admin_order_id']);
 
 
     }
+
+
+    public function edit_add_note ()
+    {
+
+        $validations = [
+                'admin_order_id' => 'required',
+                'note'          => 'required',
+            ];
+
+        $validations_texts = [  'admin_order_id'        => 'Se produjo un error, volver a cargar la página por favor!',
+                                'note.required'         => 'Debe escribir la nota.',
+                            ];
+
+
+
+
+        $data = request()->validate($validations, $validations_texts);
+
+        $insert_note = AdminOrdersNotes::create($data);
+
+        if ( $insert_note ) {
+            Session::flash('success_message', 'Agregamos correctamente la nota');
+        } else {
+            Session::flash('error_message', 'No se pudo agregar la nota. Intente más tarde, gracias!');
+        }
+
+
+        return redirect('orden/editar/' . $data['admin_order_id']);
+
+    }
+
+
+
 
 
 
