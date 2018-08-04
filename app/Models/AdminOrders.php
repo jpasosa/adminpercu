@@ -23,6 +23,8 @@ class AdminOrders extends Model
             'date_send', 'empresa_send', 'codetrack_send', 'cash_send', 'observations', 'status'
     ];
 
+    protected $dates = ['date_cash', 'date_mp', 'date_ml', 'date_send'];
+
     protected $totalCash; // atributos que están en el modelo, pero no guarda en DB
     protected $totalMp; // atributos que están en el modelo, pero no guarda en DB
     protected $totalMl; // atributos que están en el modelo, pero no guarda en DB

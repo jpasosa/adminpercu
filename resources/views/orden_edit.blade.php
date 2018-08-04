@@ -343,7 +343,11 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" data-provide="datepicker" name="date_cash" placeholder="" value="{{ old('date_cash', $order->date_cash) }}" >
+                                    @if ($order->date_cash != null)
+                                        <input type="text" class="form-control" data-provide="datepicker" name="date_cash" placeholder="" value="{{ old('date_cash', $order->date_cash->format('m/d/Y') ) }}" >
+                                    @else
+                                        <input type="text" class="form-control" data-provide="datepicker" name="date_cash" placeholder="" value="{{ old('date_cash', '') }}" >
+                                    @endif
                                 </div>
                                 @if( $errors->has('date_cash') )
                                     <p><code>{{ $errors->first('date_cash') }}</code></p>
@@ -351,7 +355,11 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" data-provide="datepicker" name="date_mp" placeholder="" value="{{ old('date_mp', $order->date_mp) }}" >
+                                    @if ($order->date_mp != null)
+                                        <input type="text" class="form-control" data-provide="datepicker" name="date_mp" placeholder="" value="{{ old('date_mp', $order->date_mp->format('m/d/Y')) }}" >
+                                    @else
+                                        <input type="text" class="form-control" data-provide="datepicker" name="date_mp" placeholder="" value="{{ old('date_mp', '') }}" >
+                                    @endif
                                 </div>
                                 @if( $errors->has('date_mp') )
                                     <p><code>{{ $errors->first('date_mp') }}</code></p>
@@ -359,7 +367,11 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" data-provide="datepicker" name="date_ml" placeholder="" value="{{ old('date_ml', $order->date_ml) }}" >
+                                    @if ($order->date_ml != null)
+                                        <input type="text" class="form-control" data-provide="datepicker" name="date_ml" placeholder="" value="{{ old('date_ml', $order->date_ml->format('m/d/Y')) }}" >
+                                    @else
+                                        <input type="text" class="form-control" data-provide="datepicker" name="date_ml" placeholder="" value="{{ old('date_ml', '') }}" >
+                                    @endif
                                 </div>
                                 @if( $errors->has('date_ml') )
                                     <p><code>{{ $errors->first('date_ml') }}</code></p>
@@ -400,19 +412,32 @@
 
         <div class="row">
             <h4><strong>DATOS DE ENVIO</strong></h4>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Fecha Envío</label>
+                    @if ($order->date_send != null)
+                        <input type="text" class="form-control" data-provide="datepicker" name="date_send" placeholder="" value="{{ old('date_send', $order->date_send->format('m/d/Y')) }}" >
+                    @else
+                        <input type="text" class="form-control" data-provide="datepicker" name="date_send" placeholder="" value="{{ old('date_send', '') }}" >
+                    @endif
+                </div>
+                @if( $errors->has('date_send') )
+                    <p><code>{{ $errors->first('date_send') }}</code></p>
+                @endif
+            </div>
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Empresa</label>
                     <input type="text" class="form-control" id="" name="empresa_send" placeholder="" value="{{ old('empresa_send', $order->empresa_send) }}" >
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Codigo de Seguimiento</label>
                     <input type="text" class="form-control" id="" name="codetrack_send" placeholder="" value="{{ old('codetrack_send', $order->codetrack_send) }}" >
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Pago al Retirar</label>
                     <input type="text" class="form-control" id="" name="cash_send" placeholder="" value="{{ old('cash_send', $order->cash_send) }}" >

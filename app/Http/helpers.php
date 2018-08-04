@@ -142,3 +142,18 @@ if ( ! function_exists('calc_gain_ml'))
     }
 }
 
+
+
+if ( ! function_exists('convert_date'))
+{
+    function convert_date( $date_in )
+    {
+        if ($date_in != '') {
+            $date_explode   = explode('/', $date_in);
+            return $date_explode[2] . '-' . $date_explode[0] . '-' . $date_explode[1];
+        } else {
+            return null;
+        }
+    }
+}
+

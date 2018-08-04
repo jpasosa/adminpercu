@@ -90,49 +90,49 @@ class OrdenesController extends Controller
 
 
 
-    public function add_save_changes()
-    {
+    // public function add_save_changes()
+    // {
 
 
 
 
-        $validations = [
-                'admin_client_id'=> 'required',
-                'price_cash_fixed'=> '',
-                'price_mp_fixed'=> '',
-                'description'=> '',
-            ];
+    //     $validations = [
+    //             'admin_client_id'=> 'required',
+    //             'price_cash_fixed'=> '',
+    //             'price_mp_fixed'=> '',
+    //             'description'=> '',
+    //         ];
 
-        $validations_texts = ['admin_client_id.required' => 'Debe incluir el nombre del cliente.'];
-
-
+    //     $validations_texts = ['admin_client_id.required' => 'Debe incluir el nombre del cliente.'];
 
 
-        $data = request()->validate($validations, $validations_texts);
-
-        if($data['admin_client_id'] == '')   $data['admin_client_id'] = null;
 
 
-        // asigno el número.
-        $quotation = DB::table('admin_quotations')
-                            ->orderBy('id','desc')
-                            ->limit(1)
-                            ->get();
-        $data['number'] = $quotation[0]->number + 1;
+    //     $data = request()->validate($validations, $validations_texts);
+
+    //     if($data['admin_client_id'] == '')   $data['admin_client_id'] = null;
 
 
-        $save_quotation = AdminQuotations::create($data);
+    //     // asigno el número.
+    //     $quotation = DB::table('admin_quotations')
+    //                         ->orderBy('id','desc')
+    //                         ->limit(1)
+    //                         ->get();
+    //     $data['number'] = $quotation[0]->number + 1;
 
-        if ( $save_quotation ) {
-            Session::flash('success_message', 'Grabamos correctamente la cotizacion');
-        } else {
-            Session::flash('error_message', 'No se pudo grabar la cotizacion. Intente más tarde, gracias!');
-        }
+
+    //     $save_quotation = AdminQuotations::create($data);
+
+    //     if ( $save_quotation ) {
+    //         Session::flash('success_message', 'Grabamos correctamente la cotizacion');
+    //     } else {
+    //         Session::flash('error_message', 'No se pudo grabar la cotizacion. Intente más tarde, gracias!');
+    //     }
 
 
-        return redirect('home');
+    //     return redirect('home');
 
-    }
+    // }
 
 
 
@@ -224,6 +224,7 @@ class OrdenesController extends Controller
                 'date_cash'         => 'nullable|date|date_format:m/d/Y',
                 'date_mp'           => 'nullable|date|date_format:m/d/Y',
                 'date_ml'           => 'nullable|date|date_format:m/d/Y',
+                'date_send'         => 'nullable|date|date_format:m/d/Y',
                 'empresa_send'      => '',
                 'codetrack_send'    => '',
                 'idcobro_mp'        => '',
@@ -244,6 +245,8 @@ class OrdenesController extends Controller
                                 'date_mp.date_format'   => 'Está mal el formato de la fecha.',
                                 'date_ml.date'          => 'Debe ingresar una Fecha.',
                                 'date_ml.date_format'   => 'Está mal el formato de la fecha.',
+                                'date_send.date'        => 'Debe ingresar una Fecha.',
+                                'date_send.date_format' => 'Está mal el formato de la fecha.',
                             ];
 
 
@@ -255,6 +258,11 @@ class OrdenesController extends Controller
         $id     = $data['admin_order_id'];
 
         unset($data['admin_order_id'], $data['_token']);
+
+        $data['date_cash']  = convert_date($data['date_cash']);
+        $data['date_mp']    = convert_date($data['date_mp']);
+        $data['date_ml']    = convert_date($data['date_ml']);
+        $data['date_send']  = convert_date($data['date_send']);
 
         $update = AdminOrders::where('id', $id)
                                 ->update( $data );
