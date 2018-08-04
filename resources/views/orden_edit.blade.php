@@ -104,6 +104,9 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
                                                 Marca
                                             </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
+                                                Codigo
+                                            </th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                                 Producto
                                             </th>
@@ -127,15 +130,16 @@
                                                 $subtotal = $order_prod->product->cash_price * $order_prod->quantity;
                                             @endphp
 
-                                            <tr role="row" class="odd" id="prod_quot_{{ $order_prod->id }}">
+                                            <tr role="row" class="odd" id="prod_order_{{ $order_prod->id }}">
                                                 <td>{{ $order_prod->quantity }}</td>
                                                 <td>{{ $order_prod->product->manufacturer }}</td>
+                                                <td>{{ $order_prod->product->code }}</td>
                                                 <td>{{ $order_prod->product->name }}</td>
                                                 <td>${{ $order_prod->product->cash_price }}</td>
                                                 <td>${{ $order_prod->product->mp_price }}</td>
                                                 <td>${{ $subtotal }}</td>
                                                 <td>
-                                                    <a href="#" class="erase_product" data-id_quotation="{{ $order_prod->id }}" >
+                                                    <a href="#" class="erase_product_order" data-id_product_order="{{ $order_prod->id }}" >
                                                         <i class="fa fa-fw fa-eraser"></i>
                                                     </a>
                                                 </td>

@@ -64,6 +64,7 @@ desired effect
 {!! Html::script('js/app/states.js'); !!}
 {!! Html::script('js/app/products.js'); !!}
 {!! Html::script('js/app/quotations.js'); !!}
+{!! Html::script('js/app/orders.js'); !!}
 
 
 </body>

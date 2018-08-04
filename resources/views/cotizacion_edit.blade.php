@@ -64,6 +64,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
                                             Marca
                                         </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
+                                            Codigo
+                                        </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                             Producto
                                         </th>
@@ -90,6 +93,7 @@
                                         <tr role="row" class="odd" id="prod_quot_{{ $quot->id }}">
                                             <td>{{ $quot->quantity }}</td>
                                             <td>{{ $quot->product->manufacturer }}</td>
+                                            <td>{{ $quot->product->code }}</td>
                                             <td>{{ $quot->product->name }}</td>
                                             <td>${{ $quot->product->cash_price }}</td>
                                             <td>${{ $quot->product->mp_price }}</td>
