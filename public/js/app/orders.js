@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    // Selección de Marca / Producto
+    // Eliminar una orden
     $('.erase_product_order').on('click', function(e)
     {
         var id_order_product = $(this).data("id_product_order");

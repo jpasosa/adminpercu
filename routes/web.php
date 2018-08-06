@@ -16,6 +16,7 @@ use  App\Models\AdminProvinces;
 use  App\Models\AdminProducts;
 use  App\Models\AdminQuotationsProducts;
 use  App\Models\AdminOrdersProducts;
+// use  App\Models\AdminQuotations;
 
 Route::get('/', function () {
     return view('welcome');
@@ -130,4 +131,17 @@ Route::get('ajax-erase_order_product', function() {
     $response           = Response::json($erase_order_product);
     return $response;
 });
+
+Route::get('ajax-quotation_to_order/{id}', 'OrdenesController@insert_order_with_quotation_data')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+
+
+
+
+
+
+Route::get('test_quotation_to_order/{id}', 'OrdenesController@insert_order_with_quotation_data')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+
+
 

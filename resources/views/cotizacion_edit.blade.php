@@ -21,7 +21,11 @@
                         <button type="button" class="btn btn-info">Volver al Listado</button>
                     </a>
 
-                    || <input type="button" class="btn btn-warning" value="Realizar ORDEN">
+                    || <input type="button" id="pass_to_order" class="btn btn-warning" value="Realizar ORDEN" data-idquotation="{{ $quotation->id }}">
+
+                    <div id="linkorder">
+
+                    </div>
 
                 </h3>
             </div>
@@ -133,7 +137,7 @@
                 <form method="POST" action="{{ url("cotizacion/editar/agregar_producto") }}">
                             {{ csrf_field() }}
                             {{-- AL CONTADO --}}
-                            <input type="hidden" name="admin_quotation_id" value="{{ $quotation->id }}">
+                            <input type="hidden" name="admin_quotation_id" value="{{ $quotation->id }}" >
                             <div class="row">
                                 <div class="col-sm-2">
                                     <div class="form-group">

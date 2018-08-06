@@ -15,4 +15,32 @@ $(document).ready(function()
         });
     });
 
+
+
+
+    // Pasar la cotización a Orden
+    $('#pass_to_order').on('click', function(e)
+    {
+        var id_quotation = $(this).data("idquotation");
+        console.log(id_quotation);
+
+        var selector_tr = '#prod_order_' + id_quotation;
+        $.get('/ajax-quotation_to_order/' + id_quotation, function( data )
+        {
+            if (data) {
+                var link = '/orden/editar/' + data;
+                var button_order = '<a href="' + link +'"><button type="button" class="btn btn-info">Ver Orden Generada</button></a>';
+                $('#linkorder').append(button_order);
+            } else {
+                console.log('Hubo un error');
+            }
+        });
+
+
+    });
+
+
+
+
+
 });

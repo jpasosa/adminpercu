@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Models\AdminOrders;
+Use App\Models\AdminQuotations;
 Use App\Models\AdminOrdersProducts;
+Use App\Models\AdminQuotationsProducts;
 Use App\Models\AdminProducts;
 Use App\Models\AdminOrdersNotes;
 use Session;
@@ -214,12 +216,12 @@ class OrdenesController extends Controller
     {
         $validations = [
                 'admin_order_id'    => 'required',
-                'total_cash_fixed'  => 'numeric',
-                'total_mp_fixed'    => 'numeric',
-                'total_ml_fixed'    => 'numeric',
-                'abonado_cash'      => 'numeric',
-                'abonado_mp'        => 'numeric',
-                'abonado_ml'        => 'numeric',
+                'total_cash_fixed'  => 'nullable|numeric',
+                'total_mp_fixed'    => 'nullable|numeric',
+                'total_ml_fixed'    => 'nullable|numeric',
+                'abonado_cash'      => 'nullable|numeric',
+                'abonado_mp'        => 'nullable|numeric',
+                'abonado_ml'        => 'nullable|numeric',
                 'cash_send'         => 'nullable|numeric',
                 'date_cash'         => 'nullable|date|date_format:m/d/Y',
                 'date_mp'           => 'nullable|date|date_format:m/d/Y',
@@ -381,7 +383,34 @@ class OrdenesController extends Controller
 
 
 
+    function insert_order_with_quotation_data( $id_quotation )
+    {
 
+
+        $quotation  = AdminQuotations::find( $id_quotation );
+        $quotation_products = AdminQuotationsProducts::where('admin_quotation_id', $id_quotation)->get();
+
+        $data_order['admin_client_id']  = $quotation->admin_client_id;
+        $data_order['observations']     = $quotation->description;
+        $data_order['status']           = 'abierta-no-abonada';
+        $data_order['number']           = AdminOrders::get_next_number();
+
+
+        $create_order   = AdminOrders::create($data_order);
+        $admin_order_id = $create_order->id;
+
+        foreach ($quotation_products AS $prod)
+        {
+            $data_order_product['quantity'] = $prod->quantity;
+            $data_order_product['admin_order_id'] = $admin_order_id;
+            $data_order_product['admin_product_id'] = $prod->admin_product_id;
+            $data_order_product['clarifications'] = $prod->clarifications;
+            $save_order_product = AdminOrdersProducts::create($data_order_product);
+        }
+
+        return $admin_order_id;
+
+    }
 
 
 
