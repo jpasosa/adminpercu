@@ -70,7 +70,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $provide->DaysPassed }}</td>
-                                            <td>{{ $provide->cantItems }}</td>
+                                            <td title="{{ $provide->view_hover_products() }}">{{ $provide->cantItems }}</td>
                                             <td>{{ $provide->total }}</td>
                                             <td>
                                                 <a href="{{ url( "proveedor/editar/$provide->id" ) }}">

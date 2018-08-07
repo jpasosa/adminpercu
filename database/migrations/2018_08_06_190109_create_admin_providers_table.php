@@ -22,7 +22,7 @@ class CreateAdminProvidersTable extends Migration
                         'viajando-caseros',
                         'viajando-catamarca',
                         'para-retirar',
-                        'retirados',
+                        'retirados'
                     ];
             $table->increments('id');
             $table->integer('number');

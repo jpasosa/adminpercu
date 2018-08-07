@@ -99,8 +99,47 @@ class AdminProviders extends Model
     }
 
 
+    public function view_hover_products()
+    {
+        $id         = $this->attributes['id'];
+        $products   = DB::table('admin_providers_products')
+                            ->where('admin_providers_products.admin_provider_id', $id)
+                            ->join('admin_products', 'admin_providers_products.admin_product_id', '=', 'admin_products.id')
+                            ->get();
 
+        $hover = '';
+        foreach ($products AS $prod)
+        {
+            $hover .= '** - ' . $prod->quantity . 'x - ' . $this->get_manufacturer_text($prod->oc_manufacturer_id) . ' - ' . $prod->name . '---------&#10;';
+        }
 
+        return $hover;
+    }
+
+    private function get_manufacturer_text( $id_oc_manufacturer )
+    {
+
+        if ( $id_oc_manufacturer == 17 )
+        {
+            $response_manufact = 'CONTEMPORANEA';
+        } else if ( $id_oc_manufacturer == 12 ) {
+            $response_manufact = 'GOPE';
+        } else if ( $id_oc_manufacturer == 11 ) {
+            $response_manufact = 'IVSOM';
+        } else if ( $id_oc_manufacturer == 14 ) {
+            $response_manufact = 'KING';
+        } else if ( $id_oc_manufacturer == 19 ) {
+            $response_manufact = 'ROZINI';
+        } else if ( $id_oc_manufacturer == 18 ) {
+            $response_manufact = 'TIMBRA';
+        } else {
+            $response_manufact = 'Desconocida';
+        }
+
+        // dd($response_manufact);
+
+        return $response_manufact;
+    }
 
 
 }
