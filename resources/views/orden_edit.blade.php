@@ -446,7 +446,12 @@
                     <p><code>{{ $errors->first('cash_send') }}</code></p>
                 @endif
             </div>
-
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Observaciones (vé el cliente)</label>
+                    <textarea type="text" class="form-control" rows="5" name="observations">{{ old('observations', $order->observations) }}</textarea>
+                </div>
+            </div>
 
         </div>
 

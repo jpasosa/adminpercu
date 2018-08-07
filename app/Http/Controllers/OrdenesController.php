@@ -156,6 +156,7 @@ class OrdenesController extends Controller
                 'codetrack_send'    => '',
                 'idcobro_mp'        => '',
                 'idcobro_ml'        => '',
+                'observations'      => 'nullable',
             ];
 
         $validations_texts = [  'admin_order_id'        => 'Se produjo un error, volver a cargar la página por favor!',
@@ -174,6 +175,7 @@ class OrdenesController extends Controller
                                 'date_ml.date_format'   => 'Está mal el formato de la fecha.',
                                 'date_send.date'        => 'Debe ingresar una Fecha.',
                                 'date_send.date_format' => 'Está mal el formato de la fecha.',
+                                'observations'          => '',
                             ];
 
 
