@@ -83,6 +83,13 @@ Route::post('orden/editar/cambiar_estado', 'OrdenesController@edit_change_status
 Route::post('orden/editar/agregar_nota', 'OrdenesController@edit_add_note');    # EDITAR, Cambia el estado de la ORDEN
 
 
+// PROVEEDORES
+Route::get('proveedores', 'ProveedoresController@index');       # Lista de los pedidos de Instrumentos a proveedores
+Route::get('proveedor/editar/{id}', 'ProveedoresController@edit')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+Route::post('proveedor/editar/agregar_producto', 'ProveedoresController@edit_add_product');    # EDITAR, Graba la edición
+Route::post('proveedor/editar/agregar_data', 'ProveedoresController@edit_add_data');    # EDITAR, Graba la edición
+
 
 
 

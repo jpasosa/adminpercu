@@ -76,6 +76,10 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="{{ url('proveedores') }}"><i class='fa fa-link'></i> <span>PROVEEDORES</span> <i class="fa fa-angle-left pull-right"></i></a>
+            </li>
+
 
         </ul><!-- /.sidebar-menu -->
     </section>
