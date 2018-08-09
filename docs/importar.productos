@@ -12,3 +12,13 @@ LOAD DATA LOCAL INFILE '/var/www/html/adminpercu/resources/external_files/ivsom.
 nos va a guardar en la tabla temporal tmp_ivsom
 
 Teniendo eso hay que hacer un controlador para ir exportando a la tabla original de productos, haciendo que ya calcule los precios que no tiene seteado.
+
+
+ejecutar los siguientes comandos en mysql
+mysql -u root -p
+
+# vacio todas las temporales.
+use percu_prod;TRUNCATE TABLE `tmp_contemporanea`;TRUNCATE TABLE `tmp_ivsom`;TRUNCATE TABLE `tmp_gope`;TRUNCATE TABLE `tmp_contemporanea`;TRUNCATE TABLE `tmp_rozini`;
+
+luego la importacion la hace solo.
+# LOAD DATA LOCAL INFILE '/var/www/html/adminpercu/resources/external_files/ivsom.csv' INTO TABLE tmp_ivsom CHARACTER SET UTF8 FIELDS TERMINATED BY ',' ENCLOSED BY '"';LOAD DATA LOCAL INFILE '/var/www/html/adminpercu/resources/external_files/gope.csv' INTO TABLE tmp_gope CHARACTER SET UTF8 FIELDS TERMINATED BY ',' ENCLOSED BY '"';LOAD DATA LOCAL INFILE '/var/www/html/adminpercu/resources/external_files/contemporanea.csv' INTO TABLE tmp_contemporanea CHARACTER SET UTF8 FIELDS TERMINATED BY ',' ENCLOSED BY '"';LOAD DATA LOCAL INFILE '/var/www/html/adminpercu/resources/external_files/king.csv' INTO TABLE tmp_king CHARACTER SET UTF8 FIELDS TERMINATED BY ',' ENCLOSED BY '"';LOAD DATA LOCAL INFILE '/var/www/html/adminpercu/resources/external_files/timbra.csv' INTO TABLE tmp_timbra CHARACTER SET UTF8 FIELDS TERMINATED BY ',' ENCLOSED BY '"';LOAD DATA LOCAL INFILE '/var/www/html/adminpercu/resources/external_files/rozini.csv' INTO TABLE tmp_rozini CHARACTER SET UTF8 FIELDS TERMINATED BY ',' ENCLOSED BY '"';

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\AdminProviders;
 use App\Models\AdminProvidersProducts;
 use App\Models\AdminProducts;
+use App\Models\AdminQuotations;
+use App\Models\AdminQuotationsProducts;
 use Session;
 
 class ProveedoresController extends Controller
@@ -146,6 +148,36 @@ class ProveedoresController extends Controller
     }
 
 
+    // genero la orden desde la cotización.
+    function insert_proveedor_with_quotation_data( $id_quotation )
+    {
 
+        $quotation          = AdminQuotations::find( $id_quotation );
+        $quotation_products = AdminQuotationsProducts::where('admin_quotation_id', $id_quotation)->get();
+
+        $data_provider['description']     = $quotation->description;
+        $data_provider['status']           = 'abierta-no-abonada';
+        $data_provider['number']           = AdminProviders::get_next_number();
+
+        $create_provider   = AdminProviders::create($data_provider);
+        $admin_provider_id     = $create_provider->id;
+
+
+        foreach ($quotation_products AS $prod)
+        {
+            $data_provider_product['quantity']      = $prod->quantity;
+            $data_provider_product['admin_provider_id']= $admin_provider_id;
+            $data_provider_product['admin_product_id']= $prod->admin_product_id;
+            $data_provider_product['list_price']    = $prod->product->list_price;
+            $data_provider_product['subt_price']    = $prod->product->list_price * $prod->quantity ;
+            $data_provider_product['discount_price']= $data_provider_product['subt_price'] * 0.2;
+            $data_provider_product['total_price']   = $data_provider_product['subt_price'] - $data_provider_product['discount_price'];
+            $data_provider_product['clarifications'] = $prod->clarifications;
+            $save_provider_product = AdminProvidersProducts::create($data_provider_product);
+        }
+
+        return $admin_provider_id;
+
+    }
 
 }

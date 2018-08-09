@@ -145,7 +145,9 @@ class ImportPriceListController extends Controller
                 $name           = trim(str_replace( $code, '', $codigo_nombre ));
                 $name           = trim(substr( $name , 1));
                 $name           = session('category') . ' ' . session('subcategory') . ' ' . $name;
-                $list_price     = (int)$gope->precio_lista;
+                $price          = str_replace("$", "", $gope->precio_lista);
+                $price          = str_replace(".", "", $price);
+                $list_price     = (int)$price;
                 $cash_price     = calc_cash($list_price);
                 $producto_gope[$k]['code']          = $code;
                 $producto_gope[$k]['name']          = $name;

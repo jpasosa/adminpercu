@@ -280,10 +280,11 @@ class OrdenesController extends Controller
         $quotation  = AdminQuotations::find( $id_quotation );
         $quotation_products = AdminQuotationsProducts::where('admin_quotation_id', $id_quotation)->get();
 
+
         $data_order['admin_client_id']  = $quotation->admin_client_id;
         $data_order['observations']     = $quotation->description;
-        $data_order['status']           = 'abierta-no-abonada';
-        $data_order['number']           = AdminOrders::get_next_number();
+        $data_order['status']           = 'pedido-a-fabrica-brasil';
+        $data_order['number']           = AdminProviders::get_next_number();
 
 
         $create_order   = AdminOrders::create($data_order);

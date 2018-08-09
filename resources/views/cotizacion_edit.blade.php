@@ -23,8 +23,11 @@
 
                     || <input type="button" id="pass_to_order" class="btn btn-warning" value="Realizar ORDEN" data-idquotation="{{ $quotation->id }}">
 
-                    <div id="linkorder">
+                    || <input type="button" id="pass_to_provider" class="btn btn-warning" value="Realizar pedido a PROVEEDOR" data-idquotation="{{ $quotation->id }}">
 
+                    <div id="linkorder">
+                    </div>
+                    <div id="linkprovider">
                     </div>
 
                 </h3>
@@ -81,6 +84,9 @@
                                             TC / Otros Medios (unidad)
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                            MercadoLibre (unidad)
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
                                             Efectivo (sub-total)
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">
@@ -101,6 +107,7 @@
                                             <td>{{ $quot->product->name }}</td>
                                             <td>${{ $quot->product->cash_price }}</td>
                                             <td>${{ $quot->product->mp_price }}</td>
+                                            <td>${{ $quot->product->ml_price }}</td>
                                             <td>${{ $subtotal }}</td>
                                             <td>
                                                 <a href="#" class="erase_product" data-id_quotation="{{ $quot->id }}" >

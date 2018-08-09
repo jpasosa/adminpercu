@@ -141,5 +141,16 @@ class AdminProviders extends Model
         return $response_manufact;
     }
 
+    static function get_next_number()
+    {
+        // asigno el número.
+        $order = DB::table('admin_providers')
+                            ->orderBy('id','desc')
+                            ->limit(1)
+                            ->get();
+        return $order[0]->number + 1;
+
+    }
+
 
 }

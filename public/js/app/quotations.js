@@ -22,15 +22,32 @@ $(document).ready(function()
     $('#pass_to_order').on('click', function(e)
     {
         var id_quotation = $(this).data("idquotation");
-        console.log(id_quotation);
 
-        var selector_tr = '#prod_order_' + id_quotation;
         $.get('/ajax-quotation_to_order/' + id_quotation, function( data )
         {
             if (data) {
                 var link = '/orden/editar/' + data;
                 var button_order = '<a href="' + link +'"><button type="button" class="btn btn-info">Ver Orden Generada</button></a>';
                 $('#linkorder').append(button_order);
+            } else {
+                console.log('Hubo un error');
+            }
+        });
+
+
+    });
+
+    // Pasar la cotización a pedido a PROVEEDORES
+    $('#pass_to_provider').on('click', function(e)
+    {
+        var id_quotation = $(this).data("idquotation");
+
+        $.get('/ajax-quotation_to_provider/' + id_quotation, function( data )
+        {
+            if (data) {
+                var link = '/proveedor/editar/' + data;
+                var button_provider = '<a href="' + link +'"><button type="button" class="btn btn-info">Ver pedido PROVEEDOR Generada</button></a>';
+                $('#linkprovider').append(button_provider);
             } else {
                 console.log('Hubo un error');
             }

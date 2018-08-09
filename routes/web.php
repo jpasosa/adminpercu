@@ -143,6 +143,13 @@ Route::get('ajax-quotation_to_order/{id}', 'OrdenesController@insert_order_with_
             ->where('id', '[0-9]+');
 
 
+Route::get('ajax-quotation_to_provider/{id}', 'ProveedoresController@insert_proveedor_with_quotation_data')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+
+
+Route::get('test_quotation_to_provider/{id}', 'ProveedoresController@insert_proveedor_with_quotation_data') # pruebassss
+            ->where('id', '[0-9]+');
+
 
 
 

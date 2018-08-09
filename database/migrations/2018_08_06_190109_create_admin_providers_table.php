@@ -16,7 +16,7 @@ class CreateAdminProvidersTable extends Migration
         Schema::create('admin_providers', function (Blueprint $table)
         {
 
-            $status = [     'pedido-a-fabrica-brasil',
+            $status = [ 'pedido-a-fabrica-brasil',
                         'salio-fabrica-viaje-frontera',
                         'en-frontera',
                         'viajando-caseros',
