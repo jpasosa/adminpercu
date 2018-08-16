@@ -47,9 +47,9 @@ if ( ! function_exists('calc_cash'))
     {
         $real_price = (float)$price_list * (1 - ( config('indices.desc_lista') * 0.01 ));
         if ($real_price > 0 && $real_price < 301)
-            $indice_aumento = 1.42;
+            $indice_aumento = 1.45;
         else if ( $real_price > 300 && $real_price < 601 )
-            $indice_aumento = 1.36;
+            $indice_aumento = 1.37;
         else if ( $real_price > 600 && $real_price < 901 )
             $indice_aumento = 1.35;
         else if ( $real_price > 900 && $real_price < 1501 )

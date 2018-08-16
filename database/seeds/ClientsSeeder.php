@@ -49,6 +49,25 @@ class ClientsSeeder extends Seeder
                 'created_at'    => date('Y-m-d H:i:s'),
                 'updated_at'    => date('Y-m-d H:i:s')
             ]);
+            DB::table('admin_clients')->insert([
+                'name'  => 'Juampa',
+                'last_name'=> 'Sosa',
+                'user_ml'=> null,
+                'user_whatsapp'=> 'YO',
+                'email' => 'info@percu.com.ar',
+                'dni'   => '27861007',
+                'phone' => '',
+                'face' => null,
+                'friends' => true,
+                'ya_nos_compro' => true,
+                'marketing' => 2,
+                'admin_state_residence_id'  => 16493,
+                'admin_state_shipping_id'   => 16493,
+                'admin_comparsas_id' => 1,
+                'observations'  => 'curly de moreno',
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s')
+            ]);
 
 
     }
