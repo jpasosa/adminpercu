@@ -16,6 +16,7 @@ use  App\Models\AdminProvinces;
 use  App\Models\AdminProducts;
 use  App\Models\AdminQuotationsProducts;
 use  App\Models\AdminOrdersProducts;
+use  App\Models\AdminStockProducts;
 // use  App\Models\AdminQuotations;
 
 Route::get('/', function () {
@@ -92,6 +93,18 @@ Route::post('proveedor/editar/agregar_data', 'ProveedoresController@edit_add_dat
 
 
 
+// COTIZACIONES
+Route::get('stock', 'StockController@index');       # Stock de los productos.
+// Route::get('cotizaciones/nueva', 'CotizacionesController@add');   # Agregar una nueva cotizacion
+// Route::post('cotizaciones/nueva', 'CotizacionesController@add_save_changes'); # Agregar una nueva cotizacion, ya vienen los datos que ingresamos.
+// // Route::get('cotizacion/{id}', 'CotizacionesController@show')     # Vista detallada de cotizacion
+// //             ->where('id', '[0-9]+');
+// Route::get('cotizacion/editar/{id}', 'CotizacionesController@edit')     # EDITAR, muestra por GET
+//             ->where('id', '[0-9]+');
+Route::post('stock/agregar', 'StockController@add_product');    # Agrega un producto al stock
+
+
+
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
@@ -136,6 +149,29 @@ Route::get('ajax-erase_order_product', function() {
     $id_order_product= Request::get('id_order_product');
     $erase_order_product = AdminOrdersProducts::destroy($id_order_product);
     $response           = Response::json($erase_order_product);
+    return $response;
+});
+
+Route::get('ajax-erase_stock_product', function() {
+    $id_product_stock= Request::get('id_product_stock');
+    $erase_stock_product = AdminStockProducts::destroy($id_product_stock);
+    $response           = Response::json($erase_stock_product);
+    return $response;
+});
+
+Route::get('ajax-add_stock_product', function() {
+    $id_product_stock= Request::get('id_product_stock');
+    $product = AdminStockProducts::where('id', $id_product_stock)->first();
+    $add_one = AdminStockProducts::where('id', $id_product_stock)->update( ['quantity'=>$product->quantity + 1] );
+    $response = Response::json($add_one);
+    return $response;
+});
+
+Route::get('ajax-down_stock_product', function() {
+    $id_product_stock= Request::get('id_product_stock');
+    $product = AdminStockProducts::where('id', $id_product_stock)->first();
+    $add_one = AdminStockProducts::where('id', $id_product_stock)->update( ['quantity'=>$product->quantity - 1] );
+    $response = Response::json($add_one);
     return $response;
 });
 

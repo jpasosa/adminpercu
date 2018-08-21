@@ -1,0 +1,11 @@
+
+
+
+admin_stock_products
+--------------------
+id
+id_product
+quant
+
+
+de esta manera

@@ -90,6 +90,17 @@ class AdminProducts extends Model
         return $response_manufact;
     }
 
+    static function manufacturers_names()
+    {
+        return [ 17 => 'CONTEMPORANEA',
+                                    12 => 'GOPE',
+                                    11 => 'IVSOM',
+                                    14 => 'KING',
+                                    19 => 'ROZINI',
+                                    18 => 'TIMBRA',
+                                ];
+    }
+
 
 
 

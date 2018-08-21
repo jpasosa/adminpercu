@@ -80,6 +80,10 @@
                 <a href="{{ url('proveedores') }}"><i class='fa fa-link'></i> <span>PROVEEDORES</span> <i class="fa fa-angle-left pull-right"></i></a>
             </li>
 
+            <li class="treeview">
+                <a href="{{ url('stock') }}"><i class='fa fa-link'></i> <span>Stock Productos</span> <i class="fa fa-angle-left pull-right"></i></a>
+            </li>
+
 
         </ul><!-- /.sidebar-menu -->
     </section>
