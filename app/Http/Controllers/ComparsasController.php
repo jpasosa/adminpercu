@@ -16,7 +16,7 @@ class ComparsasController extends Controller
 
     public function index()
     {
-        $data['comparsas'] = AdminComparsas::orderBy('name_comparsa')->paginate();
+        $data['comparsas'] = AdminComparsas::orderBy('name_comparsa')->paginate(30);
 
         return view('comparsa_list', $data);
     }

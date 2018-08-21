@@ -31,25 +31,25 @@ class OrdenesController extends Controller
                                         ->orWhere('status', 'ML-esperando-intrumentos')
                                         ->orWhere('status', 'ML-en-viaje')
                                         ->orWhere('status', 'ML-con-reclamos')
-                                        ->orderBy('id', 'desc')->paginate(20);
+                                        ->orderBy('id', 'desc')->paginate(30);
 
 
         } else if ($status == 'cerradas') {
 
             $orders         = AdminOrders::where('status', 'cerrada')
                                         ->orWhere('status', 'ML-cerrada')
-                                        ->orderBy('id', 'desc')->paginate(20);
+                                        ->orderBy('id', 'desc')->paginate(30);
 
         } else if ( $status == 'abiertas-esperando-instrumentos') {
 
             $orders         = AdminOrders::where('status', 'abierta-no-abonada')
                                         ->orWhere('status', 'abierta-abonada-esperando-instrumentos')
                                         ->orWhere('status', 'ML-esperando-intrumentos')
-                                        ->orderBy('id', 'desc')->paginate(20);
+                                        ->orderBy('id', 'desc')->paginate(30);
 
         } else {
 
-            $orders         = AdminOrders::orderBy('id', 'desc')->paginate(20);
+            $orders         = AdminOrders::orderBy('id', 'desc')->paginate(30);
 
         }
 

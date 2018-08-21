@@ -20,7 +20,7 @@ class ClientesController extends Controller
     public function index()
     {
 
-        $data['clients'] = AdminClients::orderBy('id', 'desc')->paginate();
+        $data['clients'] = AdminClients::orderBy('id', 'desc')->paginate(30);
 
         return view('cliente_lista', $data);
 

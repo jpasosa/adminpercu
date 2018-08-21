@@ -17,7 +17,7 @@ class ProveedoresController extends Controller
     public function index()
     {
 
-        $providers         = AdminProviders::orderBy('id', 'desc')->paginate();
+        $providers         = AdminProviders::orderBy('id', 'desc')->paginate(30);
 
         $data['providers'] = $providers;
         return view('proveedores_list', $data);

@@ -27,7 +27,7 @@ class CotizacionesController extends Controller
     public function index()
     {
 
-        $quotations         = AdminQuotations::orderBy('id', 'desc')->paginate();
+        $quotations         = AdminQuotations::orderBy('id', 'desc')->paginate(30);
 
         $data['quotations'] = $quotations;
 
