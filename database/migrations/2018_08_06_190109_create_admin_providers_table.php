@@ -16,7 +16,8 @@ class CreateAdminProvidersTable extends Migration
         Schema::create('admin_providers', function (Blueprint $table)
         {
 
-            $status = [ 'pedido-a-fabrica-brasil',
+            $status = [ 'esperando-aprobación',
+                        'pedido-a-fabrica-brasil',
                         'salio-fabrica-viaje-frontera',
                         'en-frontera',
                         'viajando-caseros',
@@ -32,7 +33,7 @@ class CreateAdminProvidersTable extends Migration
             $table->date('date_aboned')->nullable();
             $table->date('date_arrived')->nullable();
             $table->text('description')->nullable();
-            $table->enum('status', $status);
+            $table->enum('status', $status)->default('esperando-aprobación');
             $table->timestamps();
         });
     }

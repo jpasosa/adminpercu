@@ -19,7 +19,6 @@ class ProvidersSeeder extends Seeder
         ]);
          DB::table('admin_providers')->insert([
                 'number'=> 8766,
-                'status' => 'en-frontera',
                 'updated_at' => date('Y-m-d H:i:s'),
                 'created_at' => date('Y-m-d H:i:s')
         ]);

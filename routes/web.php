@@ -14,8 +14,10 @@
 use  App\Models\AdminStates;
 use  App\Models\AdminProvinces;
 use  App\Models\AdminProducts;
+use  App\Models\AdminProviders;
 use  App\Models\AdminQuotationsProducts;
 use  App\Models\AdminOrdersProducts;
+use  App\Models\AdminProvidersProducts;
 use  App\Models\AdminStockProducts;
 // use  App\Models\AdminQuotations;
 
@@ -151,6 +153,22 @@ Route::get('ajax-erase_order_product', function() {
     $response           = Response::json($erase_order_product);
     return $response;
 });
+
+
+Route::get('ajax-erase_provider', function() {
+    $id_provider= Request::get('id_provider');
+
+    $del_products_providers = AdminProvidersProducts::where('admin_provider_id', $id_provider)->delete();
+    if ($del_products_providers) {
+        $erase_provider     = AdminProviders::destroy($id_provider);
+        $response           = Response::json($erase_provider);
+    } else {
+        $response = false;
+    }
+    return $response;
+});
+
+
 
 Route::get('ajax-erase_stock_product', function() {
     $id_product_stock= Request::get('id_product_stock');

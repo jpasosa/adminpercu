@@ -52,7 +52,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse ( $providers as $provide)
-                                        <tr role="row" class="odd">
+                                        <tr role="row" class="odd" id="id_provider_{{ $provide->id }}">
                                             <td class="sorting_1">{{ $provide->number }}</td>
                                             <td>
                                                 @if ($provide->date_aboned != null)
@@ -76,6 +76,11 @@
                                                 <a href="{{ url( "proveedor/editar/$provide->id" ) }}">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
+                                                @if ($provide->canDelete)
+                                                    <a href="#" class="erase_provider" data-id_provider="{{ $provide->id }}" >
+                                                        <i class="fa fa-fw fa-eraser"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty

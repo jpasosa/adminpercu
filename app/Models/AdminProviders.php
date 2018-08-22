@@ -24,7 +24,7 @@ class AdminProviders extends Model
     ];
 
     protected $appends = [
-        'cantItems'
+        'cantItems', 'canDelete' // si lo puedo eliminar o no.
     ];
 
     protected $dates = ['date_aboned', 'date_arrived'];
@@ -55,6 +55,16 @@ class AdminProviders extends Model
         return $products;
     }
 
+    public function getCanDeleteAttribute() // si lo puedo eliminar o no. Si es 'esperando-aprobación' solamente lo puedo eliminar
+    {
+        if ( $this->attributes['status'] == 'esperando-aprobación')
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getTotalAttribute()
     {
 
@@ -70,13 +80,14 @@ class AdminProviders extends Model
 
     static function getStatus()
     {
-        return [    1=>'pedido-a-fabrica-brasil',
-                    2=>'salio-fabrica-viaje-frontera',
-                    3=>'en-frontera',
-                    4=>'viajando-caseros',
-                    5=>'viajando-catamarca',
-                    6=>'para-retirar',
-                    7=>'retirados',
+        return [    1=>'esperando-aprobación',
+                    2=>'pedido-a-fabrica-brasil',
+                    3=>'salio-fabrica-viaje-frontera',
+                    4=>'en-frontera',
+                    5=>'viajando-caseros',
+                    6=>'viajando-catamarca',
+                    7=>'para-retirar',
+                    8=>'retirados',
                 ];
     }
 

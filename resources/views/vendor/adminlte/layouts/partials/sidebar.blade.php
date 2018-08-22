@@ -31,20 +31,21 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
+            {{-- <li class="header">{{ trans('adminlte_lang::message.header') }}</li> --}}
+            <li class="header">ADMINISTRACION PERCU.COM.AR</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
-            <li><a href="{{ url('precios') }}"><i class='fa fa-link'></i> <span>CALCULAR PRECIOS</span></a></li>
-            <li class="treeview">
+            {{-- <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li> --}}
+            {{-- <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li> --}}
+            <li><a href="{{ url('precios') }}"><i class='fa fa-calculator'></i> <span>CALCULAR PRECIOS</span></a></li>
+            {{-- <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>COMPARSAS</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-music'></i> <span>COMPARSAS</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('comparsas') }}">Lista de Comparsas</a></li>
                     <li><a href="{{ url('comparsas/nueva') }}">Nueva Comparsa</a></li>
@@ -52,7 +53,7 @@
             </li>
 
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>CLIENTES</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-smile-o'></i> <span>CLIENTES</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('clientes') }}">Lista de Clientes</a></li>
                     <li><a href="{{ url('clientes/nuevo') }}">Nuevo Cliente</a></li>
@@ -60,7 +61,7 @@
             </li>
 
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>COTIZACIONES</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa  fa-list'></i> <span>COTIZACIONES</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('cotizaciones') }}">Lista de Cotizaciones</a></li>
                     <li><a href="{{ url('cotizaciones/nueva') }}">Nueva Cotizacion</a></li>
@@ -68,7 +69,7 @@
             </li>
 
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>ORDENES</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa  fa-pencil-square'></i> <span>ORDENES</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('ordenes') }}">Todas las Ordenes</a></li>
                     <li><a href="{{ url('ordenes/abiertas') }}">Ordenes Abiertas</a></li>
@@ -76,13 +77,11 @@
                 </ul>
             </li>
 
-            <li class="treeview">
-                <a href="{{ url('proveedores') }}"><i class='fa fa-link'></i> <span>PROVEEDORES</span> <i class="fa fa-angle-left pull-right"></i></a>
-            </li>
+            <li><a href="{{ url('proveedores') }}"><i class='fa fa-credit-card'></i> <span>PROVEEDORES</span></a></li>
 
-            <li class="treeview">
-                <a href="{{ url('stock') }}"><i class='fa fa-link'></i> <span>Stock Productos</span> <i class="fa fa-angle-left pull-right"></i></a>
-            </li>
+
+            <li><a href="{{ url('stock') }}"><i class='fa fa-archive'></i> <span>STOCK PRODUCTOS</span></a></li>
+
 
 
         </ul><!-- /.sidebar-menu -->
