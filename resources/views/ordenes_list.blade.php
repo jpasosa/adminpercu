@@ -67,6 +67,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                             Cliente
                                         </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                            WhatsApp
+                                        </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
                                             Items
                                         </th>
@@ -100,6 +103,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $order->client->name . ' ' . $order->client->last_name }}</td>
+                                            <td>{{ $order->client->user_whatsapp }}</td>
                                             <td title="{{ $order->view_hover_products() }}">{{ $order->cantItems }}</td>
                                             <td>{{ $order->total_cash }}</td>
                                             <td>{{ $order->status }}</td>
