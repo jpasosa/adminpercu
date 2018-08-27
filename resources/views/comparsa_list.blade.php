@@ -46,7 +46,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse ( $comparsas as $comp)
-                                        <tr role="row" class="odd">
+                                        <tr role="row" class="odd" id="id_comparsa_{{ $comp->id }}">
                                             <td class="sorting_1">{{ $comp->name_comparsa }}</td>
                                             <td>{{ $comp->name_bateria }}</td>
                                             <td>{{ $comp->facebook_page }}</td>
@@ -54,8 +54,15 @@
                                             <td>{{ $comp->state->name . ' - ' . $comp->state->province->name . ' - ' . $comp->state->cp }}</td>
                                             <td>ubicacion</td>
                                             <td>
-                                                <a href="{{ url( "comparsa/$comp->id" ) }}">Ver</a>
-                                                <a href="{{ url( "comparsa/editar/$comp->id" ) }}">Editar</a>
+                                                <a href="{{ url( "comparsa/$comp->id" ) }}">
+                                                    <i class="fa fa-fw fa-eye"></i>
+                                                </a>
+                                                <a href="{{ url( "comparsa/editar/$comp->id" ) }}">
+                                                    <i class="fa fa-fw fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="erase_comparsa" data-id_comparsa="{{ $comp->id }}" >
+                                                    <i class="fa fa-fw fa-eraser"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @empty

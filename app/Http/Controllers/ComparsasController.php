@@ -6,6 +6,9 @@ use App\Models\AdminComparsas;
 use App\Models\AdminStates;
 use Illuminate\Http\Request;
 
+
+
+
 use Session;
 
 
@@ -31,6 +34,12 @@ class ComparsasController extends Controller
 
     }
 
+    public function test()
+    {
+
+
+
+    }
 
 
     public function add_save_changes()

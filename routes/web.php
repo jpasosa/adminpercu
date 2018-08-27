@@ -19,6 +19,8 @@ use  App\Models\AdminQuotationsProducts;
 use  App\Models\AdminOrdersProducts;
 use  App\Models\AdminProvidersProducts;
 use  App\Models\AdminStockProducts;
+use  App\Models\AdminClients;
+use  App\Models\AdminComparsas;
 // use  App\Models\AdminQuotations;
 
 Route::get('/', function () {
@@ -46,6 +48,7 @@ Route::get('comparsa/editar/{id}', 'ComparsasController@edit')     # EDITAR, mue
 Route::post('comparsa/editar/{id}', 'ComparsasController@edit_save_changes')     # EDITAR, Graba la edición
             ->where('id', '[0-9]+');
 
+Route::get('comparsa_test', 'ComparsasController@test');
 
 
 
@@ -167,6 +170,29 @@ Route::get('ajax-erase_provider', function() {
     }
     return $response;
 });
+
+
+
+Route::get('ajax-erase_comparsa', function()
+{
+
+    $id_comparsa= Request::get('id_comparsa');
+
+    $clientes_comparsa = AdminClients::where('admin_comparsas_id', $id_comparsa)->get();
+
+    if (count($clientes_comparsa) > 0)
+    {
+        $response = 'false';
+    } else {
+        $erase_comparsa     = AdminComparsas::destroy($id_comparsa);
+        $response           = Response::json($erase_comparsa);
+    }
+
+
+    return $response;
+
+});
+
 
 
 

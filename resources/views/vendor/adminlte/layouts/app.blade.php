@@ -67,6 +67,7 @@ desired effect
 {!! Html::script('js/app/orders.js'); !!}
 {!! Html::script('js/app/stock.js'); !!}
 {!! Html::script('js/app/providers.js'); !!}
+{!! Html::script('js/app/comparsas.js'); !!}
 
 
 </body>
