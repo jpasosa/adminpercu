@@ -44,9 +44,30 @@ class ComparsasController extends Controller
 
     public function add_save_changes()
     {
+        // validacion que ponga o el nombre de la comparsa o el de la bateria
+        $data = request()->all();
+
+        if ( ($data['name_comparsa'] == '' && $data['name_bateria'] != '')
+            || ($data['name_comparsa'] != '' && $data['name_bateria'] == '')) {
 
 
-        $data = request()->validate([
+            $validates = [
+                'name_comparsa' => '',
+                'name_bateria'  => '',
+                'facebook_page' => '',
+                'members_cant'  => '',
+                'can_publish'   => '',
+                'observations'  => '',
+                'admin_province_id'=> '',
+                'admin_state_id'=> 'required',
+            ];
+            $text_validates = [
+                'admin_state_id.required' => 'Debe seleccionar una localidad.',
+            ];
+
+        } else {
+
+            $validates = [
                 'name_comparsa' => 'required',
                 'name_bateria'  => '',
                 'facebook_page' => '',
@@ -55,15 +76,21 @@ class ComparsasController extends Controller
                 'observations'  => '',
                 'admin_province_id'=> '',
                 'admin_state_id'=> 'required',
-            ],[
-                'name_comparsa.required' => 'Debe incluir el nombre de la comparsa.',
+            ];
+            $text_validates = [
+                'name_comparsa.required' => 'Debe incluir el nombre de la comparsa y/o de la bateria.',
                 'admin_state_id.required' => 'Debe seleccionar una localidad.',
-            ]);
+            ];
 
-        unset($data['admin_province_id']);
+        }
+
+
+        $data = request()->validate($validates, $text_validates);
+
+
+
         if($data['can_publish'] == '1')  $data['can_publish'] = true;
         if($data['can_publish'] == '0')  $data['can_publish'] = false;
-
 
 
         $save_comparsa = AdminComparsas::create($data);
