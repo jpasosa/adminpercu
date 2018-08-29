@@ -1,0 +1,12 @@
+
+
+
+
+
+external_links
+id
+rel_id ( puede ser cotización o pedido )
+tipo
+code
+updated_at
+created_at

@@ -16,11 +16,14 @@ use  App\Models\AdminProvinces;
 use  App\Models\AdminProducts;
 use  App\Models\AdminProviders;
 use  App\Models\AdminQuotationsProducts;
+use  App\Models\AdminQuotations;
 use  App\Models\AdminOrdersProducts;
 use  App\Models\AdminProvidersProducts;
 use  App\Models\AdminStockProducts;
 use  App\Models\AdminClients;
 use  App\Models\AdminComparsas;
+use  App\Models\AdminOrders;
+use  App\Models\AdminExternalLinks;
 // use  App\Models\AdminQuotations;
 
 Route::get('/', function () {
@@ -175,11 +178,8 @@ Route::get('ajax-erase_provider', function() {
 
 Route::get('ajax-erase_comparsa', function()
 {
-
     $id_comparsa= Request::get('id_comparsa');
-
     $clientes_comparsa = AdminClients::where('admin_comparsas_id', $id_comparsa)->get();
-
     if (count($clientes_comparsa) > 0)
     {
         $response = 'false';
@@ -190,7 +190,63 @@ Route::get('ajax-erase_comparsa', function()
 
 
     return $response;
+});
 
+
+// elimino una cotización por AJAX
+Route::get('ajax-erase_quotation', function()
+{
+    $id_quot= Request::get('id_quot');
+
+    //controlo que no figure en links externos . . . .
+    $quotation_links = AdminExternalLinks::where(['rel_id'=>$id_quot, 'type'=>'cotizacion'])->get();
+
+    var_dump($quotation_links);
+
+
+
+    if (false)
+    {
+        $response = 'false';
+    } else {
+
+        DB::table('admin_quotations_products')->where('admin_quotation_id', $id_quot)->delete();
+        $control_quot = AdminQuotationsProducts::where('admin_quotation_id', $id_quot)->get();
+
+        if ( count($control_quot) > 0) {
+            // error todavia quedó algun registro relacionado cotizaciones/productos
+        } else {
+            $erase_quot     = AdminQuotations::destroy($id_quot);
+            $response           = Response::json($erase_quot);
+
+        }
+
+    }
+
+
+    return $response;
+});
+
+
+
+Route::get('ajax-erase_cliente', function()
+{
+    $id_cliente= Request::get('id_cliente');
+
+    $clients_orders     = AdminOrders::where('admin_client_id', $id_cliente)->get();
+    $clients_quotations = AdminQuotations::where('admin_client_id', $id_cliente)->get();
+
+
+    if ( count($clients_orders) > 0 || count($clients_quotations) > 0 )
+    {
+        $response = 'false';
+    } else {
+        $erase_client     = AdminClients::destroy($id_cliente);
+        $response           = Response::json($erase_client);
+    }
+
+
+    return $response;
 });
 
 

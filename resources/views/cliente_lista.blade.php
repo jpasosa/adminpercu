@@ -46,15 +46,23 @@
                                 </thead>
                                 <tbody>
                                     @forelse ( $clients as $client)
-                                        <tr role="row" class="odd">
+                                        <tr role="row" class="odd" id="id_cliente_{{ $client->id }}">
                                             <td class="sorting_1">{{ $client->name }}</td>
                                             <td>{{ $client->user_whatsapp }}</td>
                                             <td>{{ $client->user_ml }}</td>
                                             <td>{{ $client->email }}</td>
                                             <td>{{ $client->state_shipping->name . ' - ' . $client->state_shipping->province->name . ' - ' . $client->state_shipping->cp }}</td>
-                                            <td><a href="{{ url( "cliente/$client->id" ) }}">Ver</a></td>
-                                            <td><a href="{{ url( "cliente/editar/$client->id" ) }}">Editar</a></td>
-
+                                            <td>
+                                                <a href="{{ url( "cliente/$client->id" ) }}">
+                                                    <i class="fa fa-fw fa-eye"></i>
+                                                </a>
+                                                <a href="{{ url( "cliente/editar/$client->id" ) }}">
+                                                    <i class="fa fa-fw fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="erase_cliente" data-id_cliente="{{ $client->id }}" >
+                                                    <i class="fa fa-fw fa-eraser"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr role="row" class="odd">

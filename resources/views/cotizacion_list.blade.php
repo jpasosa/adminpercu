@@ -49,7 +49,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse ( $quotations as $quot)
-                                        <tr role="row" class="odd">
+                                        <tr role="row" class="odd" id="id_quot_{{ $quot->id }}">
                                             <td class="sorting_1">{{ $quot->number }}</td>
                                             <td>{{ $quot->client->name . ' ' . $quot->client->last_name }}</td>
                                             <td>{{ $quot->created_at }}</td>
@@ -59,6 +59,9 @@
                                             <td>
                                                 <a href="{{ url( "cotizacion/editar/$quot->id" ) }}">
                                                     <i class="fa fa-fw fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="erase_quot" data-id_quot="{{ $quot->id }}" >
+                                                    <i class="fa fa-fw fa-eraser"></i>
                                                 </a>
                                             </td>
                                         </tr>

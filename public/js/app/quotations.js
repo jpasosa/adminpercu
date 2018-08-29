@@ -56,8 +56,30 @@ $(document).ready(function()
 
     });
 
+    // Eliminar la cotización
+    $('.erase_quot').on('click', function(e)
+    {
 
+        var confirma = confirm("Está segurx qie desea eliminar la cotización?");
+        if (confirma == true)
+        {
 
+            var id_quot = $(this).data("id_quot");
+            var selector_tr = '#id_quot_' + id_quot;
+            $.get('/ajax-erase_quotation?id_quot=' + id_quot, function( data )
+            {
+                if (data) {
+                    $(selector_tr).animate({'line-height':0},1000).hide(1);
+                } else {
+                    console.log('no se pudo eliminar la cotizacion, debe tener un link externo ya linkeado');
+                }
+            });
+
+        } else {
+            // no hace nada.
+        }
+
+    });
 
 
 });
