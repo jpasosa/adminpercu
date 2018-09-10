@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdminQuotations;
+use App\Models\AdminClients;
 use App\Models\AdminQuotationsProducts;
 use App\Models\AdminProducts;
-
+use App\Models\AdminExternalLinks;
+use HTML;
 // use App\Models\AdminComparsas;
 // use App\Models\AdminClients;
 // use Session;
@@ -223,6 +225,47 @@ class CotizacionesController extends Controller
 
 
 
+
+    public function quot_to_external_link( $id_quotation )
+    {
+
+        $data_link['rel_id']= $id_quotation;
+        $data_link['type']  = 'cotizacion';
+        $data_link['code']  = str_random(32);
+        $create_link   = AdminExternalLinks::create($data_link);
+
+        if ($create_link) {
+            return 'true';
+        } else {
+            return 'false';
+        }
+
+
+    }
+
+
+    public function client_see_quotation( $code_external_link )
+    {
+
+        $external_link = AdminExternalLinks::where( 'code', $code_external_link )->where( 'type', 'cotizacion')->get();
+
+        $rel_id = $external_link[0]->rel_id;
+
+        $data['quotation']= AdminQuotations::find( $rel_id );
+        $data['quotation_products'] = AdminQuotationsProducts::where('admin_quotation_id', $rel_id)->get();
+
+        $data['manufacturers']  = [ 17 => 'CONTEMPORANEA',
+                                    12 => 'GOPE',
+                                    11 => 'IVSOM',
+                                    14 => 'KING',
+                                    19 => 'ROZINI',
+                                    18 => 'TIMBRA',
+                                ];
+        $data['client']       = AdminClients::find( $data['quotation']->admin_client_id );
+
+        return view('frontend/cotizacion', $data);
+
+    }
 
 
 

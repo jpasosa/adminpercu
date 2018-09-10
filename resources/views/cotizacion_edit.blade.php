@@ -12,11 +12,10 @@
             <div class="box-header">
                 <h3 class="box-title">
                     <strong>LISTA DE PRODUCTOS DE LA COTIZACION NRO: {{ $quotation->number }}</strong> |
-                    <a href="http://clientes.percu.com.ar/cotizacion/{{ $quotation->number }}" target="_blank">
-                        <button type="button" class="btn btn-info">LINK</button>
-                    </a>
+                    @if ( !$quotation->isSetExternalLink )
+                        <input type="button" id="generate_link" class="btn btn-warning" value="Generar Link" data-idquotation="{{ $quotation->id }}">
+                    @endif
                     ||
-
                     <a href="{{ url('cotizaciones') }}">
                         <button type="button" class="btn btn-info">Volver al Listado</button>
                     </a>

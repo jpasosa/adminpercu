@@ -56,6 +56,28 @@ $(document).ready(function()
 
     });
 
+
+    // Generar el link de la cotización para el cliente
+    $('#generate_link').on('click', function(e)
+    {
+        var id_quotation = $(this).data("idquotation");
+
+        $.get('/ajax-quotation_to_external_link/' + id_quotation, function( data )
+        {
+            if (data) {
+                // var link = '/orden/editar/' + data;
+                // var button_order = '<a href="' + link +'"><button type="button" class="btn btn-info">Ver Orden Generada</button></a>';
+                // $('#linkorder').append(button_order);
+                console.log('link generado!!');
+            } else {
+                console.log('Hubo un error');
+            }
+        });
+
+
+    });
+
+
     // Eliminar la cotización
     $('.erase_quot').on('click', function(e)
     {
@@ -68,10 +90,10 @@ $(document).ready(function()
             var selector_tr = '#id_quot_' + id_quot;
             $.get('/ajax-erase_quotation?id_quot=' + id_quot, function( data )
             {
-                if (data) {
+                if ( data != 'false' ) {
                     $(selector_tr).animate({'line-height':0},1000).hide(1);
                 } else {
-                    console.log('no se pudo eliminar la cotizacion, debe tener un link externo ya linkeado');
+                    alert('No se pudo eliminar la cotizacion, debe tener un link externo ya linkeado');
                 }
             });
 

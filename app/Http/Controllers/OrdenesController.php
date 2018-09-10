@@ -9,6 +9,7 @@ Use App\Models\AdminOrdersProducts;
 Use App\Models\AdminQuotationsProducts;
 Use App\Models\AdminProducts;
 Use App\Models\AdminOrdersNotes;
+Use App\Models\AdminProviders;
 use Session;
 
 
@@ -283,7 +284,7 @@ class OrdenesController extends Controller
 
         $data_order['admin_client_id']  = $quotation->admin_client_id;
         $data_order['observations']     = $quotation->description;
-        $data_order['status']           = 'pedido-a-fabrica-brasil';
+        $data_order['status']           = 'abierta-no-abonada';
         $data_order['number']           = AdminProviders::get_next_number();
 
 

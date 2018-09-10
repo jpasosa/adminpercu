@@ -25,10 +25,9 @@ class AdminQuotations extends Model
     ];
 
     protected $appends = [
-        'cantItems'
+        'cantItems', 'isSetExternalLink', 'externalLink'
     ];
 
-    // protected $titulo = '';
 
 
     static function get_blank_fields()
@@ -67,6 +66,38 @@ class AdminQuotations extends Model
 
     }
 
+
+
+    public function getIsSetExternalLinkAttribute()
+    {
+        $id = $this->attributes['id'];
+        $ext_links = DB::table('admin_external_links')
+                        ->where('rel_id', $id)
+                        ->where('type', 'cotizacion')
+                        ->get();
+
+        if (count($ext_links) > 0)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getExternalLinkAttribute()
+    {
+        if ( $this->getIsSetExternalLinkAttribute() ) {
+            $id = $this->attributes['id'];
+            $ext_links = DB::table('admin_external_links')
+                            ->where('rel_id', $id)
+                            ->where('type', 'cotizacion')
+                            ->get();
+            return $ext_links[0]->code;
+        } else {
+            return '';
+        }
+
+    }
 
 
 

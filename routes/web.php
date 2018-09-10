@@ -201,11 +201,7 @@ Route::get('ajax-erase_quotation', function()
     //controlo que no figure en links externos . . . .
     $quotation_links = AdminExternalLinks::where(['rel_id'=>$id_quot, 'type'=>'cotizacion'])->get();
 
-    var_dump($quotation_links);
-
-
-
-    if (false)
+    if ( count($quotation_links) > 0)
     {
         $response = 'false';
     } else {
@@ -278,6 +274,11 @@ Route::get('ajax-down_stock_product', function() {
 Route::get('ajax-quotation_to_order/{id}', 'OrdenesController@insert_order_with_quotation_data')     # EDITAR, muestra por GET
             ->where('id', '[0-9]+');
 
+Route::get('ajax-quotation_to_external_link/{id}', 'CotizacionesController@quot_to_external_link')     # EDITAR, muestra por GET
+            ->where('id', '[0-9]+');
+
+
+
 
 Route::get('ajax-quotation_to_provider/{id}', 'ProveedoresController@insert_proveedor_with_quotation_data')     # EDITAR, muestra por GET
             ->where('id', '[0-9]+');
@@ -294,4 +295,8 @@ Route::get('test_quotation_to_order/{id}', 'OrdenesController@insert_order_with_
             ->where('id', '[0-9]+');
 
 
+# CLIENTES
 
+
+Route::get('clientes/cotizacion/{code}', 'CotizacionesController@client_see_quotation')
+            ->middleware('throttle');

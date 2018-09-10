@@ -42,6 +42,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
                                             Total
                                         </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                            Link
+                                        </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">
                                             Acciones
                                         </th>
@@ -57,12 +60,26 @@
                                             <td>{{ $quot->cantItems }}</td>
                                             <td>{{ $quot->total }}</td>
                                             <td>
-                                                <a href="{{ url( "cotizacion/editar/$quot->id" ) }}">
+                                                @if ( $quot->isSetExternalLink )
+                                                    <a href="{{ url( "clientes/cotizacion/$quot->externalLink" ) }}" target="_blank" title="Ver la Cotización" >
+                                                        Ver Cotización
+                                                    </a>
+                                                @else
+                                                    No está el link.
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ url( "cotizacion/editar/$quot->id" ) }}" title="Editar" >
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="erase_quot" data-id_quot="{{ $quot->id }}" >
+                                                <a href="#" class="erase_quot" title="Eliminar" data-id_quot="{{ $quot->id }}" >
                                                     <i class="fa fa-fw fa-eraser"></i>
                                                 </a>
+                                                @if ( !$quot->isSetExternalLink )
+                                                    <a href="#" id="generate_link" title="Generar Link Externo" data-idquotation="{{ $quot->id }}" >
+                                                        <i class="fa fa-fw fa-external-link-square"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty
