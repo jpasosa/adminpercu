@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 
 
+
 class AdminQuotations extends Model
 {
 
@@ -21,14 +22,12 @@ class AdminQuotations extends Model
      * @var array
      */
     protected $fillable = [
-            'description', 'admin_client_id', 'number', 'price_mp_fixed', 'price_cash_fixed','updated_at', 'created_at'
+            'description', 'admin_client_id', 'title', 'number', 'price_mp_fixed', 'price_cash_fixed','updated_at', 'created_at'
     ];
 
     protected $appends = [
         'cantItems', 'isSetExternalLink', 'externalLink'
     ];
-
-
 
     static function get_blank_fields()
     {

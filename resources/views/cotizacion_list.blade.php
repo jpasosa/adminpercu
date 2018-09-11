@@ -30,6 +30,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
                                             Cliente
                                         </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
+                                            Titulo
+                                        </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                             Fecha Creación
                                         </th>
@@ -55,6 +58,11 @@
                                         <tr role="row" class="odd" id="id_quot_{{ $quot->id }}">
                                             <td class="sorting_1">{{ $quot->number }}</td>
                                             <td>{{ $quot->client->name . ' ' . $quot->client->last_name }}</td>
+                                            <td>
+                                                @if( $quot->title != null )
+                                                    {{ $quot->title }}
+                                                @endif
+                                            </td>
                                             <td>{{ $quot->created_at }}</td>
                                             <td>{{ $quot->updated_at }}</td>
                                             <td>{{ $quot->cantItems }}</td>
@@ -72,7 +80,7 @@
                                                 <a href="{{ url( "cotizacion/editar/$quot->id" ) }}" title="Editar" >
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="erase_quot" title="Eliminar" data-id_quot="{{ $quot->id }}" >
+                                                <a href="#" class="erase_quot" title="Eliminar" data-id_quot="{{ $quot->id }}" style="color: #e86f6f;" >
                                                     <i class="fa fa-fw fa-eraser"></i>
                                                 </a>
                                                 @if ( !$quot->isSetExternalLink )

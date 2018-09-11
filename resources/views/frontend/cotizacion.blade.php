@@ -64,6 +64,9 @@
                     <h4>{{ $client->phone }}</h4>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
+                    @if( $quotation->title != null )
+                        <h2>Titulo: {{ $quotation->title }}</h2>
+                    @endif
                     <h4><strong>Cotización No: </strong>#{{ $quotation->number }}</h4>
                     <h4>
                         {{ Carbon\Carbon::parse($quotation->created_at)->toFormattedDateString() }}

@@ -47,6 +47,16 @@
                             </div>
 
                             <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Titulo</label>
+                                        <input type="text" class="form-control" id="" name="title" placeholder="" value="{{ old('title') }}" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Precio Fijado Efectivo</label>

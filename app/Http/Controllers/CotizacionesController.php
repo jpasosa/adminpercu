@@ -75,12 +75,15 @@ class CotizacionesController extends Controller
 
         $validations = [
                 'admin_client_id'=> 'required',
+                'title'=> '',
                 'price_cash_fixed'=> '',
                 'price_mp_fixed'=> '',
                 'description'=> '',
             ];
 
-        $validations_texts = ['admin_client_id.required' => 'Debe incluir el nombre del cliente.'];
+        $validations_texts = [  'admin_client_id.required' => 'Debe incluir el nombre del cliente.',
+                                'title' => ''
+                            ];
 
 
 
@@ -97,7 +100,6 @@ class CotizacionesController extends Controller
                             ->get();
         $data['number'] = $quotation[0]->number + 1;
 
-
         $save_quotation = AdminQuotations::create($data);
 
         if ( $save_quotation ) {
@@ -107,7 +109,7 @@ class CotizacionesController extends Controller
         }
 
 
-        return redirect('home');
+        return redirect('cotizaciones');
 
     }
 

@@ -16,6 +16,7 @@ class CreateAdminQuotationsTable extends Migration
         Schema::create('admin_quotations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('number');
+            $table->string('title')->nullable();
             $table->unsignedInteger('admin_client_id')->nullable();
             $table->foreign('admin_client_id')->references('id')->on('admin_clients')->nullable();
             $table->integer('price_cash')->nullable();
