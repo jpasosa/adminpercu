@@ -188,40 +188,49 @@ class CotizacionesController extends Controller
 
 
 
-    public function edit_save_changes( $id )
+    public function edit_save_data()
     {
 
+        $validations = [
+                'admin_quotation_id'=> 'required',
+                'title'             => '',
+                'price_cash_fixed'  => 'numeric',
+                'price_mp_fixed'    => 'numeric',
+                'description'       => '',
+            ];
 
-        dd('grabar data del cliente');
+        $validations_texts = [  'admin_quotation_id' => 'Se produjo un error, volver a cargar la página por favor!',
+                                'title' => '',
+                                'price_cash_fixed' => '',
+                                'price_mp_fixed' => '',
+                                'description' => '',
+                            ];
 
 
-        // $data = request()->validate([
-        //         'name_comparsa' => 'required',
-        //         'name_bateria'  => '',
-        //         'facebook_page' => '',
-        //         'members_cant'  => '',
-        //         'can_publish'   => '',
-        //         'observations'  => '',
-        //         'admin_province_id'=> '',
-        //         'admin_state_id'=> 'required',
-        //     ],[
-        //         'name_comparsa.required' => 'Debe incluir el nombre de la comparsa.',
-        //         'admin_state_id.required' => 'Debe seleccionar una localidad.',
-        //     ]);
-        // unset($data['admin_province_id']);
 
-        // $save = AdminComparsas::where('id', $id)
-        //             ->update($data);
 
-        // if ( $save ) {
-        //     Session::flash('success_message', 'Editamos correctamente la Comparsa');
-        // } else {
-        //     if ( !Session::has('error_message')) {
-        //         Session::flash('error_message', 'No se pudo actualizar la comparsa. Intente más tarde, gracias!');
-        //     }
-        // }
+        $data = request()->validate($validations, $validations_texts);
 
-        // return redirect('home');
+        $id = $data['admin_quotation_id'];
+        $data_save['title']         = $data['title'];
+        $data_save['price_cash_fixed']= $data['price_cash_fixed'];
+        $data_save['price_mp_fixed']= $data['price_mp_fixed'];
+        $data_save['description']   = $data['description'];
+
+
+        $update = AdminQuotations::where('id', $id)->update( $data_save );
+
+
+
+
+        if ( $update ) {
+            Session::flash('success_message', 'Agregamos los datos correctamente');
+        } else {
+            Session::flash('error_message', 'No se pudo agregar los datos de pago. Intente más tarde, gracias!');
+        }
+
+        return redirect('cotizacion/editar/' . $id );
+
 
     }
 

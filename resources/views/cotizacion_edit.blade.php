@@ -133,6 +133,10 @@
         </div>
     </div>
 
+
+
+
+
     <div class="row">
         <div class="box">
             <div class="box-header">
@@ -193,6 +197,60 @@
                             </div>
 
                             <input type="submit" class="btn btn-info" value="Guardar Producto">
+                        {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Agregar Datos</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form method="POST" action="{{ url("cotizacion/editar/agregar_data") }}">
+                            {{ csrf_field() }}
+                            {{-- AL CONTADO --}}
+                            <input type="hidden" name="admin_quotation_id" value="{{ $quotation->id }}" >
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Titulo</label>
+                                        <input type="text" class="form-control" id="" name="title" placeholder="" value="{{ old('title', $quotation->title) }}" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Precio Fijado Efectivo</label>
+                                        <input type="number" class="form-control" id="" name="price_cash_fixed" placeholder="0" value="{{ old('price_cash_fixed', $quotation->price_cash_fixed) }}" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Precio Fijado TC</label>
+                                        <input type="number" class="form-control" id="" name="price_mp_fixed" placeholder="0" value="{{ old('price_mp_fixed', $quotation->price_mp_fixed) }}" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Observaciones</label>
+                                        <textarea type="text" class="form-control" rows="5" name="description">{{ old('description', $quotation->description) }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="submit" class="btn btn-info" value="Guardar">
                         {!! Form::close() !!}
             </div>
         </div>

@@ -67,6 +67,9 @@ Route::post('cliente/editar/{id}', 'ClientesController@edit_save_changes')     #
             ->where('id', '[0-9]+');
 
 
+
+
+
 // COTIZACIONES
 Route::get('cotizaciones', 'CotizacionesController@index');       # Lista de las cotizaciones
 Route::get('cotizaciones/nueva', 'CotizacionesController@add');   # Agregar una nueva cotizacion
@@ -76,6 +79,11 @@ Route::post('cotizaciones/nueva', 'CotizacionesController@add_save_changes'); # 
 Route::get('cotizacion/editar/{id}', 'CotizacionesController@edit')     # EDITAR, muestra por GET
             ->where('id', '[0-9]+');
 Route::post('cotizacion/editar/agregar_producto', 'CotizacionesController@edit_add_product');    # EDITAR, Graba la edición
+Route::post('cotizacion/editar/agregar_data', 'CotizacionesController@edit_save_data');    # EDITAR, Graba la edición
+
+
+
+
 
 
 // ORDENES
