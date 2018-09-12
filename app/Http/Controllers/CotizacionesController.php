@@ -9,6 +9,8 @@ use App\Models\AdminQuotationsProducts;
 use App\Models\AdminProducts;
 use App\Models\AdminExternalLinks;
 use HTML;
+use Redirect;
+
 // use App\Models\AdminComparsas;
 // use App\Models\AdminClients;
 // use Session;
@@ -259,6 +261,11 @@ class CotizacionesController extends Controller
     {
 
         $external_link = AdminExternalLinks::where( 'code', $code_external_link )->where( 'type', 'cotizacion')->get();
+
+        if (count($external_link) == 0)
+        {
+            return Redirect::to('http://percu.com.ar');
+        }
 
         $rel_id = $external_link[0]->rel_id;
 

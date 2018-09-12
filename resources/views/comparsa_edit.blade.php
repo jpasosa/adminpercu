@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1">Nombre de la Bateria</label>
+                                        <label for="exampleFormControlInput1">Nombre de la Bateria/Bloco</label>
                                         <input type="text" class="form-control" id="" name="name_bateria" placeholder="Indique el nombre de la bateria" value="{{ old('name_bateria', $comparsa->name_bateria) }}"  >
                                     </div>
                                 </div>
