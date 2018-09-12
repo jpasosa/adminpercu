@@ -59,7 +59,7 @@
                                                 <a href="{{ url( "cliente/editar/$client->id" ) }}">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="erase_cliente" data-id_cliente="{{ $client->id }}" >
+                                                <a href="#" class="erase_cliente" data-id_cliente="{{ $client->id }}" style="color: #e86f6f;" >
                                                     <i class="fa fa-fw fa-eraser"></i>
                                                 </a>
                                             </td>

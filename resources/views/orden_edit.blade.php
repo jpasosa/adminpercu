@@ -15,7 +15,7 @@
 @endsection
 
 @section('htmlheader_title')
-    Edición de la Cotización
+    Edición de la Orden
 @endsection
 
 
@@ -30,37 +30,32 @@
                         <button type="button" class="btn btn-info">LINK</button>
                     </a>
                     ||
-
                     <a href="{{ url('ordenes') }}">
                         <button type="button" class="btn btn-info">Volver al Listado de Ordenes</button>
                     </a>
-
-                    || <input type="button" class="btn btn-warning" value="Realizar ORDEN">
-
                 </h3>
-                        <form method="POST" action="{{ url("orden/editar/cambiar_estado") }}">
-                            {{ csrf_field() }}
-                            {{-- AL CONTADO --}}
-                            <input type="hidden" name="admin_order_id" value="{{ $order->id }}">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1"><strong>ESTADO DE LA ORDEN</strong></label>
-                                        <select class="form-control" name="status">
-                                            @foreach( $status AS $k => $estado )
-                                                @if ( $estado == $order->status)
-                                                    <option value="{{ $k }}" selected="selected">{{ $estado }}</option>
-                                                @else
-                                                    <option value="{{ $k }}" >{{ $estado }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+                <form method="POST" action="{{ url("orden/editar/cambiar_estado") }}">
+                    {{ csrf_field() }}
+                    {{-- AL CONTADO --}}
+                    <input type="hidden" name="admin_order_id" value="{{ $order->id }}">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1"><strong>ESTADO DE LA ORDEN</strong></label>
+                                <select class="form-control" name="status">
+                                    @foreach( $status AS $k => $estado )
+                                        @if ( $estado == $order->status)
+                                            <option value="{{ $k }}" selected="selected">{{ $estado }}</option>
+                                        @else
+                                            <option value="{{ $k }}" >{{ $estado }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
-                            <input type="submit" class="btn btn-info" value="Modificar Estado">
-                        {!! Form::close() !!}
-
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-info" value="Modificar Estado">
+                {!! Form::close() !!}
             </div>
 
             <!-- /.box-header -->

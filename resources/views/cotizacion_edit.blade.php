@@ -223,8 +223,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -239,17 +237,14 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1">Observaciones</label>
+                                        <label for="exampleFormControlInput1">Observaciones (vé el cliente)</label>
                                         <textarea type="text" class="form-control" rows="5" name="description">{{ old('description', $quotation->description) }}</textarea>
                                     </div>
                                 </div>
                             </div>
-
                             <input type="submit" class="btn btn-info" value="Guardar">
                         {!! Form::close() !!}
             </div>

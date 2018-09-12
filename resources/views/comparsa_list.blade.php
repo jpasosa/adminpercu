@@ -60,7 +60,7 @@
                                                 <a href="{{ url( "comparsa/editar/$comp->id" ) }}">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="erase_comparsa" data-id_comparsa="{{ $comp->id }}" >
+                                                <a href="#" class="erase_comparsa" data-id_comparsa="{{ $comp->id }}" style="color: #e86f6f;" >
                                                     <i class="fa fa-fw fa-eraser"></i>
                                                 </a>
                                             </td>
