@@ -84,7 +84,7 @@
                                                     <i class="fa fa-fw fa-eraser"></i>
                                                 </a>
                                                 @if ( !$quot->isSetExternalLink )
-                                                    <a href="#" id="generate_link" title="Generar Link Externo" data-idquotation="{{ $quot->id }}" >
+                                                    <a href="#" class="generate_link" title="Generar Link Externo" data-idquotation="{{ $quot->id }}" >
                                                         <i class="fa fa-fw fa-external-link-square"></i>
                                                     </a>
                                                 @endif

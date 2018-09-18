@@ -79,6 +79,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
                                             Status
                                         </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                            Link
+                                        </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">
                                             Acciones
                                         </th>
@@ -108,9 +111,23 @@
                                             <td>{{ $order->total_cash }}</td>
                                             <td>{{ $order->status }}</td>
                                             <td>
+                                                @if ( $order->isSetExternalLink )
+                                                    <a href="{{ url( "clientes/orden/$order->externalLink" ) }}" target="_blank" title="Ver la Cotización" >
+                                                        Ver Orden
+                                                    </a>
+                                                @else
+                                                    No está el link.
+                                                @endif
+                                            </td>
+                                            <td>
                                                 <a href="{{ url( "orden/editar/$order->id" ) }}">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
+                                                @if ( !$order->isSetExternalLink )
+                                                    <a href="#" class="generate_order_link" title="Generar Link Externo" data-idorder="{{ $order->id }}" >
+                                                        <i class="fa fa-fw fa-external-link-square"></i>
+                                                    </a>
+                                                @endif
                                             </td>
 
 

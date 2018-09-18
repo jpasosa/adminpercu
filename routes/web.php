@@ -282,8 +282,15 @@ Route::get('ajax-down_stock_product', function() {
 Route::get('ajax-quotation_to_order/{id}', 'OrdenesController@insert_order_with_quotation_data')     # EDITAR, muestra por GET
             ->where('id', '[0-9]+');
 
+# Desde la cotización genero un link externo.
 Route::get('ajax-quotation_to_external_link/{id}', 'CotizacionesController@quot_to_external_link')     # EDITAR, muestra por GET
             ->where('id', '[0-9]+');
+
+
+# Desde las ordenes genero un LINK EXTERNO
+Route::get('ajax-order_to_external_link/{id}', 'OrdenesController@order_to_external_link')
+            ->where('id', '[0-9]+');
+
 
 
 
@@ -307,4 +314,7 @@ Route::get('test_quotation_to_order/{id}', 'OrdenesController@insert_order_with_
 
 
 Route::get('clientes/cotizacion/{code}', 'CotizacionesController@client_see_quotation')
+            ->middleware('throttle');
+
+Route::get('clientes/orden/{code}', 'OrdenesController@client_see_order')
             ->middleware('throttle');

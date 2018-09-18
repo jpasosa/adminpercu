@@ -34,6 +34,9 @@ class AdminOrders extends Model
     // $table->integer('total_mp');
     // $table->integer('total_ml');
 
+    protected $appends = [
+        'isSetExternalLink', 'externalLink'
+    ];
 
     static function getStatus()
     {
@@ -85,6 +88,45 @@ class AdminOrders extends Model
         return $products;
 
     }
+
+
+    // controla si existe un link externo para la orden
+    public function getIsSetExternalLinkAttribute()
+    {
+        $id = $this->attributes['id'];
+        $ext_links = DB::table('admin_external_links')
+                        ->where('rel_id', $id)
+                        ->where('type', 'orden')
+                        ->get();
+
+        if (count($ext_links) > 0)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // obtiene el link externo
+    public function getExternalLinkAttribute()
+    {
+        if ( $this->getIsSetExternalLinkAttribute() ) {
+            $id = $this->attributes['id'];
+            $ext_links = DB::table('admin_external_links')
+                            ->where('rel_id', $id)
+                            ->where('type', 'orden')
+                            ->get();
+            return $ext_links[0]->code;
+        } else {
+            return '';
+        }
+
+    }
+
+
+
+
 
     // public function setTotalCashAttribute()
     // {

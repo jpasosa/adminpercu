@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+
     // Eliminar una orden
     $('.erase_product_order').on('click', function(e)
     {
@@ -15,4 +16,24 @@ $(document).ready(function()
         });
     });
 
+
+    // Generar el link de la orde para el cliente
+    $('.generate_order_link').on('click', function(e)
+    {
+        var id_order = $(this).data("idorder");
+        $.get('/ajax-order_to_external_link/' + id_order, function( data )
+        {
+            if (data) {
+                alert('Link Generado!');
+                location.reload();
+            } else {
+                alert('Se produjo un error');
+                location.reload();
+            }
+        });
+
+
+    });
+
 });
+

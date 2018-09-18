@@ -58,7 +58,7 @@ $(document).ready(function()
 
 
     // Generar el link de la cotización para el cliente
-    $('#generate_link').on('click', function(e)
+    $('.generate_link').on('click', function(e)
     {
         var id_quotation = $(this).data("idquotation");
 
@@ -68,9 +68,11 @@ $(document).ready(function()
                 // var link = '/orden/editar/' + data;
                 // var button_order = '<a href="' + link +'"><button type="button" class="btn btn-info">Ver Orden Generada</button></a>';
                 // $('#linkorder').append(button_order);
-                console.log('link generado!!');
+                alert('Link Generado!');
+                location.reload();
             } else {
-                console.log('Hubo un error');
+                alert('Se produjo un error');
+                location.reload();
             }
         });
 

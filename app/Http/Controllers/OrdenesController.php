@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Models\AdminOrders;
+Use App\Models\AdminClients;
 Use App\Models\AdminQuotations;
 Use App\Models\AdminOrdersProducts;
 Use App\Models\AdminQuotationsProducts;
 Use App\Models\AdminProducts;
+use App\Models\AdminExternalLinks;
 Use App\Models\AdminOrdersNotes;
 Use App\Models\AdminProviders;
 use Session;
@@ -305,6 +307,55 @@ class OrdenesController extends Controller
     }
 
 
+
+
+    public function order_to_external_link( $id_order )
+    {
+
+        $data_link['rel_id']= $id_order;
+        $data_link['type']  = 'orden';
+        $data_link['code']  = str_random(32);
+        $create_link   = AdminExternalLinks::create($data_link);
+
+        if ($create_link) {
+            return 'true';
+        } else {
+            return 'false';
+        }
+
+
+    }
+
+
+    public function client_see_order( $code_external_link )
+    {
+
+        $external_link = AdminExternalLinks::where( 'code', $code_external_link )->where( 'type', 'orden')->get();
+
+
+        if (count($external_link) == 0)
+        {
+            return Redirect::to('http://percu.com.ar');
+        }
+
+        $rel_id = $external_link[0]->rel_id;
+
+        $data['order']= AdminOrders::find( $rel_id );
+        $data['orders_products'] = AdminOrdersProducts::where('admin_order_id', $rel_id)->get();
+
+        $data['manufacturers']  = [ 17 => 'CONTEMPORANEA',
+                                    12 => 'GOPE',
+                                    11 => 'IVSOM',
+                                    14 => 'KING',
+                                    19 => 'ROZINI',
+                                    18 => 'TIMBRA',
+                                ];
+
+        $data['client']       = AdminClients::find( $data['order']->admin_client_id );
+
+        return view('frontend/orden', $data);
+
+    }
 
 
 
