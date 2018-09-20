@@ -8,6 +8,7 @@ use App\Models\AdminClients;
 use App\Models\AdminQuotationsProducts;
 use App\Models\AdminProducts;
 use App\Models\AdminExternalLinks;
+use App\Models\AdminStockProducts;
 use HTML;
 use Redirect;
 
@@ -272,16 +273,25 @@ class CotizacionesController extends Controller
         $data['quotation']= AdminQuotations::find( $rel_id );
         $data['quotation_products'] = AdminQuotationsProducts::where('admin_quotation_id', $rel_id)->get();
 
-        $data['manufacturers']  = [ 17 => 'CONTEMPORANEA',
-                                    12 => 'GOPE',
-                                    11 => 'IVSOM',
-                                    14 => 'KING',
-                                    19 => 'ROZINI',
-                                    18 => 'TIMBRA',
-                                ];
+        // $data['manufacturers']  = [ 17 => 'CONTEMPORANEA',
+        //                             12 => 'GOPE',
+        //                             11 => 'IVSOM',
+        //                             14 => 'KING',
+        //                             19 => 'ROZINI',
+        //                             18 => 'TIMBRA',
+        //                         ];
         $data['client']       = AdminClients::find( $data['quotation']->admin_client_id );
 
         return view('frontend/cotizacion', $data);
+
+    }
+
+    public function client_see_products_stock()
+    {
+
+        $data['stock_products'] = AdminStockProducts::all();
+
+        return view('frontend/stock', $data);
 
     }
 

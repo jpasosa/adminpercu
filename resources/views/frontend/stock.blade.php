@@ -43,10 +43,7 @@
             <hr />
             <div class="row text-center">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    Mirá nuestro stock para envío inmediato!
-                    <a target="_blank" href="{{ url('clientes/productos/en-stock') }}" class="btn btn-success">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> Stock Disponible
-                    </a>
+
                     &nbsp;&nbsp;&nbsp;Entrá a nuestra tienda!
                     <a target="_blank" href="http://www.percu.com.ar" class="btn btn-success">
                         <span class="glyphicon glyphicon-shopping-cart"></span> Ver Tienda Online
@@ -59,23 +56,7 @@
             </div>
             <hr />
             <div class="row ">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <h4><strong>{{  $client->name . ' ' . $client->last_name }}</strong></h4>
-                    <h4>
-                        <b>{{ $client->state_residence->name . ' - ' . $client->state_residence->province->name . ' - ' . $client->state_residence->cp }}</b></h4>
-                    </h4>
-                    <h4>{{ $client->email }}</h4>
-                    <h4>{{ $client->phone }}</h4>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    @if( $quotation->title != null )
-                        <h2>Titulo: {{ $quotation->title }}</h2>
-                    @endif
-                    <h4><strong>Cotización No: </strong>#{{ $quotation->number }}</h4>
-                    <h4>
-                        {{ Carbon\Carbon::parse($quotation->created_at)->toFormattedDateString() }}
-                    </h4>
-                </div>
+                <h2 style="text-align: center;"><strong>PRODUCTOS EN STOCK, envíos a cualquier provincia de la Argentina!</strong></h2>
             </div>
             <hr />
             <br />
@@ -89,8 +70,8 @@
                                     <th bgcolor="#018000" style="color: #DAFF69">MARCA</th>
                                     <th bgcolor="#018000" style="color: #DAFF69">CODIGO</th>
                                     <th bgcolor="#018000" style="color: #DAFF69">PRODUCTO</th>
-                                    <th colspan="2" bgcolor="#018000" style="color: #DAFF69">EFECTIVO</th>
-                                    <th colspan="2" bgcolor="#018000" style="color: #DAFF69">TARJETA</th>
+                                    <th bgcolor="#018000" style="color: #DAFF69">EFECTIVO</th>
+                                    <th bgcolor="#018000" style="color: #DAFF69">TARJETA</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,32 +83,17 @@
                                     <td bgcolor="#E3E3E3"><strong>Por Unidad
 
                                     </strong></td>
-                                    <td bgcolor="#E3E3E3"><strong>Subtotal</strong></td>
                                     <td bgcolor="#E3E3E3"><strong>Por Unidad </strong></td>
-                                    <td bgcolor="#E3E3E3"><strong>Subtotal</strong></td>
                                 </tr>
 
-                                @php
-                                    $tot_cash   = 0;
-                                    $tot_mp     = 0;
-                                @endphp
-
-                                @forelse ( $quotation_products as $prod)
-                                    @php
-                                        $subt_cash  = $prod->product->cash_price * $prod->quantity;
-                                        $subt_mp    = $prod->product->mp_price * $prod->quantity;
-                                        $tot_cash   += $subt_cash;
-                                        $tot_mp     += $subt_mp;
-                                    @endphp
+                                @forelse ( $stock_products as $prod)
                                     <tr>
                                         <td>{{ $prod->quantity }}</td>
                                         <td>{{ $prod->product->manufacturer }}</td>
                                         <td>{{ $prod->product->code }}</td>
-                                        <td>{{ $prod->product->name }}</td>
+                                        <td title="{{ $prod->observations }}">{{ $prod->product->name }}</td>
                                         <td>${{ $prod->product->cash_price }}</td>
-                                        <td>${{ $subt_cash }}</td>
                                         <td>${{ $prod->product->mp_price }}</td>
-                                        <td>${{ $subt_mp }}</td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -135,28 +101,6 @@
                                     </tr>
                                 @endforelse
                                 <tr>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
-                                  <td></td>
-                                  <td><strong>${{ $tot_cash }}</strong></td>
-                                  <td>&nbsp;</td>
-                                  <td><strong>${{ $tot_mp }}</strong></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td>&nbsp;</td>
-                                  <td>&nbsp;</td>
                                   <td>&nbsp;</td>
                                   <td>&nbsp;</td>
                                   <td>&nbsp;</td>

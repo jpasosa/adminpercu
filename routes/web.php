@@ -318,3 +318,6 @@ Route::get('clientes/cotizacion/{code}', 'CotizacionesController@client_see_quot
 
 Route::get('clientes/orden/{code}', 'OrdenesController@client_see_order')
             ->middleware('throttle');
+
+Route::get('clientes/productos/en-stock', 'CotizacionesController@client_see_products_stock')
+            ->middleware('throttle');

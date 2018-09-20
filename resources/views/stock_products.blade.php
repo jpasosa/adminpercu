@@ -76,7 +76,7 @@
                                             <td>{{ $stock_prod->product->name }}</td>
                                             <td>{{ $stock_prod->observations }}</td>
                                             <td>
-                                                <a href="#" class="erase_stock_product" data-id_product="{{ $stock_prod->id }}" >
+                                                <a href="#" class="erase_stock_product" data-id_product="{{ $stock_prod->id }}" style="color: #e86f6f;">
                                                     <i class="fa fa-fw fa-eraser"></i>
                                                 </a>
                                                 <a href="#" class="add_stock_product" data-id_product="{{ $stock_prod->id }}" >

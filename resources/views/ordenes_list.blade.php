@@ -80,6 +80,9 @@
                                             Status
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
+                                            Abonado
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
                                             Link
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">
@@ -110,6 +113,7 @@
                                             <td title="{{ $order->view_hover_products() }}">{{ $order->cantItems }}</td>
                                             <td>{{ $order->total_cash }}</td>
                                             <td>{{ $order->status }}</td>
+                                            <td>{{ $order->quickStatus }}</td>
                                             <td>
                                                 @if ( $order->isSetExternalLink )
                                                     <a href="{{ url( "clientes/orden/$order->externalLink" ) }}" target="_blank" title="Ver la Cotización" >

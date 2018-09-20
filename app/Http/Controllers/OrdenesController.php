@@ -341,6 +341,7 @@ class OrdenesController extends Controller
         $rel_id = $external_link[0]->rel_id;
 
         $data['order']= AdminOrders::find( $rel_id );
+
         $data['orders_products'] = AdminOrdersProducts::where('admin_order_id', $rel_id)->get();
 
         $data['manufacturers']  = [ 17 => 'CONTEMPORANEA',

@@ -35,7 +35,7 @@ class AdminOrders extends Model
     // $table->integer('total_ml');
 
     protected $appends = [
-        'isSetExternalLink', 'externalLink'
+        'isSetExternalLink', 'externalLink', 'quickStatus', 'paymentMethod'
     ];
 
     static function getStatus()
@@ -90,6 +90,54 @@ class AdminOrders extends Model
     }
 
 
+
+    public function getQuickStatusAttribute()
+    {
+
+        $total_cash_fixed   = $this->attributes['total_cash_fixed'];
+        $total_mp_fixed     = $this->attributes['total_mp_fixed'];
+        $total_ml_fixed     = $this->attributes['total_ml_fixed'];
+        $abonado_cash       = $this->attributes['abonado_cash'];
+        $abonado_mp         = $this->attributes['abonado_mp'];
+        $abonado_ml         = $this->attributes['abonado_ml'];
+
+        if ( $abonado_cash != 0 ) {     // CASH
+            if ( $total_cash_fixed == $abonado_cash ) {
+                $quick_status = 'PAGADO';
+            } else if ( $total_cash_fixed > $abonado_cash ) {
+                $quick_status = 'RESERVADO';
+            } else {
+                $quick_status = 'NO PAGADO';
+            }
+
+        } else if ( $abonado_mp != 0 ) {    // MERCADOPAGO
+            if ( $total_mp_fixed == $abonado_mp ) {
+                $quick_status = 'PAGADO';
+            } else if ( $total_mp_fixed > $abonado_mp ) {
+                $quick_status = 'RESERVADO';
+            } else {
+                $quick_status = 'NO PAGADO';
+            }
+
+        } else if ( $abonado_ml != 0 ) {    // MERCADOLIBRE
+            if ( $total_ml_fixed == $abonado_ml ) {
+                $quick_status = 'PAGADO';
+            } else if ( $total_ml_fixed > $abonado_ml ) {
+                $quick_status = 'RESERVADO';
+            } else {
+                $quick_status = 'NO PAGADO';
+            }
+
+        } else {
+            $quick_status = 'NO PAGADO';
+        }
+
+        return $quick_status;
+
+    }
+
+
+
     // controla si existe un link externo para la orden
     public function getIsSetExternalLinkAttribute()
     {
@@ -121,6 +169,27 @@ class AdminOrders extends Model
         } else {
             return '';
         }
+
+    }
+
+    public function getPaymentMethodAttribute()
+    {
+
+        $abonado_cash       = $this->attributes['abonado_cash'];
+        $abonado_mp         = $this->attributes['abonado_mp'];
+        $abonado_ml         = $this->attributes['abonado_ml'];
+
+        if ( !is_null($abonado_cash) && $abonado_cash != 0 ) {     // CASH
+            $paymentmethod = 'EFECTIVO';
+        } else if ( !is_null($abonado_mp) && $abonado_mp != 0 ) {    // MERCADOPAGO
+            $paymentmethod = 'MERCADOPAGO';
+        } else if ( !is_null($abonado_ml) && $abonado_ml != 0 ) {    // MERCADOLIBRE
+            $paymentmethod = 'MERCADOLIBRE';
+        } else {
+            $paymentmethod = 'EFECTIVO';
+        }
+
+        return $paymentmethod;
 
     }
 
