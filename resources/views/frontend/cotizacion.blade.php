@@ -148,11 +148,11 @@
                                   <td>&nbsp;</td>
                                   <td>&nbsp;</td>
                                   <td>&nbsp;</td>
+                                  <td>&nbsp;</td>
                                   <td></td>
                                   <td><strong>${{ $tot_cash }}</strong></td>
-                                  <td>&nbsp;</td>
-                                  <td><strong>${{ $tot_mp }}</strong></td>
                                   <td></td>
+                                  <td><strong>${{ $tot_mp }}</strong></td>
                                 </tr>
                                 <tr>
                                   <td>&nbsp;</td>

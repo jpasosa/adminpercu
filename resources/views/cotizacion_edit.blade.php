@@ -104,9 +104,9 @@
                                             <td>{{ $quot->product->manufacturer }}</td>
                                             <td>{{ $quot->product->code }}</td>
                                             <td>{{ $quot->product->name }}</td>
-                                            <td>${{ $quot->product->cash_price }}</td>
-                                            <td>${{ $quot->product->mp_price }}</td>
-                                            <td>${{ $quot->product->ml_price }}</td>
+                                            <td title="Ganancia: ${{ $quot->product->cash_gain }}">${{ $quot->product->cash_price }}</td>
+                                            <td title="Ganancia: ${{ $quot->product->mp_gain }}">${{ $quot->product->mp_price }}</td>
+                                            <td title="Ganancia: ${{ $quot->product->ml_gain }}">${{ $quot->product->ml_price }}</td>
                                             <td>${{ $subtotal }}</td>
                                             <td>
                                                 <a href="#" class="erase_product" data-id_quotation="{{ $quot->id }}" >
