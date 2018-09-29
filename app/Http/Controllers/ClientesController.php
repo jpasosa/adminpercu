@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Models\AdminComparsas;
+use App\Models\AdminComparsas;
 use App\Models\AdminClients;
 use App\Models\AdminStates;
 use Session;
@@ -117,15 +117,16 @@ class ClientesController extends Controller
         $data['cliente']    = AdminClients::find( $id );
         $cliente            = $data['cliente'];
 
+
         $id_province_residence= $cliente->state_residence->province->id;
         $id_state_residence = $cliente->state_residence->id;
         $id_province_shipping= $cliente->state_shipping->province->id;
         $id_state_shipping  = $cliente->state_shipping->id;
 
+        $data['states_residence']   = AdminStates::where('admin_province_id',$id_province_residence)->orderBy('name')->get();
+        $data['states_shipping']    = AdminStates::where('admin_province_id',$id_province_shipping)->orderBy('name')->get();
 
-
-        $data['states_residence']   = AdminStates::where('admin_province_id',$id_province_residence)->get();
-        $data['states_shipping']    = AdminStates::where('admin_province_id',$id_province_shipping)->get();
+        $data['admin_comparsas_id'] = AdminComparsas::all();
 
         return view('cliente_edit', $data);
     }
@@ -133,37 +134,52 @@ class ClientesController extends Controller
     public function edit_save_changes( $id )
     {
 
+        $validations = [
+                'name'          => 'required',
+                'last_name'     => '',
+                'user_ml'       => '',
+                'email'         => '',
+                'phone'         => '',
+                'marketing'     => '',
+                'face'          => '',
+                'friends'       => '',
+                'admin_province_residence_id'=> '',
+                'admin_state_residence_id'  => '',
+                'admin_province_shipping_id'=> '',
+                'admin_state_shipping_id'=> '',
+                'admin_comparsas_id'    => '',
+                'observations'          => '',
 
-        dd('grabar data del cliente');
+            ];
+
+        if (!is_null(request('dni'))) {
+            $validations['dni'] = 'unique:admin_clients';
+        }
+
+        $data = request()->validate($validations);
 
 
-        // $data = request()->validate([
-        //         'name_comparsa' => 'required',
-        //         'name_bateria'  => '',
-        //         'facebook_page' => '',
-        //         'members_cant'  => '',
-        //         'can_publish'   => '',
-        //         'observations'  => '',
-        //         'admin_province_id'=> '',
-        //         'admin_state_id'=> 'required',
-        //     ],[
-        //         'name_comparsa.required' => 'Debe incluir el nombre de la comparsa.',
-        //         'admin_state_id.required' => 'Debe seleccionar una localidad.',
-        //     ]);
-        // unset($data['admin_province_id']);
+        if($data['friends'] == '1')     $data['friends']= true;
+        if($data['friends'] == '0')     $data['friends']= false;
+        if($data['user_ml'] == '')      $data['user_ml']= null;
+        if($data['face'] == '')         $data['face']   = null;
+        if($data['email'] == null)      $data['email']  = '';
+        if($data['admin_comparsas_id'] == 'null')   $data['admin_comparsas_id'] = null;
 
-        // $save = AdminComparsas::where('id', $id)
-        //             ->update($data);
+        unset($data['admin_province_residence_id'], $data['admin_province_shipping_id']);
 
-        // if ( $save ) {
-        //     Session::flash('success_message', 'Editamos correctamente la Comparsa');
-        // } else {
-        //     if ( !Session::has('error_message')) {
-        //         Session::flash('error_message', 'No se pudo actualizar la comparsa. Intente más tarde, gracias!');
-        //     }
-        // }
+        $update = AdminClients::where('id', $id)
+                    ->update($data);
 
-        // return redirect('home');
+        if ( $update ) {
+            Session::flash('success_message', 'Editamos correctamente el cliente');
+        } else {
+            if ( !Session::has('error_message')) {
+                Session::flash('error_message', 'No se pudo actualizar el cliente. Intente más tarde, gracias!');
+            }
+        }
+
+        return redirect('home');
 
     }
 

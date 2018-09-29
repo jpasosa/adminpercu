@@ -22,7 +22,7 @@
                                     </h5>
                                 </div>
                             @endif
-                        <form method="POST" action="{{ url("clientes/editar/$cliente->id") }}">
+                        <form method="POST" action="{{ url("cliente/editar/$cliente->id") }}">
                             {{ csrf_field() }}
                             {{-- AL CONTADO --}}
                             <span class="label label-success">Edición de cliente</span>
@@ -137,15 +137,14 @@
                                 </div>
                             </div>
 
-
-
-                           {{--  <div class="row">
+                            {{-- UBICACION DE RESIDENCIA --}}
+                            <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Provincia de Residencia</label>
                                         <select class="form-control" id="admin_province_residence_id" name="admin_province_residence_id">
-                                                 @foreach ($admin_province_residence_id AS $prov)
-                                                    @if (old('admin_province_residence_id') == $prov->id)
+                                                @foreach ($cliente->state_residence->province->all() AS $prov)
+                                                    @if (old('admin_province_id', $cliente->state_residence->province->id) == $prov->id)
                                                           <option value="{{ $prov->id }}" selected="selected">{{ $prov->name }}</option>
                                                     @else
                                                           <option value="{{ $prov->id }}">{{ $prov->name }}</option>
@@ -155,16 +154,17 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Localidad de Residencia{{ old('admin_state_residence_id') }} </label>
                                         <select class="form-control" id="admin_state_residence_id" name="admin_state_residence_id">
-                                            @foreach ($admin_state_residence_id AS $state)
-                                                @if (old('admin_state_residence_id') == $state->id)
-                                                      <option value="{{ $state->id }}" selected="selected">{{ $state->name }}</option>
+                                            @foreach ($states_residence AS $st)
+                                                @if (old('admin_state_residence_id', $cliente->state_residence->id) == $st->id)
+                                                      <option value="{{ $st->id }}" selected="selected">{{ $st->name }}</option>
                                                 @else
-                                                      <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                      <option value="{{ $st->id }}">{{ $st->name }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -173,16 +173,17 @@
                                 </div>
                             </div>
 
+                            {{-- UBICACION DE ENVIO --}}
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Provincia de Envío</label>
                                         <select class="form-control" id="admin_province_shipping_id" name="admin_province_shipping_id">
-                                            @foreach ($admin_province_shipping_id AS $prov)
-                                                @if (old('admin_province_shipping_id') == $prov->id)
-                                                      <option value="{{ $prov->id }}" selected="selected">{{ $prov->name }}</option>
+                                            @foreach ($cliente->state_shipping->province->all() AS $prov)
+                                                @if (old('admin_province_shipping_id', $cliente->state_shipping->province->id) == $prov->id)
+                                                    <option value="{{ $prov->id }}" selected="selected">{{ $prov->name }}</option>
                                                 @else
-                                                      <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                                                    <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -194,11 +195,11 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Localidad de Envío</label>
                                         <select class="form-control" id="admin_state_shipping_id" name="admin_state_shipping_id">
-                                            @foreach ($admin_state_shipping_id AS $state)
-                                                @if (old('admin_state_shipping_id') == $state->id)
-                                                      <option value="{{ $state->id }}" selected="selected">{{ $state->name }}</option>
+                                            @foreach ($states_shipping AS $st)
+                                                @if (old('admin_state_shipping_id', $cliente->state_shipping->id) == $st->id)
+                                                      <option value="{{ $st->id }}" selected="selected">{{ $st->name }}</option>
                                                 @else
-                                                      <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                      <option value="{{ $st->id }}">{{ $st->name }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -206,6 +207,8 @@
 
                                 </div>
                             </div>
+
+
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
@@ -213,7 +216,7 @@
                                         <select class="form-control" id="admin_comparsas_id" name="admin_comparsas_id">
                                                 <option value="null">No Pertenesco a Ninguna . . . .</option>
                                                 @foreach ($admin_comparsas_id as $comp)
-                                                    @if (old('admin_comparsas_id') == $comp['id'])
+                                                    @if (old('admin_comparsas_id', $cliente->comparsa->id) == $comp['id'])
                                                           <option value="{{ $comp['id'] }}" selected>{{ $comp['name_comparsa'] }} | {{  $comp['name_bateria']  }}</option>
                                                     @else
                                                           <option value="{{ $comp['id'] }}">{{ $comp['name_comparsa'] }} | {{  $comp['name_bateria']  }}</option>
@@ -222,7 +225,9 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
+
+
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
