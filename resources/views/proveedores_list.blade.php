@@ -77,7 +77,7 @@
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
                                                 @if ($provide->canDelete)
-                                                    <a href="#" class="erase_provider" data-id_provider="{{ $provide->id }}" >
+                                                    <a href="#" class="erase_provider" data-id_provider="{{ $provide->id }}" style="color: #e86f6f;">
                                                         <i class="fa fa-fw fa-eraser"></i>
                                                     </a>
                                                 @endif

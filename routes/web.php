@@ -153,13 +153,25 @@ Route::get('ajax-get_product', function() {
 
 });
 
-
+# COTIZACIONES
+# Elimino un producto en la cotización
 Route::get('ajax-erase_quotation_product', function() {
     $id_quotation_product= Request::get('id_quotation_product');
     $erase_quot_product = AdminQuotationsProducts::destroy($id_quotation_product);
     $response           = Response::json($erase_quot_product);
     return $response;
 });
+
+# PROVEEDORES
+# Elimino un producto en los proveedores
+Route::get('ajax-erase_provider_product', function() {
+    $id_product_provider= Request::get('id_product_provider');
+    $erase_prod_provider= AdminProvidersProducts::destroy($id_product_provider);
+    $response           = Response::json($erase_prod_provider);
+    return $response;
+});
+
+
 
 Route::get('ajax-erase_order_product', function() {
     $id_order_product= Request::get('id_order_product');

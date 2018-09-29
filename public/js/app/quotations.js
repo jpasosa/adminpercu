@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    // Selección de Marca / Producto
+    // Eliminar un producto en la cotización
     $('.erase_product').on('click', function(e)
     {
         var id_quotation_product = $(this).data("id_quotation");

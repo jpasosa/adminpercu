@@ -113,7 +113,7 @@
                                             $discount_price += $prov->discount_price;
                                             $total_price += $prov->total_price;
                                         @endphp
-                                        <tr role="row" class="odd" id="prod_quot_{{ $prov->id }}">
+                                        <tr role="row" class="odd" id="id_prod_provider_{{ $prov->id }}">
                                             <td>{{ $prov->quantity }}</td>
                                             <td>{{ $prov->product->manufacturer }}</td>
                                             <td>{{ $prov->product->code }}</td>
@@ -123,7 +123,7 @@
                                             <td>${{ $prov->discount_price }}</td>
                                             <td>${{ $prov->total_price }}</td>
                                             <td>
-                                                <a href="#" class="erase_product" data-id_quotation="{{ $prov->id }}" >
+                                                <a href="#" id="id_prod_provider_{{ $prov->id }}" class="erase_product_provider" data-id_product_provider="{{ $prov->id }}" style="color: #e86f6f;">
                                                     <i class="fa fa-fw fa-eraser"></i>
                                                 </a>
                                             </td>
@@ -134,7 +134,7 @@
                                         </tr>
                                     @endforelse
                                     @if( count($providers_products) != 0 )
-                                        <tr role="row" class="odd" id="prod_quot_{{ $prov->id }}">
+                                        <tr role="row" class="odd" >
                                             <td></td>
                                             <td></td>
                                             <td></td>

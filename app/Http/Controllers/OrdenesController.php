@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
 Use App\Models\AdminOrders;
 Use App\Models\AdminClients;
 Use App\Models\AdminQuotations;
