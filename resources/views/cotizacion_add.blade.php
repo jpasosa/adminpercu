@@ -35,7 +35,7 @@
                                                     @if (old('admin_clients') == $client['id'])
                                                           <option value="{{ $client['id'] }}" selected>{{ $client['name'] }} </option>
                                                     @else
-                                                          <option value="{{ $client['id'] }}">{{ $client['name'] }} </option>
+                                                          <option value="{{ $client['id'] }}">{{ $client['name'] . ' ' . $client['last_name'] . ' / ' . $client['user_ml'] . '/' . $client['user_whatsapp'] }} </option>
                                                     @endif
                                                 @endforeach
                                         </select>

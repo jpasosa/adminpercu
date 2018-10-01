@@ -268,7 +268,13 @@ class AdminOrders extends Model
                             ->orderBy('id','desc')
                             ->limit(1)
                             ->get();
-        return $order[0]->number + 1;
+        if ( count($order) > 0 ) {
+            $number = $order[0]->number + 1;
+        } else {
+            $number = 8763;
+        }
+
+        return $number;
 
     }
 

@@ -101,7 +101,11 @@ class CotizacionesController extends Controller
                             ->orderBy('id','desc')
                             ->limit(1)
                             ->get();
-        $data['number'] = $quotation[0]->number + 1;
+        if (count($quotation) > 0) {
+            $data['number'] = $quotation[0]->number + 1;
+        } else {
+            $data['number'] = 6543;
+        }
 
         $save_quotation = AdminQuotations::create($data);
 
