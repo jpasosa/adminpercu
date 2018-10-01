@@ -62,6 +62,17 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
+                                        <label for="exampleFormControlInput1">WhatsApp Nombre</label>
+                                        <input type="text" class="form-control" id="" name="user_whatsapp" placeholder="User mercadolibre" value="{{ old('user_whatsapp', $cliente->user_whatsapp) }}"  >
+                                    </div>
+                                    @if( $errors->has('user_whatsapp') )
+                                        <p><code>{{ $errors->first('user_whatsapp') }}</code></p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
                                         <label for="exampleFormControlInput1">Email</label>
                                         <input type="email" class="form-control" id="" name="email" placeholder="email" value="{{ old('email', $cliente->email) }}"  >
                                     </div>
@@ -214,14 +225,19 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Comparsa a la que pertenece</label>
                                         <select class="form-control" id="admin_comparsas_id" name="admin_comparsas_id">
+                                            @if (is_null($cliente->comparsa))
+                                                <option value="null" selected="selected">No Pertenesco a Ninguna . . . .</option>
+                                            @else
                                                 <option value="null">No Pertenesco a Ninguna . . . .</option>
-                                                @foreach ($admin_comparsas_id as $comp)
-                                                    @if (old('admin_comparsas_id', $cliente->comparsa->id) == $comp['id'])
-                                                          <option value="{{ $comp['id'] }}" selected>{{ $comp['name_comparsa'] }} | {{  $comp['name_bateria']  }}</option>
-                                                    @else
-                                                          <option value="{{ $comp['id'] }}">{{ $comp['name_comparsa'] }} | {{  $comp['name_bateria']  }}</option>
-                                                    @endif
-                                                @endforeach
+                                            @endif
+
+                                            @foreach ($admin_comparsas_id as $comp)
+                                                @if (!is_null($cliente->comparsa) && old('admin_comparsas_id', $cliente->comparsa->id) == $comp['id'])
+                                                      <option value="{{ $comp['id'] }}" selected>{{ $comp['name_comparsa'] }} | {{  $comp['name_bateria']  }}</option>
+                                                @else
+                                                      <option value="{{ $comp['id'] }}">{{ $comp['name_comparsa'] }} | {{  $comp['name_bateria']  }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

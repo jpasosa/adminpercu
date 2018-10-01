@@ -63,6 +63,7 @@ class ClientesController extends Controller
                 'name'          => 'required',
                 'last_name'     => '',
                 'user_ml'       => '',
+                'user_whatsapp' => '',
                 'email'         => '',
                 'phone'         => '',
                 'marketing'     => '',
@@ -90,7 +91,6 @@ class ClientesController extends Controller
         if($data['face'] == '')         $data['face']   = null;
         if($data['email'] == null)      $data['email']  = '';
         if($data['admin_comparsas_id'] == 'null')   $data['admin_comparsas_id'] = null;
-
 
 
         $save_client = AdminClients::create($data);
@@ -138,6 +138,7 @@ class ClientesController extends Controller
                 'name'          => 'required',
                 'last_name'     => '',
                 'user_ml'       => '',
+                'user_whatsapp' => '',
                 'email'         => '',
                 'phone'         => '',
                 'marketing'     => '',

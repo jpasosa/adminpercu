@@ -62,6 +62,17 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="form-group">
+                                        <label for="exampleFormControlInput1">Nombre WhatsApp</label>
+                                        <input type="text" class="form-control"  name="user_whatsapp" placeholder="User whatsapp" value="{{ old('user_whatsap') }}"  >
+                                    </div>
+                                    @if( $errors->has('user_whatsapp') )
+                                        <p><code>{{ $errors->first('user_whatsap') }}</code></p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
                                         <label for="exampleFormControlInput1">Email</label>
                                         <input type="email" class="form-control" id="" name="email" placeholder="email" value="{{ old('email') }}"  >
                                     </div>
