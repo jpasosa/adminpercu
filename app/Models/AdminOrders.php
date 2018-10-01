@@ -23,7 +23,7 @@ class AdminOrders extends Model
             'date_send', 'empresa_send', 'codetrack_send', 'cash_send', 'observations', 'status'
     ];
 
-    protected $dates = ['date_cash', 'date_mp', 'date_ml', 'date_send'];
+    protected $dates = ['date_cash', 'date_mp', 'date_ml', 'date_send', 'created_at', 'updated_at'];
 
     protected $totalCash; // atributos que están en el modelo, pero no guarda en DB
     protected $totalMp; // atributos que están en el modelo, pero no guarda en DB
@@ -235,6 +235,24 @@ class AdminOrders extends Model
 
         return $hover;
     }
+
+    public function view_hover_private_notes()
+    {
+        $admin_order_id         = $this->attributes['id'];
+
+        $notes   = DB::table('admin_orders_notes')
+                            ->where('admin_order_id', $admin_order_id)
+                            ->get();
+
+        $hover = '';
+        foreach ($notes AS $note)
+        {
+            $hover .= $note->created_at . ' -> ' . $note->note . '---------&#10;';
+        }
+
+        return $hover;
+    }
+
 
     private function get_manufacturer_text( $id_oc_manufacturer )
     {

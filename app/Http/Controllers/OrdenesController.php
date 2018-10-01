@@ -47,8 +47,7 @@ class OrdenesController extends Controller
 
         } else if ( $status == 'abiertas-esperando-instrumentos') {
 
-            $orders         = AdminOrders::where('status', 'abierta-no-abonada')
-                                        ->orWhere('status', 'abierta-abonada-esperando-instrumentos')
+            $orders         = AdminOrders::where('status', 'abierta-abonada-esperando-instrumentos')
                                         ->orWhere('status', 'ML-esperando-intrumentos')
                                         ->orderBy('id', 'desc')->paginate(30);
 

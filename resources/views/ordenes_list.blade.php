@@ -112,7 +112,7 @@
                                             <td>{{ $order->client->user_whatsapp }}</td>
                                             <td title="{{ $order->view_hover_products() }}">{{ $order->cantItems }}</td>
                                             <td>{{ $order->total_cash }}</td>
-                                            <td>{{ $order->status }}</td>
+                                            <td title="{{ $order->view_hover_private_notes() }}">{{ $order->status }}</td>
                                             <td>{{ $order->quickStatus }}</td>
                                             <td>
                                                 @if ( $order->isSetExternalLink )
